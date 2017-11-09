@@ -1,3 +1,5 @@
+package capstonetracker;
+
 /*
 * ISTE330 Team Project
 * Ryan Sweeney, Henry Kirk, Zhimin Lin
@@ -33,9 +35,9 @@ public class User
    // login method allow user login to their account
    // After user login, GUI will display the project information 
    // Data need: userName, password
-   public void login(String userName, String password)
+   public boolean login(String userName, String password)
    {
-      
+      return true;
    }
    
    
