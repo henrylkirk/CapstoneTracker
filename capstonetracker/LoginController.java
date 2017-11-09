@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package capstonetracker;
 
 import java.net.URL;
@@ -13,23 +8,35 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
 /**
- *
- * @author student
+ * LoginController
+ * @author Henry Kirk
  */
 public class LoginController implements Initializable {
     
     @FXML
-    private Label label;
+    private Button btnLogin;
+    @FXML
+    private Button btnCreate;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+        // TODO
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Set user input listeners
+        btnLogin.setOnAction(event -> {getLoginInput();});
+        btnCreate.setOnAction(event -> {getCreateInput();});
         // TODO
-    }    
+    }  
+
+    private void getLoginInput() {
+        // TODO
+    }
+    
+    private void getCreateInput() {
+        // TODO
+    }  
     
 }
