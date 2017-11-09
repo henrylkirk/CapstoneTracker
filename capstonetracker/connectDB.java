@@ -7,7 +7,7 @@ import java.util.Arrays;
  * Last Revised: 11/06/17
  */
  
-public class connectDB{
+public class ConnectDB {
  
    private String uri; //Location and DB to use
    private String driver; //Driver to use
