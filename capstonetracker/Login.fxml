@@ -20,7 +20,7 @@
         <VBox id="vboxCreate" layoutX="317.0" layoutY="45.0" prefHeight="218.0" prefWidth="178.0">
            <children>
               <Label text="Create Account" />
-              <TextField id="tfCreateCsername" promptText="username" />
+              <TextField id="tfCreateUsername" promptText="username" />
               <TextField id="tfCreatePassword" promptText="password" />
               <TextField id="tfFirstname" promptText="first name" />
               <TextField id="tfLastname" promptText="last name" />
