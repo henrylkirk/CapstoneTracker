@@ -1,9 +1,10 @@
+package capstonetracker;
 /**
  * Business layer User class
  * @author Ryan Sweeney
  * Revised: 11/06/17
  */
-public class BLUser extends User{
+public class BLUser extends User {
 
 
    /**

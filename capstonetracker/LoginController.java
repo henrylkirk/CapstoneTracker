@@ -13,8 +13,6 @@ import javafx.scene.control.*;
  * @author Henry Kirk
  */
 public class LoginController implements Initializable {
-
-    private User user = null;
     
     @FXML 
     private TextField tfLoginUsername;
@@ -40,8 +38,6 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // create a user
-        user = new User();
     }
 
     @FXML
@@ -53,7 +49,11 @@ public class LoginController implements Initializable {
         if( !isEmpty(username) && !isEmpty(password) ) {
             username = username.trim();
             password = password.trim();
-            loginStatus = user.login(username, password);
+
+            // create a user
+            User user = new User(username, password);
+
+            loginStatus = user.login();
         } else {
             loginStatus = false;
         }

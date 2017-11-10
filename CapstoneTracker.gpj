@@ -12,13 +12,15 @@ s#i0
 s#k0
 s#j0
 s#l0
-!134;g
+!168;g
 %\011Login.fxml
 %\011capstonetracker%sCapstoneTracker.java
 %\011capstonetracker%sUser.java
 %\011capstonetracker%sLoginController.java
-!134;f
+%\011capstonetracker%sBLUser.java
+!168;f
 %\011Login.fxml
 %\011capstonetracker%sCapstoneTracker.java
 %\011capstonetracker%sUser.java
 %\011capstonetracker%sLoginController.java
+%\011capstonetracker%sBLUser.java
