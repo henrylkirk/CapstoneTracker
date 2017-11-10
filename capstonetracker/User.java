@@ -1,5 +1,7 @@
 package capstonetracker;
-
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 /**
 * Class the stores values for users in capstoneProjects DB
 * ISTE330 Team Project
@@ -26,7 +28,7 @@ public class User
    public User(String _userName, String _password){
       userName = _userName;
       password = _password;
-      userId = 0;
+      userID = 0;
       fName = "NULL";
       lName = "NULL";
       email = "NULL";

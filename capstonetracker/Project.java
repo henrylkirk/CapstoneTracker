@@ -12,9 +12,9 @@ import java.util.*;
  * New class named Project
  * Project class extends connectDB class
  */
- public class Project extends connectDB
+ public class Project
  { 
-   public int projectID;
+   public String projectID;
    public String projectName;
    public String projectDescription;
    public String startDate;
@@ -22,13 +22,14 @@ import java.util.*;
    public String changeTo;
    public String partOfChange;
    public String userType;
+   public ConnectDB dbConn;
    
    /**
     * Default constructor
     */
    public Project()
    {
-      projectID = 0;
+      projectID = "NULL";
       projectName = "NULL";
       projectDescription = "NULL";
       startDate = "NULL";
@@ -36,6 +37,7 @@ import java.util.*;
       changeTo = "NULL";
       partOfChange = "NULL";
       userType = "NULL";
+      dbConn = new ConnectDB();
    }
    
    /**
@@ -46,7 +48,7 @@ import java.util.*;
     * startDate: the date of the this project start
     * endDate: the duedate for this project
     */
-   public Project(int _projectID, String _projectName, String _projectDescription, String _startDate, String _endDate)
+   public Project(String _projectID, String _projectName, String _projectDescription, String _startDate, String _endDate)
    {
       projectID = _projectID;
       projectName = _projectName;
@@ -66,7 +68,7 @@ import java.util.*;
       String statement = "SELECT * FROM projects WHERE pid = ?;";
       try
       {
-         myArray = getData(statement, projectID);
+         myArray = dbConn.getData(statement, projectID);
          if (myArray.size() == 0)
          {
             System.out.println("No data is retrieved");
@@ -83,9 +85,10 @@ import java.util.*;
              }
          }
       }
-      catch(Exception e)
+      catch(DLException dle)
       {
-         throw new DLException(e,"checkProject() error");
+         System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+         dle.printStackTrace();
       }
    }
    
@@ -102,23 +105,23 @@ import java.util.*;
       }
       else
       {
-         ArrayList<ArrayList<String>> myArray = new ArrayList<>();
          String statement = "INSERT INTO project VALUES(?,?,?,?,?);";
          try
          {
-            myArray = setData(statement, projectID, projectName, projectDescription, startDate, endDate);
-            if (myArray.size() == 0)
-            {
-               System.out.println("No data is retrieved");
-            }
-            else
+            boolean add = dbConn.setData(statement, projectID, projectName, projectDescription, startDate, endDate);
+            if (add)
             {
                System.out.println("New Project Added");
             }
+            else
+            {
+               System.out.println("New Project Added Failed");
+            }
          }
-         catch(Exception e)
+         catch(DLException dle)
          {
-            throw new DLException(e,"addNewProject() error");
+            System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+            dle.printStackTrace();
          }
       }
    }
@@ -136,23 +139,23 @@ import java.util.*;
       }
       else
       {
-         ArrayList<ArrayList<String>> myArray = new ArrayList<>();
          String statement = "UPDATE projects SET " + partOfChange + " = ? WHERE pid = ?;" ;
          try
          {
-            myArray = setData(statement, changeTo, projectID );
-            if (myArray.size() == 0)
-            {
-               System.out.println("No data is retrieved");
-            }
-            else
+            boolean update = dbConn.setData(statement, changeTo, projectID );
+            if (update)
             {
                System.out.println("Data Updated");
             }
+            else
+            {
+               System.out.println("Data Update Failed");
+            }
          }
-         catch(Exception e)
+         catch(DLException dle)
          {
-            throw new DLException(e,"updateProjectInfo() error");
+            System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+            dle.printStackTrace();
          }
        }
 
