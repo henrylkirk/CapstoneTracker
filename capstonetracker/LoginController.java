@@ -14,41 +14,56 @@ import javafx.scene.control.*;
  */
 public class LoginController implements Initializable {
 
-    // private User user = null;
+    private User user = null;
     
-    @FXML
-    private Button btnLogin;
-    @FXML
-    private Button btnCreate;
-    @FXML
+    @FXML 
     private TextField tfLoginUsername;
-    @FXML
+    @FXML 
     private TextField tfLoginPassword;
-    @FXML
+    @FXML 
     private TextField tfCreateUsername;
-    @FXML
+    @FXML 
     private TextField tfCreatePassword;
-    @FXML
+    @FXML 
     private TextField tfFirstname;
-    @FXML
+    @FXML 
     private TextField tfLastname;
-    @FXML
+    @FXML 
     private TextField tfEmail;
-    @FXML
+    @FXML 
     private ComboBox cbRole;
-    @FXML
+    @FXML 
     private Label lblLogin;
 
-    
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // create a user
-        // user = new User();
+        user = new User();
     }
 
     @FXML
     protected void handleLoginButtonAction(ActionEvent event) {
-        System.out.println("successfully logged in");
+        String username = tfLoginUsername.getText();
+        String password = tfLoginPassword.getText();
+        boolean loginStatus = false;
+
+        if( !isEmpty(username) && !isEmpty(password) ) {
+            username = username.trim();
+            password = password.trim();
+            loginStatus = user.login(username, password);
+        } else {
+            loginStatus = false;
+        }
+
+        if(!loginStatus){
+            System.out.println("invalid username or password");
+        } else {
+            System.out.println("successful login\nUsername: "+username+"\nPassword: "+password);
+        }
+
     }
 
     @FXML
@@ -56,9 +71,18 @@ public class LoginController implements Initializable {
         System.out.println("successfully created account");
     }
 
+    private static boolean isEmpty(String s) {
+        if ((s != null) && (s.trim().length() > 0)){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     private void login() {
-        String username = tfLoginUsername.getText().trim();
-        String password = tfLoginPassword.getText().trim();
+
+        // String username = tfLoginUsername.getText();
+        // String password = tfLoginPassword.getText();
 
         // if(username.length() > 0 && password.length() > 0){
         //     if(user.login(username, password)){

@@ -7,13 +7,13 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="login" prefHeight="308.0" prefWidth="543.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="capstonetracker.LoginController">
+<AnchorPane id="login" prefHeight="308.0" prefWidth="543.0" xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx/8" fx:controller="capstonetracker.LoginController">
   <children>
         <VBox id="vboxLogin" layoutX="41.0" layoutY="96.0" prefHeight="104.0" prefWidth="178.0">
            <children>
               <Label id="lblLogin" text="Login" />
-              <TextField id="tfLoginUsername" promptText="username" />
-              <TextField id="tfLoginPassword" promptText="password" />
+              <TextField id="tfLoginUsername" fx:id="tfLoginUsername" promptText="username" />
+              <TextField id="tfLoginPassword" fx:id="tfLoginPassword" promptText="password" />
               <Button id="btnLogin" mnemonicParsing="false" prefHeight="57.0" prefWidth="178.0" text="Log in" onAction="#handleLoginButtonAction" />
            </children>
         </VBox>
