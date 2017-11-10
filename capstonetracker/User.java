@@ -1,34 +1,49 @@
 package capstonetracker;
 
-/*
+/**
+* Class the stores values for users in capstoneProjects DB
 * ISTE330 Team Project
 * Ryan Sweeney, Henry Kirk, Zhimin Lin
 */
 
- 
-//This class extends to GUI class 
 public class User  
 {
-   public String userName;
-   public String password;
-   public String fName;
-   public String lName;
-   public String email;
-   public String userType;
+   private int userID;
+   private String userName;
+   private String password;
+   private String fName;
+   private String lName;
+   private String email;
+   private String userType;
    private boolean canEdit;
+   private ConnectDB dbConn;
    
-   //Basic default constructor - Just takes username and pass
+   /**
+    * Constructor that sets username and password
+    * @param _userName the username for this user
+    * @param _password the password for this user
+    */
    public User(String _userName, String _password){
       userName = _userName;
       password = _password;
+      userId = 0;
       fName = "NULL";
       lName = "NULL";
       email = "NULL";
       userType = "NULL";
       canEdit = false;
+      dbConn = new ConnectDB();
    }
    
-   // Full parameterized Constructor - Info for either existing or current record
+   /**
+    * Constructor that sets all values for user object
+    * @param _userName username for this user record
+    * @param _password password for this user record
+    * @param _fName first name for this user
+    * @param _lname last name for this user
+    * @param _email email for this user record
+    * @param _userType userType for this user record
+    */
    public User(String _userName, String _password, String _fName, String _lName, String _email, String _userType)
    {
       userName = _userName;
@@ -37,6 +52,7 @@ public class User
       lName = _lName;
       email = _email;
       userType = _userType;
+      dbConn = new ConnectDB();
       if(userType.equalsIgnoreCase("Faculty")){
          canEdit = true;
       }else{
@@ -44,37 +60,76 @@ public class User
       }
    }
    
-   // registerAccount method allow user to create new account, it can be either student or faculty
-   public void registerAccount()
+   /**
+    * Method that post new users to db
+    * @return posted boolean that determines if insert was successful
+    */
+   public boolean registerAccount()
    {
-      //Prepare statement insert record into Users table
+      String statement = 
+         "INSERT INTO equipment VALUES(?,?,?,?,?,?);";
+      boolean posted = false;
+      
+      try{
+         dbConn.connect();
+         if(dbConn.setData(statement,userName,password,fName,lName,email,userType)){
+            dbConn.close();
+            posted = true;
+         }
+         else{
+            dbConn.close();
+            posted = false;
+         }
+      }
+      catch(DLException dle){
+         System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+         dle.printStackTrace();
+      }
+      return posted;
    }
    
-   // login method allow user login to their account
-   // After user login, GUI will display the project information 
-   // Data need: userName, password
-   public boolean login(String userName, String password)
+   /**
+    * Method the checks if user exists in db and returns boolean
+    * @return loginSuccess boolean that determines if login was successful
+    */
+   public boolean login()
    {
-      //Select statement on DB, if record found fill remaining varables and return true
-      return true;
+      boolean loginSuccess = false;
+      String statement = "SELECT * FROM users WHERE username= ? AND password= ? ;";
+      
+      try{
+         dbConn.connect();
+         ArrayList<ArrayList<String>> rs = dbConn.getData(statement,userName,password);
+         if(rs != null){
+            dbConn.close();
+            userID = Integer.parseInt(rs.get(0).get(0));
+            fName = rs.get(0).get(3);
+            lName = rs.get(0).get(4);
+            email = rs.get(0).get(5);
+            userType = rs.get(0).get(6);
+            loginSuccess = true;
+         }
+         else{
+            dbConn.close();
+            loginSuccess = false;
+         }
+      }
+      catch(DLException dle){
+         loginSuccess = false;
+         System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+         dle.printStackTrace();
+      }
+      return loginSuccess;
    }
    
    
-   // checkIdentity method also able to check user's identity
-   // if faculty: setEditable(true); Facultys are allow to change everything on GUI
-	//	if student: setEditable(false), Students are not able to change everything on GUI 
-   // Data need: userType
+   /**
+    * Returns edit boolean that determines if the user can modify records
+    * @return canEdit boolean that determines if this user has permissions to modify data
+    */
    public boolean checkPermession()
    {
       return canEdit;
-   }
-   
-   // newChange method will save all the change that faculty make on GUI, and update the database
-   // And the GUI will always display the newest
-   // **May use Arraylist in this method 
-   public void newChange()
-   {
-   
    }
    
 }

@@ -22,8 +22,8 @@ public class ConnectDB {
    /**
     * Default constructor with default options to connect to the database
     */
-   public connectDB(){
-      uri = "jdbc:mysql://localhost/travel?autoReconnect=true&useSSL=false";
+   public ConnectDB(){
+      uri = "jdbc:mysql://localhost/capstoneprojects?autoReconnect=true&useSSL=false";
       driver = "com.mysql.jdbc.Driver";
       user = "root";
       pass = "student";
@@ -34,10 +34,10 @@ public class ConnectDB {
     * @param _user sets value for the username
     * @param _pass sets value for the password
     */
-   public connectDB(String _user, String _pass){
+   public ConnectDB(String _user, String _pass){
       user = _user;
       pass = _pass;
-      uri = "jdbc:mysql://localhost/travel?autoReconnect=true&useSSL=false";
+      uri = "jdbc:mysql://localhost/capstoneprojects?autoReconnect=true&useSSL=false";
       driver = "com.mysql.jdbc.Driver";
    }
    
