@@ -95,7 +95,6 @@ import java.util.*;
    /**
     * Only faculty are allow to use this method, student are not allow
     * faculty able to add new project
-    * if there are no data match, show messsage: No data is retrieved
     */
    public void addNewProject()
    {
@@ -129,7 +128,6 @@ import java.util.*;
    /**
     * Only faculty are allow to use this method, student are not allow
     * faculty able to update project information
-    * if there are no data match, show messsage: No data is retrieved
     */
    public void updateProjectInfo(String partOfChange)
    {
