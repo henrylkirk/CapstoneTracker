@@ -40,6 +40,10 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }
 
+    /**
+     * Attempt to log in with the provided username and password.
+     * This method is called when the "Login" button is pressed.
+     */
     @FXML
     protected void handleLoginButtonAction(ActionEvent event) {
         String username = tfLoginUsername.getText();
@@ -49,10 +53,7 @@ public class LoginController implements Initializable {
         if( !isEmpty(username) && !isEmpty(password) ) {
             username = username.trim();
             password = password.trim();
-
-            // create a user
             User user = new User(username, password);
-
             loginStatus = user.login();
         } else {
             loginStatus = false;
@@ -66,9 +67,20 @@ public class LoginController implements Initializable {
 
     }
 
+    /**
+     * Create an account with the input information.
+     * This method is called when the "Create Account" button is pressed.
+     */
     @FXML
     protected void handleCreateButtonAction(ActionEvent event) {
+        String username = tfCreateUsername.getText();
+        String password = tfCreateUsername.getText();
+        String email = tfEmail.getText();
+        String firstName = tfFirstname.getText();
+        String lastName = tfLastname.getText();
+
         System.out.println("successfully created account");
+        // TODO
     }
 
     private static boolean isEmpty(String s) {
@@ -77,22 +89,6 @@ public class LoginController implements Initializable {
         } else {
             return true;
         }
-    }
-
-    private void login() {
-
-        // String username = tfLoginUsername.getText();
-        // String password = tfLoginPassword.getText();
-
-        // if(username.length() > 0 && password.length() > 0){
-        //     if(user.login(username, password)){
-        //         System.out.println("Successful login");
-        //     } else {
-        //         System.out.println("Invalid login");
-        //     }
-        // } else {
-        //     System.out.println("Please fill in all fields");
-        // }
     }
 
     private void createAccount() {

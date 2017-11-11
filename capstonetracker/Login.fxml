@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.collections.FXCollections?>
 
 <AnchorPane id="login" prefHeight="308.0" prefWidth="543.0" xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx/8" fx:controller="capstonetracker.LoginController">
   <children>
@@ -20,12 +21,20 @@
         <VBox id="vboxCreate" layoutX="317.0" layoutY="45.0" prefHeight="218.0" prefWidth="178.0">
            <children>
               <Label text="Create Account" />
-              <TextField id="tfCreateUsername" promptText="username" />
-              <TextField id="tfCreatePassword" promptText="password" />
-              <TextField id="tfFirstname" promptText="first name" />
-              <TextField id="tfLastname" promptText="last name" />
-              <TextField id="tfEmail" promptText="email" />
-              <ComboBox id="cbRole" prefHeight="27.0" prefWidth="183.0" promptText="Role" />
+              <TextField id="tfCreateUsername" fx:id="tfCreateUsername" promptText="username" />
+              <TextField id="tfCreatePassword" fx:id="tfCreatePassword" promptText="password" />
+              <TextField id="tfFirstname" fx:id="tfFirstname" promptText="first name" />
+              <TextField id="tfLastname" fx:id="tfLastname" promptText="last name" />
+              <TextField id="tfEmail" fx:id="tfEmail" promptText="email" />
+              <ComboBox id="cbRole" fx:id="cbRole" layoutX="15.0" prefHeight="27.0" prefWidth="183.0" promptText="Role">
+                <items>
+                  <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Student" />
+                    <String fx:value="Advisor" />
+                    <String fx:value="Staff" />
+                  </FXCollections>
+                </items>
+              </ComboBox>
               <Button id="btnCreate" mnemonicParsing="false" prefHeight="32.0" prefWidth="178.0" text="Create Account" onAction="#handleCreateButtonAction" />
            </children>
         </VBox>
