@@ -23,7 +23,7 @@ import java.util.*;
    private int plagiarismScore;
    private String changeTo;
    private String partOfChange;
-   private ArrayList<String> users;
+   private ArrayList<User> users;
    private connectDB dbConn;
    
    /**
@@ -150,11 +150,12 @@ import java.util.*;
    }
 
    /**
-    * 
+    * Returns an ArrayList of users associated with this project.
+    * @return ArrayList
     */
-   public ArrayList<String> getProjectUsers(){
-
-   }
+   // public ArrayList<User> getProjectUsers(){
+   //    return users;
+   // }
    
    /**
     * Only faculty are allow to use this method, student are not allow
