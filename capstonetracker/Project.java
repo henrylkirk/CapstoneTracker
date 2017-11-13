@@ -138,6 +138,30 @@ import java.util.*;
    // public ArrayList<User> getProjectUsers(){
    //    return users;
    // }
+
+   /**
+    *
+    */
+   public boolean addProjectUser(String username, String role){
+      // check if this username exists in the database
+      String statement = "SELECT * FROM users WHERE username = ?";
+      ArrayList<ArrayList<String>> data = new ArrayList<>();
+
+      try {
+         data = dbConn.getData(statement, projectID);
+         if (myArray.size() == 0) {
+            check = false;
+         } else {
+
+         }
+         // if so, add user to ArrayList
+      } catch(DLException dle){
+         System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+         dle.printStackTrace();
+      }
+
+      return true;
+   }
    
    /**
     * Only faculty are allow to use this method, student are not allow
