@@ -23,6 +23,7 @@ import java.util.*;
    private int plagiarismScore;
    private String changeTo;
    private String partOfChange;
+   private ArrayList<String> users;
    private connectDB dbConn;
    
    /**
@@ -37,6 +38,7 @@ import java.util.*;
       endDate =  "NULL";
       changeTo = "NULL";
       partOfChange = "NULL";
+      users = null;
       dbConn = new connectDB();
    }
    
@@ -127,6 +129,13 @@ import java.util.*;
             dle.printStackTrace();
          }
       }
+   }
+
+   /**
+    * 
+    */
+   public ArrayList<String> getProjectUsers(){
+
    }
    
    /**
