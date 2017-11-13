@@ -14,15 +14,14 @@ import java.util.*;
  */
  public class Project
  { 
-   public String projectID;
-   public String projectName;
-   public String projectDescription;
-   public String startDate;
-   public String endDate;
-   public String changeTo;
-   public String partOfChange;
-   public String userType;
-   public ConnectDB dbConn;
+   private String projectID;
+   private String projectName;
+   private String projectDescription;
+   private String startDate;
+   private String endDate;
+   private String changeTo;
+   private String partOfChange;
+   private connectDB dbConn;
    
    /**
     * Default constructor
@@ -36,8 +35,7 @@ import java.util.*;
       endDate =  "NULL";
       changeTo = "NULL";
       partOfChange = "NULL";
-      userType = "NULL";
-      dbConn = new ConnectDB();
+      dbConn = new connectDB();
    }
    
    /**
@@ -55,6 +53,7 @@ import java.util.*;
       projectDescription = _projectDescription;
       startDate = _startDate;
       endDate =  _endDate;
+      dbConn = new connectDB();
    } 
    
    /**
@@ -96,8 +95,9 @@ import java.util.*;
     * Only faculty are allow to use this method, student are not allow
     * faculty able to add new project
     */
-   public void addNewProject()
+   public void addNewProject(BLUser user)
    {
+      String userType = user.checkUserType();
       if(userType.equalsIgnoreCase("Student"))
       {
          System.out.println("Student not able to add new project");
@@ -129,8 +129,9 @@ import java.util.*;
     * Only faculty are allow to use this method, student are not allow
     * faculty able to update project information
     */
-   public void updateProjectInfo(String partOfChange)
+   public void updateProjectInfo(String partOfChange, BLUser user)
    {
+      String userType = user.checkUserType();
       if(userType.equalsIgnoreCase("Student"))
       {
          System.out.println("Student not able to update project information");

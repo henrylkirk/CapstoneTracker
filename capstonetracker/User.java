@@ -17,9 +17,9 @@ public class User
    private String fName;
    private String lName;
    private String email;
+   private String office;
    private String userType;
-   private boolean canEdit;
-   private ConnectDB dbConn;
+   private connectDB dbConn;
    
    /**
     * Constructor that sets username and password
@@ -33,9 +33,9 @@ public class User
       fName = "NULL";
       lName = "NULL";
       email = "NULL";
+      office = "NULL";
       userType = "NULL";
-      canEdit = false;
-      dbConn = new ConnectDB();
+      dbConn = new connectDB();
    }
    
    /**
@@ -45,22 +45,19 @@ public class User
     * @param _fName first name for this user
     * @param _lname last name for this user
     * @param _email email for this user record
+    * @param _office the office number for this user
     * @param _userType userType for this user record
     */
-   public User(String _userName, String _password, String _fName, String _lName, String _email, String _userType)
+   public User(String _userName, String _password, String _fName, String _lName, String _email, String _office, String _userType)
    {
       userName = _userName;
       password = _password;
       fName = _fName;
       lName = _lName;
       email = _email;
+      office = _office;
       userType = _userType;
-      dbConn = new ConnectDB();
-      if(userType.equalsIgnoreCase("Faculty")){
-         canEdit = true;
-      }else{
-         canEdit = false;
-      }
+      dbConn = new connectDB();
    }
    
    /**
@@ -109,7 +106,8 @@ public class User
             fName = rs.get(0).get(3);
             lName = rs.get(0).get(4);
             email = rs.get(0).get(5);
-            userType = rs.get(0).get(6);
+            office = rs.get(0).get(6);
+            userType = rs.get(0).get(7);
             loginSuccess = true;
          }
          else{
@@ -130,9 +128,9 @@ public class User
     * Returns edit boolean that determines if the user can modify records
     * @return canEdit boolean that determines if this user has permissions to modify data
     */
-   public boolean checkPermession()
+   public String checkUserType()
    {
-      return canEdit;
+      return userType;
    }
    
 }

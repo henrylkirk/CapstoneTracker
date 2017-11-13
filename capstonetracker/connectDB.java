@@ -9,7 +9,7 @@ import java.util.Arrays;
  * Last Revised: 11/06/17
  */
  
-public class ConnectDB {
+public class connectDB {
  
    private String uri; //Location and DB to use
    private String driver; //Driver to use
@@ -24,7 +24,7 @@ public class ConnectDB {
    /**
     * Default constructor with default options to connect to the database
     */
-   public ConnectDB(){
+   public connectDB(){
       uri = "jdbc:mysql://localhost/capstoneprojects?autoReconnect=true&useSSL=false";
       driver = "com.mysql.jdbc.Driver";
       user = "root";
@@ -36,7 +36,7 @@ public class ConnectDB {
     * @param _user sets value for the username
     * @param _pass sets value for the password
     */
-   public ConnectDB(String _user, String _pass){
+   public connectDB(String _user, String _pass){
       user = _user;
       pass = _pass;
       uri = "jdbc:mysql://localhost/capstoneprojects?autoReconnect=true&useSSL=false";
