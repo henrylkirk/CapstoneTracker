@@ -16,9 +16,11 @@ import java.util.*;
  { 
    private String projectID;
    private String projectName;
+   private String projectType;
    private String projectDescription;
    private String startDate;
    private String endDate;
+   private int plagiarismScore;
    private String changeTo;
    private String partOfChange;
    private connectDB dbConn;
@@ -61,27 +63,28 @@ import java.util.*;
     * Both student and faculty able to see project information, include id, name, description, startdate and enddate
     * if there are no data match, show messsage: No data is retrieved
     */
-   public void checkProject()
+   public boolean checkProject()
    {
       ArrayList<ArrayList<String>> myArray = new ArrayList<>();
       String statement = "SELECT * FROM projects WHERE pid = ?;";
+      boolean check = false;
       try
       {
          myArray = dbConn.getData(statement, projectID);
          if (myArray.size() == 0)
          {
-            System.out.println("No data is retrieved");
+            check = false;
          }
          else
          {
-             for(int i = 0; i < myArray.size(); i++)
-             {
-                for(int j = 0; j < myArray.get(i).size(); j++)
-                {
-                   System.out.println(myArray.get(i).get(j) + " ");
-                }
-               System.out.println();
-             }
+            check = true;
+            projectID = myArray.get(0).get(0);
+            projectType = myArray.get(0).get(1);
+            projectName = myArray.get(0).get(2);
+            projectDescription = myArray.get(0).get(3);
+            startDate = myArray.get(0).get(4);
+            endDate = myArray.get(0).get(5);
+            plagiarismScore =  Integer.parseInt(myArray.get(0).get(6));
          }
       }
       catch(DLException dle)
@@ -89,6 +92,7 @@ import java.util.*;
          System.out.println("*** Error: " + dle.getMessage() + " ***\n");
          dle.printStackTrace();
       }
+      return check;
    }
    
    /**
