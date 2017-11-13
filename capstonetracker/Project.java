@@ -33,9 +33,26 @@ import java.util.*;
    {
       projectID = "NULL";
       projectName = "NULL";
+      String projectType; = "NULL"
       projectDescription = "NULL";
       startDate = "NULL";
       endDate =  "NULL";
+      plagiarismScore = 0;
+      changeTo = "NULL";
+      partOfChange = "NULL";
+      users = null;
+      dbConn = new connectDB();
+   }
+   
+   public Project(String _projectID)
+   {
+      projectID = _projectID;
+      projectName = "NULL";
+      projectType; = "NULL"
+      projectDescription = "NULL";
+      startDate = "NULL";
+      endDate =  "NULL";
+      plagiarismScore = 0;
       changeTo = "NULL";
       partOfChange = "NULL";
       users = null;
@@ -50,9 +67,10 @@ import java.util.*;
     * startDate: the date of the this project start
     * endDate: the duedate for this project
     */
-   public Project(String _projectID, String _projectName, String _projectDescription, String _startDate, String _endDate)
+   public Project(String _projectID, String _projectType, String _projectName, String _projectDescription, String _startDate, String _endDate)
    {
       projectID = _projectID;
+      projectType = _projectType;
       projectName = _projectName;
       projectDescription = _projectDescription;
       startDate = _startDate;
