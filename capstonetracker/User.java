@@ -20,6 +20,7 @@ public class User
    private String office;
    private String userType;
    private connectDB dbConn;
+   private ArrayList projectIds;
    
    /**
     * Constructor that sets username and password
