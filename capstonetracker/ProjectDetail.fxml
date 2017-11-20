@@ -7,20 +7,47 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="projectDetail" prefHeight="501.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="capstonetracker.ProjectDetailController">
+<AnchorPane id="projectDetail" prefHeight="600.0" prefWidth="1295.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="capstonetracker.ProjectDetailController">
    <children>
-      <VBox layoutX="12.0" layoutY="64.0" prefHeight="423.0" prefWidth="272.0">
+      <VBox layoutX="14.0" layoutY="81.0" prefHeight="505.0" prefWidth="272.0">
          <children>
             <Label id="lblName" text="Project Name" />
             <TextField id="tfName" promptText="project name" />
             <Label id="lblDescription" text="Project Description" />
             <TextArea id="taDescription" prefHeight="200.0" prefWidth="200.0" promptText="description" />
+            <Label id="lblCode" text="Start Term Code" />
+            <TextField id="tfCode" promptText="ex. 2181" />
+            <Label id="lblEndDate" text="End Date" />
+            <TextField id="tfEndDate" promptText="YYYY-MM-DD" />
+            <Label id="lblDefenseDate" text="Defense Date" />
+            <TextField id="tfDefenseDate" promptText="YYYY-MM-DD" />
+            <Label id="lblGrade" text="Grade" />
+            <TextField id="tfGrade" promptText="95.0" />
+            <Label text="Plagiarism Score" />
+            <TextField id="tfPlagiarismScore" promptText="5.0" />
          </children>
       </VBox>
-      <Label layoutX="14.0" layoutY="14.0" text="Project Detail">
+      <Label layoutX="584.0" layoutY="16.0" text="Project Detail">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
+      <Button id="btnSave" defaultButton="true" layoutX="1161.0" layoutY="548.0" mnemonicParsing="false" text="Save Changes" />
+      <Button id="btnSave" layoutX="1200.0" layoutY="15.0" mnemonicParsing="false" text="Log Out" />
+      <Button id="btnSave" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="&lt; Back" />
+      <TableView layoutX="302.0" layoutY="97.0" prefHeight="422.0" prefWidth="580.0">
+        <columns>
+          <TableColumn id="colStep" prefWidth="75.0" text="Step" />
+          <TableColumn id="colDescription" prefWidth="180.0" text="Description" />
+            <TableColumn id="colModified" prefWidth="120.0" text="Last Modified" />
+            <TableColumn id="colComments" prefWidth="204.0" text="Comments" />
+        </columns>
+      </TableView>
+      <TableView id="tblUsers" layoutX="908.0" layoutY="97.0" prefHeight="422.0" prefWidth="353.0">
+        <columns>
+          <TableColumn id="colName" prefWidth="180.0" text="Name" />
+          <TableColumn id="colRole" prefWidth="172.0" text="Role" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>
