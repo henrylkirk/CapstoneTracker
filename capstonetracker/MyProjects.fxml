@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="MyProjects" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="capstonetracker.ProjectDetailController">
+   <children>
+      <Button id="btnLogout" layoutX="527.0" layoutY="14.0" mnemonicParsing="false" text="Log Out" />
+      <Label id="lblTitle" layoutX="234.0" layoutY="13.0" text="My Projects">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TableView id="tblProjects" layoutX="17.0" layoutY="94.0" prefHeight="200.0" prefWidth="567.0">
+        <columns>
+          <TableColumn id="colProjectName" prefWidth="274.0" text="Project Name" />
+          <TableColumn id="colRole" minWidth="0.0" prefWidth="292.0" text="Your Role" />
+        </columns>
+      </TableView>
+      <Button id="btnCreateProject" defaultButton="true" layoutX="17.0" layoutY="327.0" mnemonicParsing="false" text="Create a new project" />
+   </children>
+</AnchorPane>

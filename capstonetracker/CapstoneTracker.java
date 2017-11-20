@@ -17,7 +17,7 @@ public class CapstoneTracker extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("ProjectDetail.fxml"));
         
         Scene scene = new Scene(root);
         
