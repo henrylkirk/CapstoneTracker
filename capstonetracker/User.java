@@ -20,7 +20,7 @@ public class User
    private String office;
    private String userType;
    private connectDB dbConn;
-   private ArrayList projectIds;
+   private ArrayList<String> projectIds;
    
    /**
     * Constructor that sets username and password
@@ -124,6 +124,9 @@ public class User
       return loginSuccess;
    }
    
+   public void getProjectIds(){
+      //method to get project ids the user is connected to
+   }
    
    /**
     * Returns edit boolean that determines if the user can modify records

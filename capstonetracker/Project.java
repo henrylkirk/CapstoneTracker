@@ -23,7 +23,8 @@ import java.util.*;
    private int plagiarismScore;
    private String changeTo;
    private String partOfChange;
-   private ArrayList<User> users;
+   private String status;
+   private ArrayList<String> userIds;
    private connectDB dbConn;
    
    /**
@@ -33,14 +34,14 @@ import java.util.*;
    {
       projectID = "NULL";
       projectName = "NULL";
-      String projectType; = "NULL"
+      String projectType = "NULL";
       projectDescription = "NULL";
       startDate = "NULL";
       endDate =  "NULL";
       plagiarismScore = 0;
       changeTo = "NULL";
       partOfChange = "NULL";
-      users = null;
+      userIds = null;
       dbConn = new connectDB();
    }
    
@@ -48,14 +49,14 @@ import java.util.*;
    {
       projectID = _projectID;
       projectName = "NULL";
-      projectType; = "NULL"
+      projectType = "NULL";
       projectDescription = "NULL";
       startDate = "NULL";
       endDate =  "NULL";
       plagiarismScore = 0;
       changeTo = "NULL";
       partOfChange = "NULL";
-      users = null;
+      userIds = null;
       dbConn = new connectDB();
    }
    
@@ -162,12 +163,13 @@ import java.util.*;
     */
    public boolean addProjectUser(String username, String role){
       // check if this username exists in the database
+      boolean check = false;
       String statement = "SELECT * FROM users WHERE username = ?";
       ArrayList<ArrayList<String>> data = new ArrayList<>();
 
       try {
          data = dbConn.getData(statement, projectID);
-         if (myArray.size() == 0) {
+         if (data.size() == 0) {
             check = false;
          } else {
 
@@ -178,7 +180,7 @@ import java.util.*;
          dle.printStackTrace();
       }
 
-      return true;
+      return check;
    }
    
    /**
