@@ -32,6 +32,8 @@ public class LoginController implements Initializable {
     private ComboBox cbRole;
     @FXML 
     private Label lblLogin;
+    @FXML
+    public Button btnLogin;
 
     /**
      * Initializes the controller class.
@@ -44,8 +46,7 @@ public class LoginController implements Initializable {
      * Attempt to log in with the provided username and password.
      * This method is called when the "Login" button is pressed.
      */
-    @FXML
-    protected void handleLoginButtonAction(ActionEvent event) {
+    public boolean login() {
         String username = tfLoginUsername.getText();
         String password = tfLoginPassword.getText();
         boolean loginStatus = false;
@@ -64,7 +65,7 @@ public class LoginController implements Initializable {
         } else {
             System.out.println("successful login\nUsername: "+username+"\nPassword: "+password);
         }
-
+        return true;
     }
 
     /**
