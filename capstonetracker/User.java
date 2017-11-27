@@ -12,15 +12,16 @@ import java.util.Arrays;
 public class User  
 {
    private int userID;
+   private String userType;
    private String userName;
    private String password;
+   private String email;
    private String fName;
    private String lName;
-   private String email;
+   private String phone;
    private String office;
-   private String userType;
    private connectDB dbConn;
-   private ArrayList<String> projectIds;
+   private ArrayList<String> projectIds = new ArrayList<String>();
    
    /**
     * Constructor that sets username and password
@@ -28,15 +29,27 @@ public class User
     * @param _password the password for this user
     */
    public User(String _userName, String _password){
+      userID = 0;
+      userType = "NULL";
       userName = _userName;
       password = _password;
-      userID = 0;
+      email = "NULL";
       fName = "NULL";
       lName = "NULL";
-      email = "NULL";
+      phone = "NULL";
       office = "NULL";
-      userType = "NULL";
       dbConn = new connectDB();
+      try {
+         java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+         byte[] array = md.digest(password.getBytes());
+         StringBuffer sb = new StringBuffer();
+         for (int i = 0; i < array.length; ++i) {
+            sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+         }
+         password = sb.toString();
+      } catch (java.security.NoSuchAlgorithmException e) {
+         e.printStackTrace();
+      }
    }
    
    /**
@@ -49,16 +62,29 @@ public class User
     * @param _office the office number for this user
     * @param _userType userType for this user record
     */
-   public User(String _userName, String _password, String _fName, String _lName, String _email, String _office, String _userType)
+   public User(String _userName, String _password, String _fName, String _lName, String _email, String _office, String _phone, String _userType)
    {
+      userID = 0;
+      userType = _userType;
       userName = _userName;
       password = _password;
+      email = _email;
       fName = _fName;
       lName = _lName;
-      email = _email;
+      phone = _phone;
       office = _office;
-      userType = _userType;
       dbConn = new connectDB();
+      try {
+         java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+         byte[] array = md.digest(password.getBytes());
+         StringBuffer sb = new StringBuffer();
+         for (int i = 0; i < array.length; ++i) {
+            sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+         }
+         password = sb.toString();
+      } catch (java.security.NoSuchAlgorithmException e) {
+         e.printStackTrace();
+      }
    }
    
    /**
@@ -68,12 +94,15 @@ public class User
    public boolean registerAccount()
    {
       String statement = 
-         "INSERT INTO equipment VALUES(?,?,?,?,?,?);";
+         "INSERT INTO people VALUES(?,?,?,?,?,?,?,?,?);";
       boolean posted = false;
       
       try{
          dbConn.connect();
-         if(dbConn.setData(statement,userName,password,fName,lName,email,userType)){
+         String getMaxUserId = "SELECT MAX(uid) FROM people;";
+         ArrayList<ArrayList<String>> rs = dbConn.getData(getMaxUserId);
+         userID = Integer.parseInt(rs.get(0).get(0)) + 1;
+         if(dbConn.setData(statement,String.valueOf(userID),userType,userName,password,email,fName,lName,phone,office)){
             dbConn.close();
             posted = true;
          }
@@ -96,7 +125,7 @@ public class User
    public boolean login()
    {
       boolean loginSuccess = false;
-      String statement = "SELECT * FROM users WHERE username= ? AND password= ? ;";
+      String statement = "SELECT * FROM people WHERE username= ? AND password= ? ;";
       
       try{
          dbConn.connect();
@@ -104,11 +133,14 @@ public class User
          if(rs != null){
             dbConn.close();
             userID = Integer.parseInt(rs.get(0).get(0));
-            fName = rs.get(0).get(3);
-            lName = rs.get(0).get(4);
-            email = rs.get(0).get(5);
-            office = rs.get(0).get(6);
-            userType = rs.get(0).get(7);
+            userName = rs.get(0).get(2);
+            password = rs.get(0).get(3);
+            fName = rs.get(0).get(5);
+            lName = rs.get(0).get(6);
+            email = rs.get(0).get(4);
+            phone = rs.get(0).get(7);
+            office = rs.get(0).get(8);
+            userType = rs.get(0).get(1);
             loginSuccess = true;
          }
          else{
@@ -124,8 +156,35 @@ public class User
       return loginSuccess;
    }
    
-   public void getProjectIds(){
-      //method to get project ids the user is connected to
+   /**
+    * Method that retrieves the project IDs associated with this user
+    * @return boolean that states if this user has any projects associated with them
+    */
+   public boolean getProjectIds(){
+      String query = "SELECT pid FROM people_project JOIN people USING(uid) WHERE uid= ?;";
+      boolean idsFound = false;
+      
+      try{
+         dbConn.connect();
+         ArrayList<ArrayList<String>> rs = dbConn.getData(query,String.valueOf(userID));
+         if(rs != null){
+            dbConn.close();
+            for(int i = 0; i<rs.size(); i++){
+               projectIds.add(rs.get(i).get(0));
+            }
+            idsFound = true;
+         }
+         else{
+            dbConn.close();
+            idsFound = false;
+         }
+      }
+      catch(DLException dle){
+         idsFound = false;
+         System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+         dle.printStackTrace();
+      }
+      return idsFound;
    }
    
    /**
