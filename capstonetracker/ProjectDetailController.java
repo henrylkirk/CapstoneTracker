@@ -14,7 +14,6 @@ import javafx.scene.control.*;
  */
 public class ProjectDetailController implements Initializable {
 
-
     /**
      * Initializes the controller class.
      */

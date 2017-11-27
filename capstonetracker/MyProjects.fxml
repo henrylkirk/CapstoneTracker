@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="MyProjects" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="capstonetracker.ProjectDetailController">
+<AnchorPane id="MyProjects" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="capstonetracker.MyProjectsController">
    <children>
       <Button id="btnLogout" layoutX="527.0" layoutY="14.0" mnemonicParsing="false" text="Log Out" />
       <Label id="lblTitle" layoutX="234.0" layoutY="13.0" text="My Projects">
@@ -13,12 +13,12 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TableView id="tblProjects" layoutX="17.0" layoutY="94.0" prefHeight="200.0" prefWidth="567.0">
+      <TableView id="tblProjects" fx:id="tblProjects" layoutX="17.0" layoutY="94.0" prefHeight="200.0" prefWidth="567.0">
         <columns>
-          <TableColumn id="colProjectName" prefWidth="274.0" text="Project Name" />
-          <TableColumn id="colRole" minWidth="0.0" prefWidth="292.0" text="Your Role" />
+          <TableColumn id="colProjectName" fx:id="colProjectName" prefWidth="274.0" text="Project Name" />
+          <TableColumn id="colRole" fx:id="colRole" minWidth="0.0" prefWidth="292.0" text="Your Role" />
         </columns>
       </TableView>
-      <Button id="btnCreateProject" defaultButton="true" layoutX="17.0" layoutY="327.0" mnemonicParsing="false" text="Create a new project" />
+      <Button id="btnCreateProject" defaultButton="true" layoutX="17.0" layoutY="327.0" mnemonicParsing="false" text="Create a new project" onAction="#handleCreateButtonAction" />
    </children>
 </AnchorPane>

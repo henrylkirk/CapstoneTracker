@@ -34,8 +34,12 @@ public class CapstoneTracker extends Application {
                 } catch(Exception e){}
             }
         });
+
     }
 
+    /**
+     * Create and show a scene from the fxml file name.
+     */
     private void changeScene(String sceneName) throws Exception {
         fxmlLoader = new FXMLLoader(getClass().getResource(sceneName));
         Parent root = fxmlLoader.load();
@@ -45,7 +49,7 @@ public class CapstoneTracker extends Application {
     }
 
     /**
-     * @param args the command line arguments
+     * @param args - the command line arguments
      */
     public static void main(String[] args) {
         launch(args);
