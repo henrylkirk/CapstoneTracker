@@ -188,12 +188,165 @@ public class User
    }
    
    /**
-    * Returns edit boolean that determines if the user can modify records
-    * @return canEdit boolean that determines if this user has permissions to modify data
+    * Mutator to set the ID for this user
+    * @param _userId ID number to assign this user
     */
-   public String checkUserType()
+   public void setUserId(int  _userId){
+      userID = _userId;
+   }
+   
+   /**
+    * Method to return userId
+    * @return the userId for this user
+    */
+   public int getUserId()
+   {
+      return userID;
+   }
+   
+   /**
+    * Mutator to set the user type for this user
+    * @param _userType the user type for this user
+    */
+   public void setUserType(String _userType){
+      userType = _userType;
+   }
+   
+   /**
+    * Method that returns the usertype assigned to this user
+    * @return the user type of this user
+    */
+   public String getUserType()
    {
       return userType;
    }
    
+   /**
+    * Mutator that sets the username used to acces the account of this user
+    * @param _userName the username for this user's account
+    */
+   public void setUsername(String _userName){
+      userName = _userName;
+   }
+   
+   /**
+    *  Method that returns the username assigned to this user
+    * @return the username for this user
+    */
+   public String getUsername()
+   {
+      return userName;
+   }
+   
+   /**
+    * Mutator tthat sets a new password for this user, saving it as a hashed string value
+    * @param _passString the base string value used to set the new password
+    */
+   public void setPassword(String _passString){
+      try {
+         java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+         byte[] array = md.digest(_passString.getBytes());
+         StringBuffer sb = new StringBuffer();
+         for (int i = 0; i < array.length; ++i) {
+            sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+         }
+         password = sb.toString();
+      } catch (java.security.NoSuchAlgorithmException e) {
+         e.printStackTrace();
+      }
+   }
+   
+   /**
+    * Method to retrieve the hashed string for this user's password
+    * @return the hashed string password for this user
+    */
+   public String getPassword()
+   {
+      return password;
+   }
+   
+   /**
+    * Mutator to set the email address for this user
+    * @param _email string that outlines email address for this user
+    */
+   public void setEmail(String _email){
+      email = _email;
+   }
+   
+   /**
+    * Method to return email address for this user
+    * @return The email address for this user
+    */
+   public String getEmail()
+   {
+      return email;
+   }
+   
+   /**
+    * Mutator to set the user's first name
+    * @param _fName the first name for this user
+    */
+   public void setFirstName(String _fName){
+      fName = _fName;
+   }
+   
+   /**
+    * Method that returns the first name of this user
+    * @return The user's first name
+    */
+   public String getFirstName()
+   {
+      return fName;
+   }
+   
+   /**
+    * Mutator that sets the user's last name
+    * @param _lName The last name for this user
+    */
+   public void setLastName(String _lName){
+      lName = _lName;
+   }
+   
+   /**
+    * Method that returns the last name for this user
+    * @return the last name of this user
+    */
+   public String getLastName()
+   {
+      return lName;
+   }
+   
+   /**
+    * Mutator that sets the phone number for this user; saved as a string value
+    * @param _phone phone number for this user
+    */
+   public void setPhone(String _phone){
+      phone = _phone;
+   }
+   
+   /**
+    * Method that returns the phone number assigned to this user
+    * @return The phone number of this user
+    */
+   public String getPhone()
+   {
+      return phone;
+   }
+   
+   /**
+    * Mutator to set the office number/location for this user
+    * @param _office the office number/location for this user
+    */
+   public void setOffice(String _office){
+      office = _office;
+   }
+   
+   /**
+    * Method that returns the office number/location for this user
+    * @return the office number/location for this user
+    */
+   public String getOffice()
+   {
+      return office;
+   }
 }
