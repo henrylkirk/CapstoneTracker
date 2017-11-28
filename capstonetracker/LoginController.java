@@ -34,6 +34,7 @@ public class LoginController implements Initializable {
     private Label lblLogin;
     @FXML
     public Button btnLogin;
+    private BLUser user = null;
 
     /**
      * Initializes the controller class.
@@ -54,7 +55,7 @@ public class LoginController implements Initializable {
         if( !isEmpty(username) && !isEmpty(password) ) {
             username = username.trim();
             password = password.trim();
-            User user = new User(username, password);
+            user = new BLUser(username, password);
             loginStatus = user.login();
         } else {
             loginStatus = false;
@@ -82,6 +83,10 @@ public class LoginController implements Initializable {
 
         System.out.println("successfully created account");
         // TODO
+    }
+
+    public BLUser getUser(){
+        return user;
     }
 
     private static boolean isEmpty(String s) {

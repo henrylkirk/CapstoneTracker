@@ -160,7 +160,7 @@ public class User
     * Method that retrieves the project IDs associated with this user
     * @return boolean that states if this user has any projects associated with them
     */
-   public boolean getProjectIds(){
+   public ArrayList<String> getProjectIds(){
       String query = "SELECT pid FROM people_project JOIN people USING(uid) WHERE uid= ?;";
       boolean idsFound = false;
       
@@ -184,7 +184,7 @@ public class User
          System.out.println("*** Error: " + dle.getMessage() + " ***\n");
          dle.printStackTrace();
       }
-      return idsFound;
+      return projectIds;
    }
    
    /**

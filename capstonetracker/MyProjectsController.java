@@ -24,6 +24,8 @@ public class MyProjectsController implements Initializable {
     private TableColumn colProjectName;
     @FXML
     private TableColumn colRole;
+    @FXML
+    public Button btnLogout;
     private final ObservableList<Person> data =
         FXCollections.observableArrayList(
             new Person("A", "Z", "a@example.com"),
@@ -47,6 +49,13 @@ public class MyProjectsController implements Initializable {
         colRole.setCellValueFactory(new PropertyValueFactory<Person,String>("lastName"));                    
         tblProjects.setItems(data);
 
+    }
+
+    /**
+     * Load projects associated with a user into the table.
+     */
+    public void loadTable(User user){
+    	user.getProjectIds();
     }
 
     @FXML

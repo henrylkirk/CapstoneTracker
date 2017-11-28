@@ -18,6 +18,7 @@ public class CapstoneTracker extends Application {
 
     private Stage stage;
     private FXMLLoader fxmlLoader;
+    private BLUser user;
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -29,11 +30,26 @@ public class CapstoneTracker extends Application {
         // get login button
         lc.btnLogin.setOnAction((event) -> {
             if(lc.login()){
+                user = lc.getUser();
                 try {
                     changeScene("MyProjects.fxml");
                 } catch(Exception e){}
             }
         });
+
+        MyProjectsController mpc = null;
+        if(user != null){
+            mpc = (MyProjectsController) fxmlLoader.getController();
+            // mpc.loadTable(user);
+
+            // logout
+            mpc.btnLogout.setOnAction((event) -> {
+                try {
+                    changeScene("Login.fxml");
+                    user = null;
+                } catch(Exception e){}
+            });
+        } 
 
     }
 
