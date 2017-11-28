@@ -34,6 +34,8 @@ public class LoginController implements Initializable {
     private Label lblLogin;
     @FXML
     public Button btnLogin;
+    @FXML
+    public Label lblLoginStatus;
     private BLUser user = null;
 
     /**
@@ -63,7 +65,11 @@ public class LoginController implements Initializable {
 
         if(!loginStatus){
             System.out.println("invalid username or password");
+            // show status label
+            lblLoginStatus.setVisible(true);
         } else {
+            // hide status label
+            lblLoginStatus.setVisible(false);
             System.out.println("successful login\nUsername: "+username+"\nPassword: "+password);
         }
         return true;
