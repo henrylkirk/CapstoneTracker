@@ -21,6 +21,7 @@ import java.util.*;
    private String startDate;
    private String endDate;
    private int plagiarismScore;
+   private int grade;
    private String changeTo;
    private String partOfChange;
    private String status;
@@ -39,6 +40,7 @@ import java.util.*;
       startDate = "NULL";
       endDate =  "NULL";
       plagiarismScore = 0;
+      grade = 0;
       changeTo = "NULL";
       partOfChange = "NULL";
       userIds = null;
@@ -54,6 +56,7 @@ import java.util.*;
       startDate = "NULL";
       endDate =  "NULL";
       plagiarismScore = 0;
+      grade = 0;
       changeTo = "NULL";
       partOfChange = "NULL";
       userIds = null;
@@ -78,34 +81,142 @@ import java.util.*;
       endDate =  _endDate;
       dbConn = new connectDB();
    } 
+  /**
+    * return a 2d arraylist include all project detail 
+    */
+   public ArrayList<ArrayList<String>> getProjectArray()
+   {
+      ArrayList<ArrayList<String>> myArray = new ArrayList<>();
+      String statement = "SELECT * FROM projects WHERE pid = ?;";
+      try
+      {
+         myArray = dbConn.getData(statement, projectID);
+      }
+      catch(DLException dle)
+      {
+         System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+         dle.printStackTrace();
+      }
+      return myArray;
+   }
+   
    
    /**
     * Both student and faculty able to check is the project exists or not.
     * Both student and faculty able to see project information, include id, name, description, startdate and enddate
-    * if there are no data match, show messsage: No data is retrieved
     */
    public boolean checkProject()
    {
-      ArrayList<ArrayList<String>> myArray = new ArrayList<>();
       String statement = "SELECT * FROM projects WHERE pid = ?;";
       boolean check = false;
+      ArrayList<ArrayList<String>> myArray = getProjectArray();
+      if (myArray.size() == 0)
+      {
+         check = false;
+      }
+      else
+      {
+         check = true;
+      }
+      return check;
+   }
+   
+   /**
+    * getProjectID method return projectID
+    */
+   public String getProjectID()
+   {
+      ArrayList<ArrayList<String>> myArray = getProjectArray();
+      projectID = myArray.get(0).get(0);
+      return projectID;
+   }
+   
+   /**
+    * getProjectType method return projectType
+    */
+   public String getProjectType()
+   {
+      ArrayList<ArrayList<String>> myArray = getProjectArray();
+      projectType = myArray.get(0).get(1);
+      return projectType;
+   }
+   
+   /**
+    * getProjectName method return projectName
+    */
+   public String getProjectName()
+   {
+      ArrayList<ArrayList<String>> myArray = getProjectArray();
+      projectName = myArray.get(0).get(2);
+      return projectName;
+   }
+  
+   /**
+    * getProjectDescription method return projectDescription
+    */
+   public String getProjectDescription()
+   {
+      ArrayList<ArrayList<String>> myArray = getProjectArray();
+      projectDescription = myArray.get(0).get(3);
+      return projectDescription;
+   }
+   
+   /**
+    * getStartDate method return startdate
+    */
+   public String getStartDate()
+   {
+      ArrayList<ArrayList<String>> myArray = getProjectArray();
+      startDate = myArray.get(0).get(4);
+      return startDate;
+   }
+   
+   /**
+    * getEndDate method return enddate
+    */
+   public String getEndDate()
+   {
+      ArrayList<ArrayList<String>> myArray = getProjectArray();
+      endDate = myArray.get(0).get(5);
+      return startDate;
+   }
+   
+   /**
+    * getPlagiarismScore method return plagiarismScore
+    */ 
+   public int getPlagiarismScore() 
+   {
+      ArrayList<ArrayList<String>> myArray = getProjectArray();
+      plagiarismScore = Integer.parseInt(myArray.get(0).get(6));
+      return plagiarismScore;
+   } 
+  
+   /**
+    * getScore method return score
+    */ 
+   public int getGrade()
+   {
+      ArrayList<ArrayList<String>> myArray = getProjectArray();
+      grade = Integer.parseInt(myArray.get(0).get(7));
+      return grade;
+   }
+   
+   /**
+    * addNewProject allow user to insert new project to database
+    */
+   public void addNewProject(BLUser user)
+   {
+      String statement = "INSERT INTO project VALUES(?,?,?,?,?);";
       try
       {
-         myArray = dbConn.getData(statement, projectID);
-         if (myArray.size() == 0)
+         boolean add = dbConn.setData(statement, projectID, projectName, projectDescription, startDate, endDate);
+         if (add)
          {
-            check = false;
+            System.out.println("New Project Added");
          }
          else
          {
-            check = true;
-            projectID = myArray.get(0).get(0);
-            projectType = myArray.get(0).get(1);
-            projectName = myArray.get(0).get(2);
-            projectDescription = myArray.get(0).get(3);
-            startDate = myArray.get(0).get(4);
-            endDate = myArray.get(0).get(5);
-            plagiarismScore =  Integer.parseInt(myArray.get(0).get(6));
+            System.out.println("New Project Added Failed");
          }
       }
       catch(DLException dle)
@@ -113,41 +224,7 @@ import java.util.*;
          System.out.println("*** Error: " + dle.getMessage() + " ***\n");
          dle.printStackTrace();
       }
-      return check;
-   }
-   
-   /**
-    * Only faculty are allow to use this method, student are not allow
-    * faculty able to add new project
-    */
-   public void addNewProject(BLUser user)
-   {
-      String userType = user.checkUserType();
-      if(userType.equalsIgnoreCase("Student"))
-      {
-         System.out.println("Student not able to add new project");
-      }
-      else
-      {
-         String statement = "INSERT INTO project VALUES(?,?,?,?,?);";
-         try
-         {
-            boolean add = dbConn.setData(statement, projectID, projectName, projectDescription, startDate, endDate);
-            if (add)
-            {
-               System.out.println("New Project Added");
-            }
-            else
-            {
-               System.out.println("New Project Added Failed");
-            }
-         }
-         catch(DLException dle)
-         {
-            System.out.println("*** Error: " + dle.getMessage() + " ***\n");
-            dle.printStackTrace();
-         }
-      }
+      
    }
 
    /**
@@ -184,15 +261,19 @@ import java.util.*;
    }
    
    /**
-    * Only faculty are allow to use this method, student are not allow
-    * faculty able to update project information
+    * updateProjectInfo allow user to change project detail
+    * BUT student are not allow to change plagirism score and grade
     */
    public void updateProjectInfo(String partOfChange, BLUser user)
    {
-      String userType = user.checkUserType();
-      if(userType.equalsIgnoreCase("Student"))
+      String userType = user.getUserType();
+      if(userType.equalsIgnoreCase("Student") && partOfChange == "plagiarism_score")
       {
-         System.out.println("Student not able to update project information");
+         System.out.println("Student not allow to change plagirism score");
+      }
+      else if(userType.equalsIgnoreCase("Student") && partOfChange == "grade")
+      {
+         System.out.println("Student not allow to change grade");
       }
       else
       {
@@ -214,8 +295,10 @@ import java.util.*;
             System.out.println("*** Error: " + dle.getMessage() + " ***\n");
             dle.printStackTrace();
          }
-       }
+      }
+       
 
    }
+   
       
  }
