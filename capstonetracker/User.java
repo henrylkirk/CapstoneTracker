@@ -9,7 +9,7 @@ import java.util.Arrays;
 * Ryan Sweeney, Henry Kirk, Zhimin Lin
 */
 
-public class User  
+public class User
 {
    private int userID;
    private String userType;
@@ -22,7 +22,7 @@ public class User
    private String office;
    private connectDB dbConn;
    private ArrayList<String> projectIds = new ArrayList<String>();
-   
+
    /**
     * Constructor that sets username and password
     * @param _userName the username for this user
@@ -51,7 +51,7 @@ public class User
          e.printStackTrace();
       }
    }
-   
+
    /**
     * Constructor that sets all values for user object
     * @param _userName username for this user record
@@ -86,17 +86,17 @@ public class User
          e.printStackTrace();
       }
    }
-   
+
    /**
     * Method that post new users to db
     * @return posted boolean that determines if insert was successful
     */
    public boolean registerAccount()
    {
-      String statement = 
+      String statement =
          "INSERT INTO people VALUES(?,?,?,?,?,?,?,?,?);";
       boolean posted = false;
-      
+
       try{
          dbConn.connect();
          String getMaxUserId = "SELECT MAX(uid) FROM people;";
@@ -117,7 +117,7 @@ public class User
       }
       return posted;
    }
-   
+
    /**
     * Method the checks if user exists in db and returns boolean
     * @return loginSuccess boolean that determines if login was successful
@@ -125,14 +125,15 @@ public class User
    public boolean login()
    {
       boolean loginSuccess = false;
-      String statement = "SELECT * FROM people WHERE username= ? AND password= ? ;";
-      
+      String statement = "SELECT uid, type, userName, password, fName, lName, email, phone, officelocation FROM people WHERE username= ? AND password= ? ;";
+
       try{
          dbConn.connect();
          ArrayList<ArrayList<String>> rs = dbConn.getData(statement,userName,password);
          if(rs != null){
             dbConn.close();
             userID = Integer.parseInt(rs.get(0).get(0));
+            userType = rs.get(0).get(1);
             userName = rs.get(0).get(2);
             password = rs.get(0).get(3);
             fName = rs.get(0).get(5);
@@ -140,7 +141,6 @@ public class User
             email = rs.get(0).get(4);
             phone = rs.get(0).get(7);
             office = rs.get(0).get(8);
-            userType = rs.get(0).get(1);
             loginSuccess = true;
          }
          else{
@@ -155,7 +155,7 @@ public class User
       }
       return loginSuccess;
    }
-   
+
    /**
     * Method that retrieves the project IDs associated with this user
     * @return boolean that states if this user has any projects associated with them
@@ -163,7 +163,7 @@ public class User
    public ArrayList<String> getProjectIds(){
       String query = "SELECT pid FROM people_project JOIN people USING(uid) WHERE uid= ?;";
       boolean idsFound = false;
-      
+
       try{
          dbConn.connect();
          ArrayList<ArrayList<String>> rs = dbConn.getData(query,String.valueOf(userID));
@@ -186,7 +186,7 @@ public class User
       }
       return projectIds;
    }
-   
+
    /**
     * Mutator to set the ID for this user
     * @param _userId ID number to assign this user
@@ -194,7 +194,7 @@ public class User
    public void setUserId(int  _userId){
       userID = _userId;
    }
-   
+
    /**
     * Method to return userId
     * @return the userId for this user
@@ -203,7 +203,7 @@ public class User
    {
       return userID;
    }
-   
+
    /**
     * Mutator to set the user type for this user
     * @param _userType the user type for this user
@@ -211,7 +211,7 @@ public class User
    public void setUserType(String _userType){
       userType = _userType;
    }
-   
+
    /**
     * Method that returns the usertype assigned to this user
     * @return the user type of this user
@@ -220,7 +220,7 @@ public class User
    {
       return userType;
    }
-   
+
    /**
     * Mutator that sets the username used to acces the account of this user
     * @param _userName the username for this user's account
@@ -228,7 +228,7 @@ public class User
    public void setUsername(String _userName){
       userName = _userName;
    }
-   
+
    /**
     *  Method that returns the username assigned to this user
     * @return the username for this user
@@ -237,7 +237,7 @@ public class User
    {
       return userName;
    }
-   
+
    /**
     * Mutator tthat sets a new password for this user, saving it as a hashed string value
     * @param _passString the base string value used to set the new password
@@ -255,7 +255,7 @@ public class User
          e.printStackTrace();
       }
    }
-   
+
    /**
     * Method to retrieve the hashed string for this user's password
     * @return the hashed string password for this user
@@ -264,7 +264,7 @@ public class User
    {
       return password;
    }
-   
+
    /**
     * Mutator to set the email address for this user
     * @param _email string that outlines email address for this user
@@ -272,7 +272,7 @@ public class User
    public void setEmail(String _email){
       email = _email;
    }
-   
+
    /**
     * Method to return email address for this user
     * @return The email address for this user
@@ -281,7 +281,7 @@ public class User
    {
       return email;
    }
-   
+
    /**
     * Mutator to set the user's first name
     * @param _fName the first name for this user
@@ -289,7 +289,7 @@ public class User
    public void setFirstName(String _fName){
       fName = _fName;
    }
-   
+
    /**
     * Method that returns the first name of this user
     * @return The user's first name
@@ -298,7 +298,7 @@ public class User
    {
       return fName;
    }
-   
+
    /**
     * Mutator that sets the user's last name
     * @param _lName The last name for this user
@@ -306,7 +306,7 @@ public class User
    public void setLastName(String _lName){
       lName = _lName;
    }
-   
+
    /**
     * Method that returns the last name for this user
     * @return the last name of this user
@@ -315,7 +315,7 @@ public class User
    {
       return lName;
    }
-   
+
    /**
     * Mutator that sets the phone number for this user; saved as a string value
     * @param _phone phone number for this user
@@ -323,7 +323,7 @@ public class User
    public void setPhone(String _phone){
       phone = _phone;
    }
-   
+
    /**
     * Method that returns the phone number assigned to this user
     * @return The phone number of this user
@@ -332,7 +332,7 @@ public class User
    {
       return phone;
    }
-   
+
    /**
     * Mutator to set the office number/location for this user
     * @param _office the office number/location for this user
@@ -340,7 +340,7 @@ public class User
    public void setOffice(String _office){
       office = _office;
    }
-   
+
    /**
     * Method that returns the office number/location for this user
     * @return the office number/location for this user

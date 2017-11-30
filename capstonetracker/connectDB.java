@@ -8,9 +8,9 @@ import java.util.Arrays;
  * Class object used to connect to a MySQL Database
  * Last Revised: 11/06/17
  */
- 
+
 public class connectDB {
- 
+
    private String uri; //Location and DB to use
    private String driver; //Driver to use
    private String user; //Username to access DB
@@ -20,17 +20,17 @@ public class connectDB {
    private ArrayList<ArrayList<String>> resultsList;//2d ArrayList to hold results from Queries
    private int [] columnWidths; //int array the stores the max widths for the columns for formatting purposes
    private boolean noRollback; //boolean that determines whether an transaction was rolled back
-   
+
    /**
     * Default constructor with default options to connect to the database
     */
    public connectDB(){
-      uri = "jdbc:mysql://localhost/capstoneprojects?autoReconnect=true&useSSL=false";
+      uri = "jdbc:mysql://localhost/mydb?autoReconnect=true&useSSL=false";
       driver = "com.mysql.jdbc.Driver";
       user = "root";
       pass = "student";
    }
-   
+
    /**
     * Param constructor that sets specific username and password to access the database; instantiates defaults for uri and driver
     * @param _user sets value for the username
@@ -42,7 +42,7 @@ public class connectDB {
       uri = "jdbc:mysql://localhost/capstoneprojects?autoReconnect=true&useSSL=false";
       driver = "com.mysql.jdbc.Driver";
    }
-   
+
    /**
     * Method used to connect to MySQL Database
     * @exception DLException catches exceptions and send info to log file
@@ -65,7 +65,7 @@ public class connectDB {
       }
       return isConn;
    }
-   
+
    /**
     * Method used to close connection to the MySQL Database
     * @exception DLException catches exceptions and sends info to log file
@@ -87,7 +87,7 @@ public class connectDB {
       }
       return isClosed;
    }
-   
+
    /**
     * Method that creates a prepare query statement using a string and array of parameters
     * @param _query The string object used to generate the query
@@ -119,7 +119,7 @@ public class connectDB {
       }
       return prep;
    }
-   
+
    /**
     * Method that preforms SQL UPDATES, DELETES and INSERTS using a prepared statement
     * @param _statement String object representing the prepared statement to be used
@@ -131,7 +131,7 @@ public class connectDB {
       String statement = _statement;
       String [] params = _params;
       int resultCount = 0;
-      
+
       try{
          PreparedStatement prepstmt = this.prepare(statement,params);
          resultCount = prepstmt.executeUpdate();
@@ -147,7 +147,7 @@ public class connectDB {
       }
       return resultCount;
    }
-   
+
    /**
     * Method that starts a transaction
     * @exception DLException throw when any type of exception is caught and write info to a log file
@@ -164,7 +164,7 @@ public class connectDB {
          throw new DLException(e,"Misc Exception caught at connectDB.startTrans()");
       }
    }
-   
+
    /**
     * Method the ends a transaction
     * @exception DLException throw when any type of exception is caught and write info to a log file
@@ -183,7 +183,7 @@ public class connectDB {
          throw new DLException(e,"Misc Exception caught at connectDB.endTrans()");
       }
    }
-   
+
    /**
     * Method used to rollback the results of a transaction should an error occur
     * @exception DLException throw when any type of exception is caught and write info to a log file
@@ -200,7 +200,7 @@ public class connectDB {
          throw new DLException(e,"Misc Exception caught at connectDB.rollbackTrans()");
       }
    }
-   
+
    /**
     * Method to retrieve data from the MySQL Database using a prepared statement
     * @param statement sets string to be used for the SELECT statement
@@ -211,7 +211,7 @@ public class connectDB {
    public ArrayList<ArrayList<String>> getData(String statement, String... _params) throws DLException {
       String query = statement;//String used for the SELECT statement
       String [] params = _params;
-      
+
       try{
          PreparedStatement stmt = this.prepare(query,params);
          ResultSet resultSet = stmt.executeQuery();
@@ -220,7 +220,7 @@ public class connectDB {
       }
       catch(SQLException sqle){
          resultsList = null;
-         throw new DLException(sqle,"SQL Exception caught at connectDB.getData(statement,includeHeader)","Query used: " 
+         throw new DLException(sqle,"SQL Exception caught at connectDB.getData(statement,includeHeader)","Query used: "
                                + query,"Parameters Passed: " + Arrays.toString(params));
       }
       catch(Exception e){
@@ -229,7 +229,7 @@ public class connectDB {
       }
       return resultsList;
    }
-   
+
    /**
     * Method to perform UPDATE, INSERT and DELETE queries on the MySQL Database using a prepared statement
     * @param statement sets string to be used for the query
@@ -242,7 +242,7 @@ public class connectDB {
       String [] params = _params;
       boolean success = false;
       int resultCount = 0;
-      
+
       try{
          resultCount = this.executeStmt(query,params);
          if(resultCount > 0){success = true;}
@@ -254,7 +254,7 @@ public class connectDB {
       }
       return success;
    }
-   
+
    /**
     * Private method that initiates and sets to data for the # of fields, columnWidths array, and populates the ResultsList
     * @param _resultSet The ResultSet object the was generated during the last executed query
@@ -268,7 +268,7 @@ public class connectDB {
          resultsList = new ArrayList<ArrayList<String>>();
          numOfFields = rsmd.getColumnCount();
          columnWidths = new int [numOfFields];
-         
+
          if(rs.isBeforeFirst()){
             while(rs.next()){
                ArrayList<String> row = new ArrayList<String>();
@@ -294,9 +294,9 @@ public class connectDB {
          throw new DLException(sqle,"SQL Exception caught at connectDB.setResultingData()");
       }
       catch(Exception e){
-         throw new DLException(e,"Misc Exception caught at connectDB.setResultingData()","# of Fields: " + String.valueOf(numOfFields), 
+         throw new DLException(e,"Misc Exception caught at connectDB.setResultingData()","# of Fields: " + String.valueOf(numOfFields),
                                "Column Widths: " + Arrays.toString(columnWidths),"Results List: " + Arrays.toString(resultsList.toArray()));
       }
    }
-   
+
 }//End connectDB
