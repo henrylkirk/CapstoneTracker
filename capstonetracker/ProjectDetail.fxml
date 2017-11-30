@@ -27,13 +27,8 @@
             <TextField id="tfPlagiarismScore" promptText="5.0" />
          </children>
       </VBox>
-      <Label layoutX="584.0" layoutY="16.0" text="Project Detail">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Button id="btnSave" defaultButton="true" layoutX="1161.0" layoutY="548.0" mnemonicParsing="false" text="Save Changes" />
-      <Button id="btnSave" layoutX="1200.0" layoutY="15.0" mnemonicParsing="false" text="Log Out" />
+      <Button id="btnSave" defaultButton="true" layoutX="1155.0" layoutY="546.0" mnemonicParsing="false" text="Save Changes" />
+      <Button id="btnSave" layoutX="1194.0" layoutY="14.0" mnemonicParsing="false" text="Log Out" />
       <Button id="btnSave" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="&lt; Back" />
       <TableView layoutX="302.0" layoutY="97.0" prefHeight="422.0" prefWidth="580.0">
         <columns>

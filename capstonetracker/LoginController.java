@@ -3,7 +3,7 @@ package capstonetracker;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler; 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -13,29 +13,29 @@ import javafx.scene.control.*;
  * @author Henry Kirk
  */
 public class LoginController implements Initializable {
-    
-    @FXML 
+
+    @FXML
     private TextField tfLoginUsername;
-    @FXML 
+    @FXML
     private TextField tfLoginPassword;
-    @FXML 
+    @FXML
     private TextField tfCreateUsername;
-    @FXML 
+    @FXML
     private TextField tfCreatePassword;
-    @FXML 
+    @FXML
     private TextField tfFirstname;
-    @FXML 
+    @FXML
     private TextField tfLastname;
-    @FXML 
+    @FXML
     private TextField tfEmail;
-    @FXML 
+    @FXML
     private ComboBox cbRole;
-    @FXML 
+    @FXML
     private Label lblLogin;
     @FXML
     public Button btnLogin;
     @FXML
-    public Label lblLoginStatus;
+    private Label lblLoginStatus;
     private BLUser user = null;
 
     /**
@@ -62,7 +62,6 @@ public class LoginController implements Initializable {
         } else {
             loginStatus = false;
         }
-
         if(!loginStatus){
             System.out.println("invalid username or password");
             // show status label
@@ -106,6 +105,6 @@ public class LoginController implements Initializable {
     private void createAccount() {
         // TODO
         // check if they exist (try to log in)
-    }  
-    
+    }
+
 }

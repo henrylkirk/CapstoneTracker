@@ -19,49 +19,54 @@ public class CapstoneTracker extends Application {
     private Stage stage;
     private FXMLLoader fxmlLoader;
     private BLUser user;
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
-        changeScene("Login.fxml");
-        
+
+        // Show login scene at start
+        changeScene("Login");
+
         // get login controller
         LoginController lc = (LoginController) fxmlLoader.getController();
-        // get login button
+        // add event listener to login button
         lc.btnLogin.setOnAction((event) -> {
             if(lc.login()){
                 user = lc.getUser();
-                try {
-                    changeScene("MyProjects.fxml");
-                } catch(Exception e){}
+                changeScene("MyProjects");
             }
         });
 
         MyProjectsController mpc = null;
         if(user != null){
             mpc = (MyProjectsController) fxmlLoader.getController();
-            // mpc.loadTable(user);
-
+            // Populate table with user's projects
+            // mpc.loadTable(user.getProjectIds());
             // logout
             mpc.btnLogout.setOnAction((event) -> {
-                try {
-                    changeScene("Login.fxml");
-                    user = null;
-                } catch(Exception e){}
+                changeScene("Login");
+                user = null;
             });
-        } 
+        }
 
     }
 
     /**
      * Create and show a scene from the fxml file name.
      */
-    private void changeScene(String sceneName) throws Exception {
-        fxmlLoader = new FXMLLoader(getClass().getResource(sceneName));
-        Parent root = fxmlLoader.load();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    private void changeScene(String sceneName) {
+        try {
+            fxmlLoader = new FXMLLoader(getClass().getResource(sceneName+".fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle(sceneName);
+            stage.show();
+        } catch(Exception e){
+            System.out.println("Exception caught at changeScene"+e.getMessage());
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -70,5 +75,5 @@ public class CapstoneTracker extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
