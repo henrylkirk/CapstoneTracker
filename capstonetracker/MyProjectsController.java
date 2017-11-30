@@ -38,6 +38,7 @@ public class MyProjectsController implements Initializable {
 	private TableColumn colView;
     @FXML
     public Button btnLogout;
+	private Button[] viewBtns;
     private final ObservableList<Person> data =
         FXCollections.observableArrayList(
             new Person("Thesis 1", "Advisor"),
@@ -91,10 +92,6 @@ public class MyProjectsController implements Initializable {
     @FXML
     protected void handleCreateButtonAction(ActionEvent event) {
     	data.add(new Person("new","new"));
-    }
-
-    @FXML
-    protected void handleSaveButtonAction(ActionEvent event) {
     }
 
 	// test class for adding rows to table

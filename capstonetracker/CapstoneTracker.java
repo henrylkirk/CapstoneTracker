@@ -61,10 +61,12 @@ public class CapstoneTracker extends Application {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle(sceneName);
+            stage.centerOnScreen();
             stage.show();
         } catch(Exception e){
             System.out.println("Exception caught at changeScene"+e.getMessage());
             e.printStackTrace();
+            System.exit(0);
         }
 
     }

@@ -1,4 +1,4 @@
-!1237;s
+!1421;s
 J
 SAU0PATH+=%<JGRASP_PATHS>%;\012PATH=+%;%<JGRASP_C_PATHS>\012CYGWIN=nodosfilewarning\012GCC_COLORS=\012-Run\012ADD_EXE_PATH==Y\012
 SCU0PATH+=%<JGRASP_PATHS>%;\012PATH=+%;%<JGRASP_C_PATHS>\012CYGWIN=nodosfilewarning\012GCC_COLORS=\012-Run\012ADD_EXE_PATH==Y\012
@@ -9,8 +9,8 @@ SOU0PATH+=%<JGRASP_PATHS>%;\012PATH=+%;%<JGRASP_C_PATHS>\012CYGWIN=nodosfilewarn
 SyU0PATH+=%<PYTHON_PATH>%;\012PATH+=%<JGRASP_PATHS>%;\012CYGWIN=nodosfilewarning\012GCC_COLORS=
 SPU0
 s#i0
-s#k0
-s#j0
+s#k0/Users/henrykirk/Documents/mysql-connector-java-5.1.44/mysql-connector-java-5.1.44-bin.jar\000
+s#j0/Users/henrykirk/Documents/mysql-connector-java-5.1.44/mysql-connector-java-5.1.44-bin.jar
 s#l0
 !267;g
 %\011Login.fxml

@@ -52,17 +52,17 @@ public class LoginController implements Initializable {
     public boolean login() {
         String username = tfLoginUsername.getText();
         String password = tfLoginPassword.getText();
-        boolean loginStatus = false;
+        boolean validLogin = false;
 
         if( !isEmpty(username) && !isEmpty(password) ) {
             username = username.trim();
             password = password.trim();
             user = new BLUser(username, password);
-            loginStatus = user.login();
+            validLogin = user.login();
         } else {
-            loginStatus = false;
+            validLogin = false;
         }
-        if(!loginStatus){
+        if(!validLogin){
             System.out.println("invalid username or password");
             // show status label
             lblLoginStatus.setVisible(true);
@@ -71,7 +71,7 @@ public class LoginController implements Initializable {
             lblLoginStatus.setVisible(false);
             System.out.println("successful login\nUsername: "+username+"\nPassword: "+password);
         }
-        return true;
+        return validLogin;
     }
 
     /**
