@@ -14,7 +14,7 @@ import java.util.*;
  */
  public class Project
  { 
-   private String projectID;
+   private int projectID;
    private String projectName;
    private String projectType;
    private String projectDescription;
@@ -27,13 +27,14 @@ import java.util.*;
    private String status;
    private ArrayList<String> userIds;
    private connectDB dbConn;
+   private int userID;
    
    /**
     * Default constructor
     */
    public Project()
    {
-      projectID = "NULL";
+      projectID = 0;
       projectName = "NULL";
       String projectType = "NULL";
       projectDescription = "NULL";
@@ -47,7 +48,7 @@ import java.util.*;
       dbConn = new connectDB();
    }
    
-   public Project(String _projectID)
+   public Project(int _projectID)
    {
       projectID = _projectID;
       projectName = "NULL";
@@ -71,7 +72,7 @@ import java.util.*;
     * startDate: the date of the this project start
     * endDate: the duedate for this project
     */
-   public Project(String _projectID, String _projectType, String _projectName, String _projectDescription, String _startDate, String _endDate)
+   public Project(int _projectID, String _projectType, String _projectName, String _projectDescription, String _startDate, String _endDate)
    {
       projectID = _projectID;
       projectType = _projectType;
@@ -81,26 +82,47 @@ import java.util.*;
       endDate =  _endDate;
       dbConn = new connectDB();
    } 
+   
   /**
-    * return a 2d arraylist include all project detail 
-    */
-   public ArrayList<ArrayList<String>> getProjectArray()
+   * After login, check what project did the user have
+   */
+   public ArrayList<ArrayList<String>> getUserProject(int userID)
    {
-      ArrayList<ArrayList<String>> myArray = new ArrayList<>();
-      String statement = "SELECT * FROM projects WHERE pid = ?;";
+      ArrayList<ArrayList<String>> userProjectList = new ArrayList<>();
+      String statement = "SELECT * FROM people_projects WHERE uid = ?;";
       try
       {
-         myArray = dbConn.getData(statement, projectID);
+         userProjectList = dbConn.getData(statement, Integer.toString(userID));
       }
       catch(DLException dle)
       {
          System.out.println("*** Error: " + dle.getMessage() + " ***\n");
          dle.printStackTrace();
       }
-      return myArray;
+      return userProjectList;
    }
    
    
+  /**
+    * return a 2d arraylist include all project detail 
+    */
+   public ArrayList<ArrayList<String>> getProjectDetailArray()
+   {
+      ArrayList<ArrayList<String>> projectDetailList = new ArrayList<>();
+      String statement = "SELECT * FROM projects WHERE pid = ?;";
+      try
+      {
+         projectDetailList = dbConn.getData(statement, Integer.toString(projectID));
+      }
+      catch(DLException dle)
+      {
+         System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+         dle.printStackTrace();
+      }
+      return projectDetailList;
+   }
+   
+   //-----------------------------------------------May not need this method-----------------------------------------------------------------
    /**
     * Both student and faculty able to check is the project exists or not.
     * Both student and faculty able to see project information, include id, name, description, startdate and enddate
@@ -109,7 +131,7 @@ import java.util.*;
    {
       String statement = "SELECT * FROM projects WHERE pid = ?;";
       boolean check = false;
-      ArrayList<ArrayList<String>> myArray = getProjectArray();
+      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
       if (myArray.size() == 0)
       {
          check = false;
@@ -120,14 +142,15 @@ import java.util.*;
       }
       return check;
    }
+   //----------------------------------------------------------------------------------------------------------------------------------------
    
    /**
     * getProjectID method return projectID
     */
-   public String getProjectID()
+   public int getProjectID()
    {
-      ArrayList<ArrayList<String>> myArray = getProjectArray();
-      projectID = myArray.get(0).get(0);
+      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
+      projectID = Integer.parseInt(myArray.get(0).get(0));
       return projectID;
    }
    
@@ -136,7 +159,7 @@ import java.util.*;
     */
    public String getProjectType()
    {
-      ArrayList<ArrayList<String>> myArray = getProjectArray();
+      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
       projectType = myArray.get(0).get(1);
       return projectType;
    }
@@ -146,7 +169,7 @@ import java.util.*;
     */
    public String getProjectName()
    {
-      ArrayList<ArrayList<String>> myArray = getProjectArray();
+      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
       projectName = myArray.get(0).get(2);
       return projectName;
    }
@@ -156,7 +179,7 @@ import java.util.*;
     */
    public String getProjectDescription()
    {
-      ArrayList<ArrayList<String>> myArray = getProjectArray();
+      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
       projectDescription = myArray.get(0).get(3);
       return projectDescription;
    }
@@ -166,7 +189,7 @@ import java.util.*;
     */
    public String getStartDate()
    {
-      ArrayList<ArrayList<String>> myArray = getProjectArray();
+      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
       startDate = myArray.get(0).get(4);
       return startDate;
    }
@@ -176,7 +199,7 @@ import java.util.*;
     */
    public String getEndDate()
    {
-      ArrayList<ArrayList<String>> myArray = getProjectArray();
+      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
       endDate = myArray.get(0).get(5);
       return startDate;
    }
@@ -186,7 +209,7 @@ import java.util.*;
     */ 
    public int getPlagiarismScore() 
    {
-      ArrayList<ArrayList<String>> myArray = getProjectArray();
+      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
       plagiarismScore = Integer.parseInt(myArray.get(0).get(6));
       return plagiarismScore;
    } 
@@ -196,7 +219,7 @@ import java.util.*;
     */ 
    public int getGrade()
    {
-      ArrayList<ArrayList<String>> myArray = getProjectArray();
+      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
       grade = Integer.parseInt(myArray.get(0).get(7));
       return grade;
    }
@@ -209,7 +232,7 @@ import java.util.*;
       String statement = "INSERT INTO project VALUES(?,?,?,?,?);";
       try
       {
-         boolean add = dbConn.setData(statement, projectID, projectName, projectDescription, startDate, endDate);
+         boolean add = dbConn.setData(statement, Integer.toString(projectID), projectName, projectDescription, startDate, endDate);
          if (add)
          {
             System.out.println("New Project Added");
@@ -245,7 +268,7 @@ import java.util.*;
       ArrayList<ArrayList<String>> data = new ArrayList<>();
 
       try {
-         data = dbConn.getData(statement, projectID);
+         data = dbConn.getData(statement, Integer.toString(projectID));
          if (data.size() == 0) {
             check = false;
          } else {
@@ -280,7 +303,7 @@ import java.util.*;
          String statement = "UPDATE projects SET " + partOfChange + " = ? WHERE pid = ?;" ;
          try
          {
-            boolean update = dbConn.setData(statement, changeTo, projectID );
+            boolean update = dbConn.setData(statement, changeTo, Integer.toString(projectID) );
             if (update)
             {
                System.out.println("Data Updated");
