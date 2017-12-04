@@ -16,4 +16,8 @@ public class BLUser extends User {
       super(_user,_pass);
    }
    
+   public BLUser(String _user, String _pass, String _fname, String _lname, String _email, String _office, String _phone, String _userType){
+      super(_user,_pass,_fname,_lname,_email,_office,_phone,_userType);
+   }
+   
 }
