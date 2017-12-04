@@ -122,7 +122,6 @@ import java.util.*;
       return projectDetailList;
    }
    
-   System.out.println(projectDetailList);
    
    //-----------------------------------------------May not need this method-----------------------------------------------------------------
    /**

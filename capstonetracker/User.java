@@ -21,7 +21,7 @@ public class User
    private String phone;
    private String office;
    private connectDB dbConn;
-   private ArrayList<String> projectIds = new ArrayList<String>();
+   private ArrayList<Project> projects = new ArrayList<Project>();
 
    /**
     * Constructor that sets username and password
@@ -160,9 +160,8 @@ public class User
     * Method that retrieves the project IDs associated with this user
     * @return boolean that states if this user has any projects associated with them
     */
-   public ArrayList<String> getProjectIds(){
+   public ArrayList<Project> getProjects(){
       String query = "SELECT pid FROM people_project JOIN people USING(uid) WHERE uid= ?;";
-      boolean idsFound = false;
 
       try{
          dbConn.connect();
@@ -170,21 +169,22 @@ public class User
          if(rs != null){
             dbConn.close();
             for(int i = 0; i<rs.size(); i++){
-               projectIds.add(rs.get(i).get(0));
+               int pid = Integer.parseInt(rs.get(i).get(0));
+               Project newProject = new Project(pid);
+               if(newProject.checkProject()){
+                  projects.add(newProject);
+               }
             }
-            idsFound = true;
          }
          else{
             dbConn.close();
-            idsFound = false;
          }
       }
       catch(DLException dle){
-         idsFound = false;
          System.out.println("*** Error: " + dle.getMessage() + " ***\n");
          dle.printStackTrace();
       }
-      return projectIds;
+      return projects;
    }
 
    /**
