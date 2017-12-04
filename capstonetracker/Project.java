@@ -134,7 +134,7 @@ import java.util.*;
       boolean check = false;
       try
       {
-         ArrayList<ArrayList<String>> myArray = dbConn.getData(statement, Integer.toString(projectID));
+         ArrayList<ArrayList<String>> myArray = dbConn.getData(statement, String.valueOf(projectID));
          if (myArray.size() == 0)
          {
             check = false;
