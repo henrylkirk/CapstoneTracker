@@ -19,7 +19,7 @@
               <Button id="btnLogin" fx:id="btnLogin" mnemonicParsing="false" prefHeight="57.0" prefWidth="178.0" text="Log in" />
            </children>
         </VBox>
-        <VBox id="vboxCreate" layoutX="317.0" layoutY="45.0" prefHeight="218.0" prefWidth="178.0">
+        <VBox id="vboxCreate" layoutX="317.0" layoutY="20.0" prefHeight="267.0" prefWidth="178.0">
            <children>
               <Label text="Create Account" />
               <TextField id="tfCreateUsername" fx:id="tfCreateUsername" promptText="username" />
@@ -30,12 +30,14 @@
               <ComboBox id="cbRole" fx:id="cbRole" layoutX="15.0" prefHeight="27.0" prefWidth="183.0" promptText="Role">
                 <items>
                   <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Student" />
+                    <String fx:value="Grad" />
                     <String fx:value="Advisor" />
                     <String fx:value="Staff" />
                   </FXCollections>
                 </items>
               </ComboBox>
+            <TextField id="tfOfficeNumber" fx:id="tfOfficeNumber" promptText="office number" />
+            <TextField id="tfPhone" fx:id="tfPhone" promptText="phone number" />
               <Button id="btnCreate" mnemonicParsing="false" onAction="#handleCreateButtonAction" prefHeight="32.0" prefWidth="178.0" text="Create Account" />
            </children>
         </VBox>

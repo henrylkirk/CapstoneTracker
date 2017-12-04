@@ -29,6 +29,10 @@ public class LoginController implements Initializable {
     @FXML
     private TextField tfEmail;
     @FXML
+    private TextField tfOfficeNumber;
+    @FXML
+    private TextField tfPhone;
+    @FXML
     private ComboBox cbRole;
     @FXML
     private Label lblLogin;
@@ -85,9 +89,18 @@ public class LoginController implements Initializable {
         String email = tfEmail.getText();
         String firstName = tfFirstname.getText();
         String lastName = tfLastname.getText();
+        String office = tfOfficeNumber.getText();
+        String phone = tfPhone.getText();
+        String usertype = cbRole.getValue().toString();
 
-        System.out.println("successfully created account");
-        // TODO
+        if(!isEmpty(username) && !isEmpty(password) && !isEmpty(email) && !isEmpty(firstName) && !isEmpty(lastName) && !isEmpty(phone) && !isEmpty(office) && !isEmpty(usertype)){
+            System.out.println("successfully created account");
+            user = new BLUser(username, password, firstName, lastName, email, office, phone, usertype);
+            user.registerAccount();
+            // System.out.println(username+password+firstName+lastName+email+phone+office+usertype);
+        } else {
+            System.out.println("Could not create account");
+        }
     }
 
     public BLUser getUser(){
