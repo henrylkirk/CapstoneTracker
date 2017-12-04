@@ -122,6 +122,8 @@ import java.util.*;
       return projectDetailList;
    }
    
+   System.out.println(projectDetailList);
+   
    //-----------------------------------------------May not need this method-----------------------------------------------------------------
    /**
     * Both student and faculty able to check is the project exists or not.
@@ -129,16 +131,32 @@ import java.util.*;
     */
    public boolean checkProject()
    {
-      String statement = "SELECT * FROM projects WHERE pid = ?;";
+      String statement = "SELECT * FROM project WHERE pid = ?;";
       boolean check = false;
-      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
-      if (myArray.size() == 0)
+      try
       {
-         check = false;
+         ArrayList<ArrayList<String>> myArray = dbConn.getData(statement, Integer.toString(projectID));
+         if (myArray.size() == 0)
+         {
+            check = false;
+         }  
+         else
+         {
+            check = true;
+            projectType = myArray.get(0).get(1);
+            projectName = myArray.get(0).get(2);
+            projectDescription = myArray.get(0).get(3);
+            startDate = myArray.get(0).get(4);
+            endDate = myArray.get(0).get(5);
+            plagiarismScore = Integer.parseInt(myArray.get(0).get(6));
+            grade = Integer.parseInt(myArray.get(0).get(7));
+            
+         }   
       }
-      else
+      catch(DLException dle)
       {
-         check = true;
+         System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+         dle.printStackTrace();
       }
       return check;
    }
