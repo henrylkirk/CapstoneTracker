@@ -44,7 +44,7 @@ public class CapstoneTracker extends Application {
         if(this.user != null){
             mpc = (MyProjectsController) fxmlLoader.getController();
             // Populate table with user's projects
-            // mpc.loadTable(user.getProjectIds());
+            mpc.loadTable(user.getProjects());
             // logout
             mpc.btnLogout.setOnAction((event) -> {
                 changeScene("Login");
