@@ -89,7 +89,7 @@ import java.util.*;
    public ArrayList<ArrayList<String>> getUserProject(int userID)
    {
       ArrayList<ArrayList<String>> userProjectList = new ArrayList<>();
-      String statement = "SELECT * FROM people_projects WHERE uid = ?;";
+      String statement = "SELECT * FROM people_project WHERE uid = ?;";
       try
       {
          userProjectList = dbConn.getData(statement, Integer.toString(userID));
@@ -102,28 +102,6 @@ import java.util.*;
       return userProjectList;
    }
    
-   
-  /**
-    * return a 2d arraylist include all project detail 
-    */
-   public ArrayList<ArrayList<String>> getProjectDetailArray()
-   {
-      ArrayList<ArrayList<String>> projectDetailList = new ArrayList<>();
-      String statement = "SELECT * FROM projects WHERE pid = ?;";
-      try
-      {
-         projectDetailList = dbConn.getData(statement, Integer.toString(projectID));
-      }
-      catch(DLException dle)
-      {
-         System.out.println("*** Error: " + dle.getMessage() + " ***\n");
-         dle.printStackTrace();
-      }
-      return projectDetailList;
-   }
-   
-   
-   //-----------------------------------------------May not need this method-----------------------------------------------------------------
    /**
     * Both student and faculty able to check is the project exists or not.
     * Both student and faculty able to see project information, include id, name, description, startdate and enddate
@@ -159,88 +137,8 @@ import java.util.*;
       }
       return check;
    }
-   //----------------------------------------------------------------------------------------------------------------------------------------
    
-   /**
-    * getProjectID method return projectID
-    */
-   public int getProjectID()
-   {
-      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
-      projectID = Integer.parseInt(myArray.get(0).get(0));
-      return projectID;
-   }
-   
-   /**
-    * getProjectType method return projectType
-    */
-   public String getProjectType()
-   {
-      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
-      projectType = myArray.get(0).get(1);
-      return projectType;
-   }
-   
-   /**
-    * getProjectName method return projectName
-    */
-   public String getProjectName()
-   {
-      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
-      projectName = myArray.get(0).get(2);
-      return projectName;
-   }
-  
-   /**
-    * getProjectDescription method return projectDescription
-    */
-   public String getProjectDescription()
-   {
-      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
-      projectDescription = myArray.get(0).get(3);
-      return projectDescription;
-   }
-   
-   /**
-    * getStartDate method return startdate
-    */
-   public String getStartDate()
-   {
-      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
-      startDate = myArray.get(0).get(4);
-      return startDate;
-   }
-   
-   /**
-    * getEndDate method return enddate
-    */
-   public String getEndDate()
-   {
-      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
-      endDate = myArray.get(0).get(5);
-      return startDate;
-   }
-   
-   /**
-    * getPlagiarismScore method return plagiarismScore
-    */ 
-   public int getPlagiarismScore() 
-   {
-      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
-      plagiarismScore = Integer.parseInt(myArray.get(0).get(6));
-      return plagiarismScore;
-   } 
-  
-   /**
-    * getScore method return score
-    */ 
-   public int getGrade()
-   {
-      ArrayList<ArrayList<String>> myArray = getProjectDetailArray();
-      grade = Integer.parseInt(myArray.get(0).get(7));
-      return grade;
-   }
-   
+      
    /**
     * addNewProject allow user to insert new project to database
     */
@@ -249,7 +147,11 @@ import java.util.*;
       String statement = "INSERT INTO project VALUES(?,?,?,?,?);";
       try
       {
-         boolean add = dbConn.setData(statement, Integer.toString(projectID), projectName, projectDescription, startDate, endDate);
+         String getMaxProjectId = "SELECT MAX(pid) FROM project;";
+         ArrayList<ArrayList<String>> rs = dbConn.getData(getMaxProjectId);
+         projectID = Integer.parseInt(rs.get(0).get(0)) + 1;
+         
+         boolean add = dbConn.setData(statement, String.valueOf(projectID), projectName, projectDescription, startDate, endDate);
          if (add)
          {
             System.out.println("New Project Added");
