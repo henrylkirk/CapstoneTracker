@@ -138,6 +138,71 @@ import java.util.*;
       return check;
    }
    
+   
+   /**
+    * getProjectID method return projectID
+    */
+   public int getProjectID()
+   {
+      return projectID;
+   }
+   
+   /**
+    * getProjectType method return projectType
+    */
+   public String getProjectType()
+   {
+      return projectType;
+   }
+   
+   /**
+    * getProjectName method return projectName
+    */
+   public String getProjectName()
+   {
+      return projectName;
+   }
+  
+   /**
+    * getProjectDescription method return projectDescription
+    */
+   public String getProjectDescription()
+   {
+      return projectDescription;
+   }
+   
+   /**
+    * getStartDate method return startdate
+    */
+   public String getStartDate()
+   {
+      return startDate;
+   }
+   
+   /**
+    * getEndDate method return enddate
+    */
+   public String getEndDate()
+   {
+      return startDate;
+   }
+   
+   /**
+    * getPlagiarismScore method return plagiarismScore
+    */ 
+   public int getPlagiarismScore() 
+   {
+      return plagiarismScore;
+   } 
+  
+   /**
+    * getScore method return score
+    */ 
+   public int getGrade()
+   {
+      return grade;
+   }
+   
       
    /**
     * addNewProject allow user to insert new project to database
