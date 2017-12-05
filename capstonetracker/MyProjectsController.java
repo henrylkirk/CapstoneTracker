@@ -39,7 +39,7 @@ public class MyProjectsController implements Initializable {
 	private TableColumn colView;
     @FXML
     public Button btnLogout;
-	private Button[] viewBtns;
+	private ArrayList<Button> viewBtns;
 	private ArrayList<Project> projects;
     private ObservableList<Person> data =
         FXCollections.observableArrayList(
@@ -155,5 +155,12 @@ public class MyProjectsController implements Initializable {
             }
         }
     }
+
+	// Get the "view" buttons
+	public ArrayList<Button> getViewBtns(){
+		ObservableList btns = colView.getColumns();
+		System.out.println(btns.toString());
+		return viewBtns;
+	}
 
 }

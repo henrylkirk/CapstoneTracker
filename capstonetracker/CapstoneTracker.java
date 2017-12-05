@@ -20,6 +20,7 @@ public class CapstoneTracker extends Application {
     private FXMLLoader fxmlLoader;
     private BLUser user;
     private MyProjectsController mpc = null;
+    private ProjectDetailController pdc = null;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -38,6 +39,7 @@ public class CapstoneTracker extends Application {
                 loadMyProjects();
             }
         });
+        this.loadProjectDetails();
     }
 
     private void loadMyProjects(){
@@ -51,6 +53,11 @@ public class CapstoneTracker extends Application {
                 user = null;
             });
         }
+    }
+
+    private void loadProjectDetails(){
+        // get project detail controller
+        pdc = (ProjectDetailController) fxmlLoader.getController();
     }
 
     /**
