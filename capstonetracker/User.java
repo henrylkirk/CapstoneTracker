@@ -160,13 +160,13 @@ public class User
     * Method that retrieves the project IDs associated with this user
     * @return boolean that states if this user has any projects associated with them
     */
-   public ArrayList<Project> getProjects(){
-      String query = "SELECT pid FROM people_project JOIN people USING(uid) WHERE uid= ?;";
-
+   public ArrayList<ArrayList<String>> getProjects(){
+      String query = "select * from project join people_project using(pid) join people using(uid) where uid = ?;";
+      ArrayList<ArrayList<String>> rs = new ArrayList<ArrayList<String>>();
       try{
-         dbConn.connect();
-         ArrayList<ArrayList<String>> rs = dbConn.getData(query,String.valueOf(userID));
-         if(rs != null){
+        dbConn.connect();
+         rs = dbConn.getData(query,String.valueOf(userID));
+         /*if(rs != null){
             dbConn.close();
             for(int i = 0; i<rs.size(); i++){
                int pid = Integer.parseInt(rs.get(i).get(0));
@@ -178,13 +178,16 @@ public class User
          }
          else{
             dbConn.close();
-         }
+         }*/
+         
+         
+         
       }
       catch(DLException dle){
          System.out.println("*** Error: " + dle.getMessage() + " ***\n");
          dle.printStackTrace();
       }
-      return projects;
+      return rs;
    }
 
    /**
@@ -350,10 +353,9 @@ public class User
       return office;
    }
 
-   // public static void main(String[] args){
-   //     User user = new User("ab1234","password");
-   //     user.login();
-   //     ArrayList<Project> projects = user.getProjects();
-   //     // System.out.println(projects.get(0).getProjectName());
-   // }
+    public static void main(String[] args){
+        User user = new User("ab1234","password");
+        user.login();
+         System.out.println(user.getProjects());
+   }
 }
