@@ -41,13 +41,13 @@ public class MyProjectsController implements Initializable {
     public Button btnLogout;
 	private Button[] viewBtns;
 	private ArrayList<Project> projects;
-    private ObservableList<Project> data;
-        // FXCollections.observableArrayList(
-        //     new Person("Thesis 1", "Advisor"),
-        //     new Person("Capstone 1", "Student"),
-        //     new Person("Capstone 2", "Advisor"),
-        //     new Person("Thesis 2", "Advisor")
-        // );
+    private ObservableList<Person> data =
+        FXCollections.observableArrayList(
+            new Person("Thesis 1", "Advisor"),
+            new Person("Capstone 1", "Student"),
+            new Person("Capstone 2", "Advisor"),
+            new Person("Thesis 2", "Advisor")
+        );
 
     /**
      * Initializes the controller class.
@@ -57,22 +57,22 @@ public class MyProjectsController implements Initializable {
 
     	// load projects in table
     	tblProjects.setEditable(true);
-        colProjectName.setCellValueFactory(new PropertyValueFactory<Project,String>("firstName"));
-        colRole.setCellValueFactory(new PropertyValueFactory<Project,String>("lastName"));
+        colProjectName.setCellValueFactory(new PropertyValueFactory<Person,String>("firstName"));
+        colRole.setCellValueFactory(new PropertyValueFactory<Person,String>("lastName"));
 		colView.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Project, Boolean>,
+                new Callback<TableColumn.CellDataFeatures<Person, Boolean>,
                 ObservableValue<Boolean>>() {
 
             @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Project, Boolean> p) {
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Person, Boolean> p) {
                 return new SimpleBooleanProperty(p.getValue() != null);
             }
         });
         colView.setCellFactory(
-                new Callback<TableColumn<Project, Boolean>, TableCell<Project, Boolean>>() {
+                new Callback<TableColumn<Person, Boolean>, TableCell<Person, Boolean>>() {
 
             @Override
-            public TableCell<Project, Boolean> call(TableColumn<Project, Boolean> p) {
+            public TableCell<Person, Boolean> call(TableColumn<Person, Boolean> p) {
                 return new ButtonCell();
             }
 
@@ -86,13 +86,14 @@ public class MyProjectsController implements Initializable {
      * Load projects associated with a user into the table.
      */
     public void loadTable(ArrayList<Project> projects){
-		data = FXCollections.observableArrayList(projects);
+		// data = FXCollections.observableArrayList(projects);
 		// System.out.println(projects.toString());
     }
 
     @FXML
     protected void handleCreateButtonAction(ActionEvent event) {
-    	data.add(new Person("new","new"));
+    	// data.add(new Project(1));
+		data.add(new Person("Thesis","Grad"));
     }
 
 	// test class for adding rows to table
@@ -129,13 +130,18 @@ public class MyProjectsController implements Initializable {
                 @Override
                 public void handle(ActionEvent event) {
                     // TODO: move this functionality to CapstoneTracker.java
+					System.out.println("button clicked");
 					Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProjectDetail.fxml"));
-		            try{
+
+					try{
 						Parent root = fxmlLoader.load();
 			            Scene scene = new Scene(root);
 					    stage.setScene(scene);
-					}catch(Exception e){}
+					}catch(Exception e){
+						System.out.println("button clicked"+e.getMessage());
+						e.printStackTrace();
+					}
                 }
             });
         }

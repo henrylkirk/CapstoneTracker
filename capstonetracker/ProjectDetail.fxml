@@ -12,24 +12,24 @@
       <VBox layoutX="14.0" layoutY="81.0" prefHeight="505.0" prefWidth="272.0">
          <children>
             <Label id="lblName" text="Project Name" />
-            <TextField id="tfName" promptText="project name" />
+            <TextField id="tfName" fx:id="tfName" promptText="project name" />
             <Label id="lblDescription" text="Project Description" />
-            <TextArea id="taDescription" prefHeight="200.0" prefWidth="200.0" promptText="description" />
+            <TextArea id="taDescription" fx:id="taDescription" prefHeight="200.0" prefWidth="200.0" promptText="description" />
             <Label id="lblCode" text="Start Term Code" />
-            <TextField id="tfCode" promptText="ex. 2181" />
+            <TextField id="tfCode" fx:id="tfCode" promptText="ex. 2181" />
             <Label id="lblEndDate" text="End Date" />
-            <TextField id="tfEndDate" promptText="YYYY-MM-DD" />
+            <TextField id="tfEndDate" fx:id="tfEndDate" promptText="YYYY-MM-DD" />
             <Label id="lblDefenseDate" text="Defense Date" />
-            <TextField id="tfDefenseDate" promptText="YYYY-MM-DD" />
+            <TextField id="tfDefenseDate" fx:id="tfDefenseDate" promptText="YYYY-MM-DD" />
             <Label id="lblGrade" text="Grade" />
-            <TextField id="tfGrade" promptText="95.0" />
+            <TextField id="tfGrade" fx:id="tfGrade" promptText="95.0" />
             <Label text="Plagiarism Score" />
-            <TextField id="tfPlagiarismScore" promptText="5.0" />
+            <TextField id="tfPlagiarismScore" fx:id="tfPlagiarismScore" promptText="5.0" />
          </children>
       </VBox>
-      <Button id="btnSave" defaultButton="true" layoutX="1155.0" layoutY="546.0" mnemonicParsing="false" text="Save Changes" />
-      <Button id="btnSave" layoutX="1194.0" layoutY="14.0" mnemonicParsing="false" text="Log Out" />
-      <Button id="btnSave" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="&lt; Back" />
+      <Button id="btnSave" fx:id="btnSave" defaultButton="true" layoutX="1155.0" layoutY="546.0" mnemonicParsing="false" text="Save Changes" />
+      <Button id="btnLogout" fx:id="btnLogout" layoutX="1194.0" layoutY="14.0" mnemonicParsing="false" text="Log Out" />
+      <Button id="btnBack" fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="&lt; Back" />
       <TableView layoutX="302.0" layoutY="97.0" prefHeight="422.0" prefWidth="580.0">
         <columns>
           <TableColumn id="colStep" prefWidth="75.0" text="Step" />
