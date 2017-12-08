@@ -36,8 +36,8 @@ public class ProjectDetailController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }
 
-    public void loadProjectDetails(){
-        tfName.setText("test");
+    public void loadProjectDetails(Project p){
+        tfName.setText(p.getProjectName());
         tfDescription.setText("test");
         tfCode.setText("test");
         tfEndDate.setText("test");

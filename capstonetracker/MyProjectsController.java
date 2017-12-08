@@ -40,7 +40,6 @@ public class MyProjectsController implements Initializable {
     @FXML
     public Button btnLogout;
 	private ArrayList<Button> viewBtns;
-	private ArrayList<Project> projects;
     // private ObservableList<Person> data =
     //     FXCollections.observableArrayList(
     //         new Person("Thesis 1", "Advisor"),
@@ -48,7 +47,8 @@ public class MyProjectsController implements Initializable {
     //         new Person("Capstone 2", "Advisor"),
     //         new Person("Thesis 2", "Advisor")
     //     );
-	private ObservableList<Project> data;
+	private 
+	private ObservableList<ProjectRow> rows;
 
     /**
      * Initializes the controller class.
@@ -58,28 +58,28 @@ public class MyProjectsController implements Initializable {
 
     	// load projects in table
     	tblProjects.setEditable(true);
-        colProjectName.setCellValueFactory(new PropertyValueFactory<Project,String>("projectName"));
-        colRole.setCellValueFactory(new PropertyValueFactory<Project,String>("projectType"));
+        colProjectName.setCellValueFactory(new PropertyValueFactory<ProjectRow,String>("projectName"));
+        colRole.setCellValueFactory(new PropertyValueFactory<ProjectRow,String>("projectType"));
 		colView.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Project, Boolean>,
+                new Callback<TableColumn.CellDataFeatures<ProjectRow, Boolean>,
                 ObservableValue<Boolean>>() {
 
             @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Project, Boolean> p) {
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<ProjectRow, Boolean> p) {
                 return new SimpleBooleanProperty(p.getValue() != null);
             }
         });
         colView.setCellFactory(
-                new Callback<TableColumn<Project, Boolean>, TableCell<Project, Boolean>>() {
+                new Callback<TableColumn<ProjectRow, Boolean>, TableCell<ProjectRow, Boolean>>() {
 
             @Override
-            public TableCell<Project, Boolean> call(TableColumn<Project, Boolean> p) {
+            public TableCell<ProjectRow, Boolean> call(TableColumn<ProjectRow, Boolean> p) {
                 return new ButtonCell();
             }
 
         });
 
-        tblProjects.setItems(data);
+        tblProjects.setItems(rows);
 
     }
 
@@ -87,7 +87,8 @@ public class MyProjectsController implements Initializable {
      * Load projects associated with a user into the table.
      */
     public void loadTable(ArrayList<Project> projects){
-		data = FXCollections.observableArrayList(projects);
+		// data = FXCollections.observableArrayList(projects);
+		ArrayList<ProjectRow> rowList = new ArrayList<ProjectRow>();
 		for (int i = 0; i < projects.size(); i++) {
 			System.out.println(projects.get(i).getProjectName());
 			System.out.println(projects.get(i).getProjectType());
@@ -96,8 +97,10 @@ public class MyProjectsController implements Initializable {
 			System.out.println(projects.get(i).getStartDate());
 			System.out.println(projects.get(i).getEndDate());
 			System.out.println(projects.get(i).getGrade());
-			// System.out.println(projects.get(i).get());
+			ProjectRow row = new ProjectRow(projects.get(i).getProjectName(), projects.get(i).getProjectType());
+			rowList.add(row);
 		}
+		rows = FXCollections.observableArrayList(rowList);
     }
 
     @FXML
@@ -107,36 +110,36 @@ public class MyProjectsController implements Initializable {
     }
 
 	// test class for adding rows to table
-    public static class Person {
+    public static class ProjectRow {
         // private final SimpleStringProperty firstName;
         // private final SimpleStringProperty lastName;
-		private String firstName;
-        private String lastName;
+		private String projectName;
+        private String projectType;
 
-        private Person(String fName, String lName) {
+        private ProjectRow(String projectName, String projectType) {
             // this.firstName = new SimpleStringProperty(fName);
             // this.lastName = new SimpleStringProperty(lName);
-			this.firstName = fName;
-            this.lastName = lName;
+			this.projectName = projectName;
+            this.projectType = projectType;
         }
 
-        public String getFirstName() {
-            return firstName;
+        public String getProjectName() {
+            return projectName;
         }
-        public void setFirstName(String fName) {
-            firstName = fName;
+        public void setProjectName(String projectName) {
+            this.projectName = projectName;
         }
 
-        public String getLastName() {
-            return lastName;
+        public String getProjectType() {
+            return projectType;
         }
-        public void setLastName(String fName) {
-            lastName = fName;
+        public void setProjectType(String projectType) {
+            this.projectType = projectType;
         }
     }
 
 	// Define button cell
-    private class ButtonCell extends TableCell<Project, Boolean> {
+    private class ButtonCell extends TableCell<ProjectRow, Boolean> {
         final Button cellButton = new Button("View");
 
         ButtonCell(){

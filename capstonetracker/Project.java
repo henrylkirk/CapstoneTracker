@@ -12,7 +12,7 @@ import java.util.*;
 * New class named Project
 * Project class extends connectDB class
 */
-public static class Project
+public class Project
 {
     private int projectID;
     private String projectName;
