@@ -29,6 +29,7 @@ public class ProjectDetailController implements Initializable {
     @FXML
     private TextField tfPlagiarismScore;
 
+    private Project userProject;
     /**
      * Initializes the controller class.
      */
@@ -37,17 +38,38 @@ public class ProjectDetailController implements Initializable {
     }
 
     public void loadProjectDetails(Project p){
+        userProject = p
         tfName.setText(p.getProjectName());
-        tfDescription.setText("test");
-        tfCode.setText("test");
-        tfEndDate.setText("test");
-        tfDefenseDate.setText("test");
-        tfGrade.setText("test");
-        tfPlagiarismScore.setText("test");
+        tfDescription.setText(p.getProjectDescription());
+        tfCode.setText(String.valueOf(p.getProjectCode()));
+        tfStartDate.setText(p.getStartDate());
+        tfEndDate.setText(p.getEndDate());
+        tfDefenseDate.setText(p.getDefenseDate);
+        tfGrade.setText(String.valueOf(p.getGrade()));
+        tfPlagiarismScore.setText(String.valueOf(p.getPlagiarismScore()));
     }
 
     @FXML
     protected void handleSaveButtonAction(ActionEvent event) {
+      String pName = tfName.getText();
+      String pDesc = tfDescription.getText();
+      String pCode = tfCode.getText();
+      String pStartDate = tfStartDate.getText();
+      String pEndDate = tfEndDate.getText();
+      String pDefense = tfDefenseDate.getText();
+      String pGrade = tfGrade.getText();
+      String pPlag = tfPlagiarismScore.getTest();
+
+      userProject.setProjectName(pName);
+      userProject.setProjectDescription(pDesc);
+      userProject.setProjectCode(Integer.parseInt(pCode));
+      userProject.setProjectStartDate(pStartDate);
+      userProject.setProjectEndDate(pEndDate);
+      userProject.setProjectDefenseDate(pDefense);
+      userProject.setProjectGrade(Integer.parseInt(pGrade));
+      userProject.setProjectPlagiarismScore(Integer.parseInt(pPlag));
+      
+      userProject.updateProjectInfo();
     }
 
 }
