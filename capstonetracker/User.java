@@ -20,7 +20,7 @@ public class User
     private String lName;
     private String phone;
     private String office;
-    private connectDB dbConn;
+    private ConnectDB dbConn;
 
     /**
     * Constructor that sets username and password
@@ -37,7 +37,7 @@ public class User
         lName = "NULL";
         phone = "NULL";
         office = "NULL";
-        dbConn = new connectDB();
+        dbConn = new ConnectDB();
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
             byte[] array = md.digest(password.getBytes());
@@ -72,7 +72,7 @@ public class User
         lName = _lName;
         phone = _phone;
         office = _office;
-        dbConn = new connectDB();
+        dbConn = new ConnectDB();
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
             byte[] array = md.digest(password.getBytes());
@@ -160,7 +160,7 @@ public class User
     * @return boolean that states if this user has any projects associated with them
     */
     public ArrayList<Project> getProjects() {
-        String query = "SELECT pid FROM project JOIN people_project using(pid) join people using(uid) WHERE uid = ?;";
+        String query = "SELECT pid FROM project JOIN people_project using(pid) join people using(uid) WHERE uid = ?";
         ArrayList<Project> projects = new ArrayList<Project>();
         ArrayList<ArrayList<String>> rs = new ArrayList<ArrayList<String>>();
         try {

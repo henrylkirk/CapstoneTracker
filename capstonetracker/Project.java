@@ -26,7 +26,7 @@ public class Project
     private String partOfChange;
     private String status;
     private ArrayList<String> userIds;
-    private connectDB dbConn;
+    private ConnectDB dbConn;
     private int userID;
 
     /**
@@ -45,7 +45,7 @@ public class Project
         changeTo = "NULL";
         partOfChange = "NULL";
         userIds = null;
-        dbConn = new connectDB();
+        dbConn = new ConnectDB();
     }
 
     public Project(int _projectID)
@@ -61,7 +61,7 @@ public class Project
         changeTo = "NULL";
         partOfChange = "NULL";
         userIds = null;
-        dbConn = new connectDB();
+        dbConn = new ConnectDB();
     }
 
     /**
@@ -80,7 +80,7 @@ public class Project
         projectDescription = _projectDescription;
         startDate = _startDate;
         endDate =  _endDate;
-        dbConn = new connectDB();
+        dbConn = new ConnectDB();
     }
 
     /**
@@ -106,7 +106,7 @@ public class Project
     * Fetch project data from database.
     */
     public boolean checkProject() {
-        String statement = "SELECT type, name, description, start_term, expected_end_date, plagiarism_score, grade FROM project WHERE pid = ?;";
+        String statement = "SELECT type, name, description, start_term, expected_end_date, plagiarism_score, grade FROM project WHERE pid = ?";
         boolean check = false;
         try {
             dbConn.connect();

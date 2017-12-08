@@ -9,7 +9,7 @@ import java.util.Arrays;
  * Last Revised: 11/06/17
  */
 
-public class connectDB {
+public class ConnectDB {
 
    private String uri; //Location and DB to use
    private String driver; //Driver to use
@@ -24,7 +24,7 @@ public class connectDB {
    /**
     * Default constructor with default options to connect to the database
     */
-   public connectDB(){
+   public ConnectDB(){
       uri = "jdbc:mysql://localhost/mydb?autoReconnect=true&useSSL=false";
       driver = "com.mysql.jdbc.Driver";
       user = "root";
@@ -36,7 +36,7 @@ public class connectDB {
     * @param _user sets value for the username
     * @param _pass sets value for the password
     */
-   public connectDB(String _user, String _pass){
+   public ConnectDB(String _user, String _pass){
       user = _user;
       pass = _pass;
       uri = "jdbc:mysql://localhost/capstoneprojects?autoReconnect=true&useSSL=false";
@@ -297,6 +297,47 @@ public class connectDB {
          throw new DLException(e,"Misc Exception caught at connectDB.setResultingData()","# of Fields: " + String.valueOf(numOfFields),
                                "Column Widths: " + Arrays.toString(columnWidths),"Results List: " + Arrays.toString(resultsList.toArray()));
       }
+   }
+
+   // Test main
+   // TODO: remove this before submit
+   public static void main(String[] args){
+       ConnectDB dbConn = new ConnectDB();
+       try {
+           dbConn.connect();
+           ArrayList<ArrayList<String>> rs = dbConn.getData("SELECT pid FROM project JOIN people_project using(pid) join people using(uid) WHERE uid = ?","1");
+           dbConn.close();
+           if(rs != null){
+               for(int i = 0; i<rs.size(); i++){
+                   int newPID = Integer.parseInt(rs.get(i).get(0));
+                   System.out.println("newPID: "+Integer.toString(newPID));
+                   Project newProject = new Project(newPID);
+                   System.out.println("newProjectID: "+newProject.getProjectID());
+                   dbConn.connect();
+                   ArrayList<ArrayList<String>> proj = dbConn.getData("SELECT type, name, description, start_term, expected_end_date, plagiarism_score, grade FROM project WHERE pid = ?","1");
+                   dbConn.close();
+                   if (proj != null) {
+                       System.out.println(proj.get(0).get(0));
+                       System.out.println(proj.get(0).get(1));
+                       System.out.println(proj.get(0).get(2));
+                       System.out.println(proj.get(0).get(3));
+                       System.out.println(proj.get(0).get(4));
+                       System.out.println(proj.get(0).get(5));
+                       System.out.println(proj.get(0).get(6));
+                       // if(proj.get(0).get(6) != "NULL") {
+                       //     System.out.println(proj.get(0).get(6));
+                       // } else {
+                       //     System.out.println("0");
+                       // }
+                   } else {
+                       System.out.println("Project data is null");
+                   }
+               }
+           }
+       } catch(DLException dle) {
+           System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+           dle.printStackTrace();
+       }
    }
 
 }//End connectDB
