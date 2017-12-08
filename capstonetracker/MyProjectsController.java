@@ -42,6 +42,11 @@ public class MyProjectsController implements Initializable {
 	private ArrayList<Button> viewBtns;
 	private ArrayList<Project> projects;
 	private ObservableList<ProjectRow> rows;
+	private int projectRowIndex = 0;
+
+	public static int getProjectRowIndex(){
+		return 0;
+	}
 
     /**
      * Initializes the controller class.
@@ -67,7 +72,8 @@ public class MyProjectsController implements Initializable {
 
             @Override
             public TableCell<ProjectRow, Boolean> call(TableColumn<ProjectRow, Boolean> p) {
-                return new ButtonCell();
+				projectRowIndex++;
+				return new ButtonCell();
             }
         });
     }
@@ -124,15 +130,10 @@ public class MyProjectsController implements Initializable {
 
 	// Define button cell
     private class ButtonCell extends TableCell<ProjectRow, Boolean> {
-        final Button cellButton = new Button(projects.get(0).getProjectName());
-		public int projectID;
-
-		public void setButtonProjectID(int projectID){
-			this.projectID = projectID;
-		}
+        final Button cellButton = new Button("View");
 
         ButtonCell(){
-			cellButton.setId(Integer.toString(projects.get(0).getProjectID()));
+			cellButton.setId(Integer.toString(projects.get(MyProjectsController.getProjectRowIndex()).getProjectID()));
             cellButton.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
                 public void handle(ActionEvent event) {
@@ -149,6 +150,8 @@ public class MyProjectsController implements Initializable {
 						System.out.println("button clicked"+e.getMessage());
 						e.printStackTrace();
 					}
+
+
                 }
             });
         }
