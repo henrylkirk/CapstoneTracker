@@ -42,11 +42,15 @@ public class CapstoneTracker extends Application {
         this.loadProjectDetails();
     }
 
+    /**
+     * Call's controller's function to load the table with MyProjects
+     * Adds logout button event listener to controller
+     */
     private void loadMyProjects(){
         if(this.user != null){
             mpc = (MyProjectsController) fxmlLoader.getController();
             // Populate table with user's projects
-            // mpc.loadTable(user.getProjects());
+            mpc.loadTable(user.getProjects());
             // logout
             mpc.btnLogout.setOnAction((event) -> {
                 changeScene("Login");
@@ -57,7 +61,7 @@ public class CapstoneTracker extends Application {
 
     private void loadProjectDetails(){
         // get project detail controller
-        pdc = (ProjectDetailController) fxmlLoader.getController();
+        // pdc = (ProjectDetailController) fxmlLoader.getController();
     }
 
     /**

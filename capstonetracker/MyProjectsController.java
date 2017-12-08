@@ -87,7 +87,9 @@ public class MyProjectsController implements Initializable {
      */
     public void loadTable(ArrayList<Project> projects){
 		// data = FXCollections.observableArrayList(projects);
-		// System.out.println(projects.toString());
+		for (int i = 0; i < projects.size(); i++) {
+			System.out.println(projects.get(i).getProjectName());
+		}
     }
 
     @FXML
@@ -98,26 +100,30 @@ public class MyProjectsController implements Initializable {
 
 	// test class for adding rows to table
     public static class Person {
-        private final SimpleStringProperty firstName;
-        private final SimpleStringProperty lastName;
+        // private final SimpleStringProperty firstName;
+        // private final SimpleStringProperty lastName;
+		private String firstName;
+        private String lastName;
 
         private Person(String fName, String lName) {
-            this.firstName = new SimpleStringProperty(fName);
-            this.lastName = new SimpleStringProperty(lName);
+            // this.firstName = new SimpleStringProperty(fName);
+            // this.lastName = new SimpleStringProperty(lName);
+			this.firstName = fName;
+            this.lastName = lName;
         }
 
         public String getFirstName() {
-            return firstName.get();
+            return firstName;
         }
         public void setFirstName(String fName) {
-            firstName.set(fName);
+            firstName = fName;
         }
 
         public String getLastName() {
-            return lastName.get();
+            return lastName;
         }
         public void setLastName(String fName) {
-            lastName.set(fName);
+            lastName = fName;
         }
     }
 
