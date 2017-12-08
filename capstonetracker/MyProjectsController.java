@@ -40,14 +40,7 @@ public class MyProjectsController implements Initializable {
     @FXML
     public Button btnLogout;
 	private ArrayList<Button> viewBtns;
-    // private ObservableList<Person> data =
-    //     FXCollections.observableArrayList(
-    //         new Person("Thesis 1", "Advisor"),
-    //         new Person("Capstone 1", "Student"),
-    //         new Person("Capstone 2", "Advisor"),
-    //         new Person("Thesis 2", "Advisor")
-    //     );
-	private 
+	private ArrayList<Project> projects;
 	private ObservableList<ProjectRow> rows;
 
     /**
@@ -76,49 +69,40 @@ public class MyProjectsController implements Initializable {
             public TableCell<ProjectRow, Boolean> call(TableColumn<ProjectRow, Boolean> p) {
                 return new ButtonCell();
             }
-
         });
-
-        tblProjects.setItems(rows);
-
     }
 
     /**
      * Load projects associated with a user into the table.
      */
     public void loadTable(ArrayList<Project> projects){
-		// data = FXCollections.observableArrayList(projects);
+		this.projects = projects;
 		ArrayList<ProjectRow> rowList = new ArrayList<ProjectRow>();
 		for (int i = 0; i < projects.size(); i++) {
-			System.out.println(projects.get(i).getProjectName());
-			System.out.println(projects.get(i).getProjectType());
-			System.out.println(projects.get(i).getProjectID());
-			System.out.println(projects.get(i).getProjectDescription());
-			System.out.println(projects.get(i).getStartDate());
-			System.out.println(projects.get(i).getEndDate());
-			System.out.println(projects.get(i).getGrade());
 			ProjectRow row = new ProjectRow(projects.get(i).getProjectName(), projects.get(i).getProjectType());
 			rowList.add(row);
 		}
 		rows = FXCollections.observableArrayList(rowList);
+		tblProjects.setItems(rows);
     }
 
     @FXML
     protected void handleCreateButtonAction(ActionEvent event) {
-    	// data.add(new Project(1));
-		// data.add(new Person("Thesis","Grad"));
+		ProjectRow row = new ProjectRow("","");
+		rows.add(row);
     }
 
-	// test class for adding rows to table
+	// Class to hold project info as a table row
     public static class ProjectRow {
-        // private final SimpleStringProperty firstName;
-        // private final SimpleStringProperty lastName;
 		private String projectName;
         private String projectType;
 
+		private ProjectRow() {
+			projectName = "";
+			projectType = "";
+		}
+
         private ProjectRow(String projectName, String projectType) {
-            // this.firstName = new SimpleStringProperty(fName);
-            // this.lastName = new SimpleStringProperty(lName);
 			this.projectName = projectName;
             this.projectType = projectType;
         }
@@ -140,14 +124,20 @@ public class MyProjectsController implements Initializable {
 
 	// Define button cell
     private class ButtonCell extends TableCell<ProjectRow, Boolean> {
-        final Button cellButton = new Button("View");
+        final Button cellButton = new Button(projects.get(0).getProjectName());
+		public int projectID;
+
+		public void setButtonProjectID(int projectID){
+			this.projectID = projectID;
+		}
 
         ButtonCell(){
+			cellButton.setId(Integer.toString(projects.get(0).getProjectID()));
             cellButton.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
                 public void handle(ActionEvent event) {
                     // TODO: move this functionality to CapstoneTracker.java
-					System.out.println("button clicked");
+					System.out.println("button clicked with ID: "+cellButton.getId());
 					Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProjectDetail.fxml"));
 
