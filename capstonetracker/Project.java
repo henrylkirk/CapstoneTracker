@@ -110,7 +110,7 @@ public class Project
         boolean check = false;
         try {
             dbConn.connect();
-            ArrayList<ArrayList<String>> data = dbConn.getData(statement, Integer.toString(getProjectID()));
+            ArrayList<ArrayList<String>> data = dbConn.getData(statement, Integer.toString(projectID));
             dbConn.close();
             if (data != null) {
                 check = true;
@@ -130,65 +130,77 @@ public class Project
     }
 
 
-    /**
-    * getProjectID method return projectID
-    */
+    
+    public void setProjectType(String _projectType)
+    {
+        projectType = _projectType;
+    }
+    
+    public void setProjectName(String _projectName)
+    {
+        projectName = _projectName;
+    }
+
+    public void setProjectDescription(String _projectDescription)
+    {
+        projectDescription = _projectDescription;
+    }
+
+    public void setStartDate(String _startDate)
+    {
+        startDate = _startDate;
+    }
+ 
+    public void setEndDate(String _endDate)
+    {
+        endDate = _endDate;
+    }
+
+    public void setPlagiarismScore(int _plagiarismScore)
+    {
+        plagiarismScore = _plagiarismScore;
+    }
+
+    public void setGrade(int _grade)
+    {
+        grade = _grade;
+    }
+
     public int getProjectID()
     {
         return projectID;
     }
 
-    /**
-    * getProjectType method return projectType
-    */
     public String getProjectType()
     {
         return projectType;
     }
-
-    /**
-    * getProjectName method return projectName
-    */
+    
     public String getProjectName()
     {
         return projectName;
     }
 
-    /**
-    * getProjectDescription method return projectDescription
-    */
     public String getProjectDescription()
     {
         return projectDescription;
     }
 
-    /**
-    * getStartDate method return startdate
-    */
     public String getStartDate()
     {
         return startDate;
     }
-
-    /**
-    * getEndDate method return enddate
-    */
+ 
     public String getEndDate()
     {
-        return startDate;
+        return endDate;
     }
 
-    /**
-    * getPlagiarismScore method return plagiarismScore
-    */
     public int getPlagiarismScore()
     {
         return plagiarismScore;
     }
 
-    /**
-    * getScore method return score
-    */
     public int getGrade()
     {
         return grade;
@@ -200,14 +212,14 @@ public class Project
     */
     public void addNewProject(BLUser user)
     {
-        String statement = "INSERT INTO project VALUES(?,?,?,?,?);";
+        String statement = "INSERT INTO project VALUES(?,?,?,?,?,?,?,?);";
         try
         {
             String getMaxProjectId = "SELECT MAX(pid) FROM project;";
             ArrayList<ArrayList<String>> rs = dbConn.getData(getMaxProjectId);
-            projectID = Integer.parseInt(rs.get(0).get(0)) + 1;
+            int newProjectID = Integer.parseInt(rs.get(0).get(0)) + 1;
 
-            boolean add = dbConn.setData(statement, String.valueOf(projectID), projectName, projectDescription, startDate, endDate);
+            boolean add = dbConn.setData(statement, String.valueOf(newProjectID), projectName, projectType,projectDescription, startDate, endDate, String.valueOf(plagiarismScore), String.valueOf(grade));
             if (add)
             {
                 System.out.println("New Project Added");
@@ -262,23 +274,39 @@ public class Project
     * updateProjectInfo allow user to change project detail
     * BUT student are not allow to change plagirism score and grade
     */
-    public void updateProjectInfo(String partOfChange, BLUser user)
+    public void updateProjectInfo(BLUser user)
     {
         String userType = user.getUserType();
-        if(userType.equalsIgnoreCase("Student") && partOfChange == "plagiarism_score")
+        if(userType.equalsIgnoreCase("Student"))
         {
-            System.out.println("Student not allow to change plagirism score");
-        }
-        else if(userType.equalsIgnoreCase("Student") && partOfChange == "grade")
-        {
-            System.out.println("Student not allow to change grade");
-        }
-        else
-        {
-            String statement = "UPDATE projects SET " + partOfChange + " = ? WHERE pid = ?;" ;
+            String statement = "UPDATE projects SET name = ?,  description = ?, start_term = ?, expected_end_date = ? WHERE pid = ?;" ;
             try
             {
-                boolean update = dbConn.setData(statement, changeTo, Integer.toString(projectID) );
+                boolean update = dbConn.setData(statement, projectName, projectDescription, startDate, endDate, Integer.toString(projectID) );
+                if (update)
+                {
+                    System.out.println("Data Updated");
+                }
+                else
+                {
+                    System.out.println("Data Update Failed");
+                    System.out.println("NOTE: student not able to change the grade");
+                }
+            }
+            catch(DLException dle)
+            {
+                System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+                dle.printStackTrace();
+            }
+
+        }
+        
+        else
+        {
+            String statement = "UPDATE projects SET name = ?,  description = ?, start_term = ?, expected_end_date = ?, plagiarism_score = ?, grade = ? WHERE pid = ?;" ;
+            try
+            {
+                boolean update = dbConn.setData(statement, projectName, projectDescription, startDate, endDate,String.valueOf(plagiarismScore),String.valueOf(grade), String.valueOf(projectID) );
                 if (update)
                 {
                     System.out.println("Data Updated");
@@ -294,8 +322,9 @@ public class Project
                 dle.printStackTrace();
             }
         }
-
-
+        
+        
+       
     }
 
 
