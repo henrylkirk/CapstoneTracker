@@ -19,7 +19,7 @@ public class Status{
 
    public Status(int _statusId, String _dateModified, String _comment){
       statusId = _statusId;
-      lastDateModifed = _dateModified;
+      lastDateModified = _dateModified;
       comment = _comment;
       statusName = "NULL";
       statusDesc = "NULL";
@@ -28,7 +28,7 @@ public class Status{
    
    public boolean checkStatusInfo(){
       String query = "SELECT name, description FROM status WHERE sid = ? ;";
-      booelan gotStatus = false;
+      boolean gotStatus = false;
       try{
          dbConn.connect();
          ArrayList<ArrayList<String>> rs = dbConn.getData(query,String.valueOf(statusId));
@@ -103,7 +103,7 @@ public class Status{
    }
    
    public String getLastDateModified(){
-      return lastDateModifed;
+      return lastDateModified;
    }
    
    public String getComment(){
