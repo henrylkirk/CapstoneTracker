@@ -130,12 +130,12 @@ public class Project
     }
 
 
-    
+
     public void setProjectType(String _projectType)
     {
         projectType = _projectType;
     }
-    
+
     public void setProjectName(String _projectName)
     {
         projectName = _projectName;
@@ -150,7 +150,7 @@ public class Project
     {
         startDate = _startDate;
     }
- 
+
     public void setEndDate(String _endDate)
     {
         endDate = _endDate;
@@ -175,7 +175,7 @@ public class Project
     {
         return projectType;
     }
-    
+
     public String getProjectName()
     {
         return projectName;
@@ -190,7 +190,7 @@ public class Project
     {
         return startDate;
     }
- 
+
     public String getEndDate()
     {
         return endDate;
@@ -300,7 +300,7 @@ public class Project
             }
 
         }
-        
+
         else
         {
             String statement = "UPDATE projects SET name = ?,  description = ?, start_term = ?, expected_end_date = ?, plagiarism_score = ?, grade = ? WHERE pid = ?;" ;
@@ -322,9 +322,11 @@ public class Project
                 dle.printStackTrace();
             }
         }
-        
-        
-       
+    }
+
+    private void addUser(String username, int projectID, String role){
+        // find the uif of the user with that username
+        // add that user as "role" to that project id - insert into people_project that role, the uid, and the pid
     }
 
 
