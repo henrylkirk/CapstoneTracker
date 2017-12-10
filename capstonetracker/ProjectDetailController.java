@@ -17,7 +17,7 @@ public class ProjectDetailController implements Initializable {
     @FXML
     private TextField tfName;
     @FXML
-    private TextArea tfDescription;
+    private TextArea taDescription;
     @FXML
     private TextField tfCode;
     @FXML
@@ -28,8 +28,8 @@ public class ProjectDetailController implements Initializable {
     private TextField tfGrade;
     @FXML
     private TextField tfPlagiarismScore;
-
     private Project userProject;
+
     /**
      * Initializes the controller class.
      */
@@ -38,15 +38,16 @@ public class ProjectDetailController implements Initializable {
     }
 
     public void loadProjectDetails(Project p){
-        // userProject = p;
-        // tfName.setText(p.getProjectName());
-        // tfDescription.setText(p.getProjectDescription());
+        System.out.println("project details loaded");
+        userProject = p;
+        tfName.setText(p.getProjectName());
+        taDescription.setText(p.getProjectDescription());
         // tfCode.setText(String.valueOf(p.getProjectCode()));
         // tfStartDate.setText(p.getStartDate());
-        // tfEndDate.setText(p.getEndDate());
-        // tfDefenseDate.setText(p.getDefenseDate);
-        // tfGrade.setText(String.valueOf(p.getGrade()));
-        // tfPlagiarismScore.setText(String.valueOf(p.getPlagiarismScore()));
+        tfEndDate.setText(p.getEndDate());
+        // tfDefenseDate.setText(p.getDefenseDate());
+        tfGrade.setText(String.valueOf(p.getGrade()));
+        tfPlagiarismScore.setText(String.valueOf(p.getPlagiarismScore()));
     }
 
     @FXML

@@ -25,7 +25,7 @@ public class Status{
       statusDesc = "NULL";
       dbConn = new ConnectDB();
    }
-   
+
    public boolean checkStatusInfo(){
       String query = "SELECT name, description FROM status WHERE sid = ? ;";
       boolean gotStatus = false;
@@ -48,8 +48,8 @@ public class Status{
       }
       return gotStatus;
    }
-   
-   
+
+
    public boolean updateProjectStatus(String _pid){
       String query = "INSERT INTO project_status(sid,pid,last_modified,comment) VALUES(?,?,?,?);";
       String project = _pid;
@@ -68,44 +68,44 @@ public class Status{
       }
       return updatePushed;
    }
-   
-   
+
+
    public void setStatusId(int _id){
       statusId = _id;
    };
-   
+
    public void setStatusName(String _name){
       statusName = _name;
    };
-   
+
    public void setStatusDescription(String _desc){
       statusDesc = _desc;
    };
-   
+
    public void setDateModified(String _date){
       lastDateModified = _date;
    };
-   
+
    public void setComment(String _comment){
       comment = _comment;
    };
-   
+
    public int getStatusId(){
       return statusId;
    }
-   
+
    public String getStatusName(){
       return statusName;
    }
-   
+
    public String getStatusDescription(){
       return statusDesc;
    }
-   
+
    public String getLastDateModified(){
       return lastDateModified;
    }
-   
+
    public String getComment(){
       return comment;
    }

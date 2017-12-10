@@ -16,15 +16,22 @@ import javafx.scene.control.*;
  */
 public class CapstoneTracker extends Application {
 
-    private Stage stage;
+    private static Stage stage;
     private FXMLLoader fxmlLoader;
     private BLUser user;
     private MyProjectsController mpc = null;
     private ProjectDetailController pdc = null;
 
+    private void setStage(Stage stage) {
+        CapstoneTracker.stage = stage;
+    }
+    static public Stage getStage() {
+        return CapstoneTracker.stage;
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
-        this.stage = stage;
+        setStage(stage);
 
         // Show login scene at start
         changeScene("Login");
@@ -67,7 +74,7 @@ public class CapstoneTracker extends Application {
     /**
      * Create and show a scene from the fxml file name.
      */
-    private void changeScene(String sceneName) {
+    public void changeScene(String sceneName) {
         try {
             fxmlLoader = new FXMLLoader(getClass().getResource(sceneName+".fxml"));
             Parent root = fxmlLoader.load();
