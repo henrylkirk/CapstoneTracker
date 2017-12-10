@@ -28,6 +28,7 @@ public class Project
     private ArrayList<String> userIds;
     private ConnectDB dbConn;
     private int userID;
+    
 
     /**
     * Default constructor
@@ -256,7 +257,7 @@ public class Project
 
         try {
             data = dbConn.getData(statement, Integer.toString(projectID));
-            if (data.size() == 0) {
+            if (data == null) {
                 check = false;
             } else {
 
@@ -277,7 +278,7 @@ public class Project
     public void updateProjectInfo(BLUser user)
     {
         String userType = user.getUserType();
-        if(userType.equalsIgnoreCase("Student"))
+        if(userType.equalsIgnoreCase("Grad"))
         {
             String statement = "UPDATE projects SET name = ?,  description = ?, start_term = ?, expected_end_date = ? WHERE pid = ?;" ;
             try
@@ -324,10 +325,84 @@ public class Project
         }
     }
 
+<<<<<<< HEAD
     private void addUser(String username, int projectID, String role){
         // find the uid of the user with that username
         // add that user as "role" to that project id - insert into people_project that role, the uid, and the pid
     }
+=======
+  
+   /*
+    * This method allow user to add a new user to the project
+    * 1. Check is the current user working on the project by using projectID
+    * 2. If No, the current user not able to add new user to the project
+    * 4. if Yes, check the new user's role, it can't be student
+    * 5. if the role is not student, check the uid of the new user by using the username
+    * 5. Insert to table.
+    */
+    public void addUser(BLUser user, String username, int pid)
+    {
+      int userID = user.getUserId();
+      boolean checkUserProject = false;
+      String statement = "select * from people_project where uid = ? and pid = ?;";
+      ArrayList<ArrayList<String>> data = new ArrayList<>();
+      try 
+      {
+         dbConn.connect();
+         data = dbConn.getData(statement,Integer.toString(userID),Integer.toString(pid));
+         if (data == null) 
+         {
+            checkUserProject = false;
+            System.out.println("you're not able to add user, unless you working for the project");
+         } 
+         else 
+         {
+            checkUserProject = true;
+            String statement2 = "select uid, type from people where username = ?;";
+            ArrayList<ArrayList<String>> data2 = new ArrayList<>();
+            try
+            {
+               data2 = dbConn.getData(statement2,username);
+               int newUserID = Integer.parseInt(data2.get(0).get(0));
+               String newUserType = data2.get(0).get(1);
+               if(newUserType.equalsIgnoreCase("Grad"))
+               {
+                  System.out.println("Can't add student");
+               }
+               else
+               {
+                  System.out.println("ok,add prof");
+                  String statement3 = "insert into people_project values(?,?,?);";
+                  try
+                  {
+                     dbConn.setData(statement3,Integer.toString(newUserID), Integer.toString(pid), newUserType);
+                  }
+                  catch(DLException dle)
+                  {
+                     System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+                     dle.printStackTrace();
+                  }
 
+               }  
+            }
+            catch(DLException dle)
+            {
+               System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+               dle.printStackTrace();
+            }
+         }
+      }
+      catch(DLException dle)
+      {
+         System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+         dle.printStackTrace();
+      }
+>>>>>>> 3d173d2ca54c2afc2a552f44d70f57202a6be86d
+
+
+    }
+    
+    
+    
 
 }

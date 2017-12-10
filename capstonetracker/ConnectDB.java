@@ -95,7 +95,7 @@ public class ConnectDB {
     * @exception DLException throw when any type of exception is caught and writes info to a log file
     * @return a Prepared Query statement with binded variables
     */
-   private PreparedStatement prepare(String _query, String [] _params) throws DLException {
+   private PreparedStatement prepare(String _query, String [] _params) throws DLException  {
       String query = _query;
       String [] params = _params;
       PreparedStatement prep = null;

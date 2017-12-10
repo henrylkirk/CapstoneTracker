@@ -1404,3 +1404,377 @@ capstonetracker.DLException: Misc Exception caught at connectDB.getData()
 	at capstonetracker.User.getProjects(User.java:174)
 	at capstonetracker.User.main(User.java:352)
 
+
+2017-12-09 15:21:56.952  :::  Misc Exception caught at connectDB.prepare()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.prepare()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:402)
+	at capstonetracker.Project.main(Project.java:457)
+
+
+2017-12-09 15:21:56.969  :::  Misc Exception caught at connectDB.getData()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.getData()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:402)
+	at capstonetracker.Project.main(Project.java:457)
+
+
+2017-12-09 15:22:46.836  :::  Misc Exception caught at connectDB.prepare()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.prepare()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:402)
+	at capstonetracker.Project.main(Project.java:457)
+
+
+2017-12-09 15:22:46.848  :::  Misc Exception caught at connectDB.getData()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.getData()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:402)
+	at capstonetracker.Project.main(Project.java:457)
+
+
+2017-12-09 15:23:31.92  :::  Misc Exception caught at connectDB.prepare()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.prepare()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:402)
+	at capstonetracker.Project.main(Project.java:457)
+
+
+2017-12-09 15:23:31.931  :::  Misc Exception caught at connectDB.getData()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.getData()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:402)
+	at capstonetracker.Project.main(Project.java:457)
+
+
+2017-12-09 15:25:05.923  :::  Misc Exception caught at connectDB.prepare()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.prepare()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:402)
+	at capstonetracker.Project.main(Project.java:457)
+
+
+2017-12-09 15:25:05.935  :::  Misc Exception caught at connectDB.getData()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.getData()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:402)
+	at capstonetracker.Project.main(Project.java:457)
+
+
+2017-12-09 15:27:43.314  :::  Misc Exception caught at connectDB.prepare()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.prepare()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:402)
+	at capstonetracker.Project.main(Project.java:457)
+
+
+2017-12-09 15:27:43.329  :::  Misc Exception caught at connectDB.getData()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.getData()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:402)
+	at capstonetracker.Project.main(Project.java:457)
+
+
+2017-12-09 15:29:51.929  :::  Misc Exception caught at connectDB.prepare()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.prepare()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:402)
+	at capstonetracker.Project.main(Project.java:457)
+
+
+2017-12-09 15:29:51.94  :::  Misc Exception caught at connectDB.getData()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.getData()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:402)
+	at capstonetracker.Project.main(Project.java:457)
+
+
+2017-12-09 15:37:31.483  :::  SQL Exception caught at connectDB.prepare()
+Prepared Statement: select uid, type from people where username = '?';
+Parameters: [db1234]
+Stack Trace____________
+capstonetracker.DLException: SQL Exception caught at connectDB.prepare()
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:964)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:897)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:886)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:860)
+	at com.mysql.jdbc.PreparedStatement.checkBounds(PreparedStatement.java:3327)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3312)
+	at com.mysql.jdbc.PreparedStatement.setString(PreparedStatement.java:4027)
+	at com.mysql.jdbc.PreparedStatement.setObject(PreparedStatement.java:3531)
+	at com.mysql.jdbc.JDBC42PreparedStatement.setObject(JDBC42PreparedStatement.java:68)
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:106)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:416)
+	at capstonetracker.Project.main(Project.java:459)
+
+
+2017-12-09 15:37:31.489  :::  Misc Exception caught at connectDB.getData()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.getData()
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:964)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:897)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:886)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:860)
+	at com.mysql.jdbc.PreparedStatement.checkBounds(PreparedStatement.java:3327)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3312)
+	at com.mysql.jdbc.PreparedStatement.setString(PreparedStatement.java:4027)
+	at com.mysql.jdbc.PreparedStatement.setObject(PreparedStatement.java:3531)
+	at com.mysql.jdbc.JDBC42PreparedStatement.setObject(JDBC42PreparedStatement.java:68)
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:106)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:416)
+	at capstonetracker.Project.main(Project.java:459)
+
+
+2017-12-09 15:47:22.923  :::  SQL Exception caught at connectDB.prepare()
+Prepared Statement: select uid, type from people where username = '?';
+Parameters: [dn1234]
+Stack Trace____________
+capstonetracker.DLException: SQL Exception caught at connectDB.prepare()
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:964)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:897)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:886)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:860)
+	at com.mysql.jdbc.PreparedStatement.checkBounds(PreparedStatement.java:3327)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3312)
+	at com.mysql.jdbc.PreparedStatement.setString(PreparedStatement.java:4027)
+	at com.mysql.jdbc.PreparedStatement.setObject(PreparedStatement.java:3531)
+	at com.mysql.jdbc.JDBC42PreparedStatement.setObject(JDBC42PreparedStatement.java:68)
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:106)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:416)
+	at capstonetracker.Project.main(Project.java:459)
+
+
+2017-12-09 15:47:22.929  :::  Misc Exception caught at connectDB.getData()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.getData()
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:964)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:897)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:886)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:860)
+	at com.mysql.jdbc.PreparedStatement.checkBounds(PreparedStatement.java:3327)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3312)
+	at com.mysql.jdbc.PreparedStatement.setString(PreparedStatement.java:4027)
+	at com.mysql.jdbc.PreparedStatement.setObject(PreparedStatement.java:3531)
+	at com.mysql.jdbc.JDBC42PreparedStatement.setObject(JDBC42PreparedStatement.java:68)
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:106)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:416)
+	at capstonetracker.Project.main(Project.java:459)
+
+
+2017-12-09 15:47:52.582  :::  SQL Exception caught at connectDB.prepare()
+Prepared Statement: select uid, type from people where username = '?';
+Parameters: [dn1234]
+Stack Trace____________
+capstonetracker.DLException: SQL Exception caught at connectDB.prepare()
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:964)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:897)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:886)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:860)
+	at com.mysql.jdbc.PreparedStatement.checkBounds(PreparedStatement.java:3327)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3312)
+	at com.mysql.jdbc.PreparedStatement.setString(PreparedStatement.java:4027)
+	at com.mysql.jdbc.PreparedStatement.setObject(PreparedStatement.java:3531)
+	at com.mysql.jdbc.JDBC42PreparedStatement.setObject(JDBC42PreparedStatement.java:68)
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:106)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:417)
+	at capstonetracker.Project.main(Project.java:461)
+
+
+2017-12-09 15:47:52.589  :::  Misc Exception caught at connectDB.getData()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.getData()
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:964)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:897)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:886)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:860)
+	at com.mysql.jdbc.PreparedStatement.checkBounds(PreparedStatement.java:3327)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3312)
+	at com.mysql.jdbc.PreparedStatement.setString(PreparedStatement.java:4027)
+	at com.mysql.jdbc.PreparedStatement.setObject(PreparedStatement.java:3531)
+	at com.mysql.jdbc.JDBC42PreparedStatement.setObject(JDBC42PreparedStatement.java:68)
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:106)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:417)
+	at capstonetracker.Project.main(Project.java:461)
+
+
+2017-12-09 15:48:58.999  :::  SQL Exception caught at connectDB.prepare()
+Prepared Statement: select uid, type from people where username = '?';
+Parameters: [dn1234]
+Stack Trace____________
+capstonetracker.DLException: SQL Exception caught at connectDB.prepare()
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:964)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:897)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:886)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:860)
+	at com.mysql.jdbc.PreparedStatement.checkBounds(PreparedStatement.java:3327)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3312)
+	at com.mysql.jdbc.PreparedStatement.setString(PreparedStatement.java:4027)
+	at com.mysql.jdbc.PreparedStatement.setObject(PreparedStatement.java:3531)
+	at com.mysql.jdbc.JDBC42PreparedStatement.setObject(JDBC42PreparedStatement.java:68)
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:106)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:416)
+	at capstonetracker.Project.main(Project.java:460)
+
+
+2017-12-09 15:48:59.005  :::  Misc Exception caught at connectDB.getData()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.getData()
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:964)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:897)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:886)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:860)
+	at com.mysql.jdbc.PreparedStatement.checkBounds(PreparedStatement.java:3327)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3312)
+	at com.mysql.jdbc.PreparedStatement.setString(PreparedStatement.java:4027)
+	at com.mysql.jdbc.PreparedStatement.setObject(PreparedStatement.java:3531)
+	at com.mysql.jdbc.JDBC42PreparedStatement.setObject(JDBC42PreparedStatement.java:68)
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:106)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:416)
+	at capstonetracker.Project.main(Project.java:460)
+
+
+2017-12-09 15:49:30.582  :::  SQL Exception caught at connectDB.prepare()
+Prepared Statement: select uid, type from people where username = '?';
+Parameters: [dn1234]
+Stack Trace____________
+capstonetracker.DLException: SQL Exception caught at connectDB.prepare()
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:964)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:897)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:886)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:860)
+	at com.mysql.jdbc.PreparedStatement.checkBounds(PreparedStatement.java:3327)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3312)
+	at com.mysql.jdbc.PreparedStatement.setString(PreparedStatement.java:4027)
+	at com.mysql.jdbc.PreparedStatement.setObject(PreparedStatement.java:3531)
+	at com.mysql.jdbc.JDBC42PreparedStatement.setObject(JDBC42PreparedStatement.java:68)
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:106)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:416)
+	at capstonetracker.Project.main(Project.java:460)
+
+
+2017-12-09 15:49:30.588  :::  Misc Exception caught at connectDB.getData()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.getData()
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:964)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:897)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:886)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:860)
+	at com.mysql.jdbc.PreparedStatement.checkBounds(PreparedStatement.java:3327)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3312)
+	at com.mysql.jdbc.PreparedStatement.setString(PreparedStatement.java:4027)
+	at com.mysql.jdbc.PreparedStatement.setObject(PreparedStatement.java:3531)
+	at com.mysql.jdbc.JDBC42PreparedStatement.setObject(JDBC42PreparedStatement.java:68)
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:106)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:416)
+	at capstonetracker.Project.main(Project.java:460)
+
+
+2017-12-09 15:49:53.189  :::  SQL Exception caught at connectDB.prepare()
+Prepared Statement: select uid, type from people where username = '?';
+Parameters: [dn1234]
+Stack Trace____________
+capstonetracker.DLException: SQL Exception caught at connectDB.prepare()
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:964)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:897)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:886)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:860)
+	at com.mysql.jdbc.PreparedStatement.checkBounds(PreparedStatement.java:3327)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3312)
+	at com.mysql.jdbc.PreparedStatement.setString(PreparedStatement.java:4027)
+	at com.mysql.jdbc.PreparedStatement.setObject(PreparedStatement.java:3531)
+	at com.mysql.jdbc.JDBC42PreparedStatement.setObject(JDBC42PreparedStatement.java:68)
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:106)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:417)
+	at capstonetracker.Project.main(Project.java:461)
+
+
+2017-12-09 15:49:53.195  :::  Misc Exception caught at connectDB.getData()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.getData()
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:964)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:897)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:886)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:860)
+	at com.mysql.jdbc.PreparedStatement.checkBounds(PreparedStatement.java:3327)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3312)
+	at com.mysql.jdbc.PreparedStatement.setString(PreparedStatement.java:4027)
+	at com.mysql.jdbc.PreparedStatement.setObject(PreparedStatement.java:3531)
+	at com.mysql.jdbc.JDBC42PreparedStatement.setObject(JDBC42PreparedStatement.java:68)
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:106)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:417)
+	at capstonetracker.Project.main(Project.java:461)
+
+
+2017-12-09 15:50:10.627  :::  SQL Exception caught at connectDB.prepare()
+Prepared Statement: select uid, type from people where username = '?';
+Parameters: [dn1234]
+Stack Trace____________
+capstonetracker.DLException: SQL Exception caught at connectDB.prepare()
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:964)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:897)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:886)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:860)
+	at com.mysql.jdbc.PreparedStatement.checkBounds(PreparedStatement.java:3327)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3312)
+	at com.mysql.jdbc.PreparedStatement.setString(PreparedStatement.java:4027)
+	at com.mysql.jdbc.PreparedStatement.setObject(PreparedStatement.java:3531)
+	at com.mysql.jdbc.JDBC42PreparedStatement.setObject(JDBC42PreparedStatement.java:68)
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:106)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:418)
+	at capstonetracker.Project.main(Project.java:462)
+
+
+2017-12-09 15:50:10.633  :::  Misc Exception caught at connectDB.getData()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.getData()
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:964)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:897)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:886)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:860)
+	at com.mysql.jdbc.PreparedStatement.checkBounds(PreparedStatement.java:3327)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3312)
+	at com.mysql.jdbc.PreparedStatement.setString(PreparedStatement.java:4027)
+	at com.mysql.jdbc.PreparedStatement.setObject(PreparedStatement.java:3531)
+	at com.mysql.jdbc.JDBC42PreparedStatement.setObject(JDBC42PreparedStatement.java:68)
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:106)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addUser(Project.java:418)
+	at capstonetracker.Project.main(Project.java:462)
+
