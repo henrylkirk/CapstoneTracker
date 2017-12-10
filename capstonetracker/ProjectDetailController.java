@@ -17,15 +17,17 @@ public class ProjectDetailController implements Initializable {
     @FXML
     private TextField tfName;
     @FXML
+    private TextField tfType;
+    @FXML
     private TextArea taDescription;
     @FXML
-    private TextField tfCode;
+    private TextField tfStartTerm;
     @FXML
     private TextField tfEndDate;
     @FXML
-    private TextField tfDefenseDate;
-    @FXML
     private TextField tfGrade;
+    @FXML
+    private Label lblPlagiarismScore;
     @FXML
     private TextField tfPlagiarismScore;
     private Project userProject;
@@ -34,18 +36,24 @@ public class ProjectDetailController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    }
+    public void initialize(URL url, ResourceBundle rb) {}
 
-    public void loadProjectDetails(Project p){
-        System.out.println("project details loaded");
+    public void loadProjectDetails(Project p, String role){
         userProject = p;
+
+        // hide/disable fields if the user is a student
+        if(role.equalsIgnoreCase("Grad")) {
+            tfPlagiarismScore.setVisible(false);
+            lblPlagiarismScore.setVisible(false);
+            tfGrade.setEditable(false);
+        }
+
+        // set textfield text
         tfName.setText(p.getProjectName());
         taDescription.setText(p.getProjectDescription());
-        // tfCode.setText(String.valueOf(p.getProjectCode()));
-        // tfStartDate.setText(p.getStartDate());
+        tfType.setText(p.getProjectType());
+        tfStartTerm.setText(String.valueOf(p.getStartDate()));
         tfEndDate.setText(p.getEndDate());
-        // tfDefenseDate.setText(p.getDefenseDate());
         tfGrade.setText(String.valueOf(p.getGrade()));
         tfPlagiarismScore.setText(String.valueOf(p.getPlagiarismScore()));
     }

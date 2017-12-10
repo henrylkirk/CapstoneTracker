@@ -15,15 +15,15 @@
             <TextField id="tfName" fx:id="tfName" promptText="project name" />
             <Label id="lblDescription" text="Project Description" />
             <TextArea id="taDescription" fx:id="taDescription" prefHeight="200.0" prefWidth="200.0" promptText="description" />
-            <Label id="lblCode" text="Start Term Code" />
-            <TextField id="tfCode" fx:id="tfCode" promptText="ex. 2181" />
+            <Label id="lblType" text="Project Type" />
+            <TextField id="tfType" fx:id="tfType" promptText="Thesis" />
+            <Label id="lblStartTerm" text="Start Term Code" />
+            <TextField id="tfStartTerm" fx:id="tfStartTerm" promptText="ex. 2171" />
             <Label id="lblEndDate" text="End Date" />
             <TextField id="tfEndDate" fx:id="tfEndDate" promptText="YYYY-MM-DD" />
-            <Label id="lblDefenseDate" text="Defense Date" />
-            <TextField id="tfDefenseDate" fx:id="tfDefenseDate" promptText="YYYY-MM-DD" />
             <Label id="lblGrade" text="Grade" />
             <TextField id="tfGrade" fx:id="tfGrade" promptText="95.0" />
-            <Label text="Plagiarism Score" />
+            <Label text="Plagiarism Score" fx:id="lblPlagiarismScore" />
             <TextField id="tfPlagiarismScore" fx:id="tfPlagiarismScore" promptText="5.0" />
          </children>
       </VBox>

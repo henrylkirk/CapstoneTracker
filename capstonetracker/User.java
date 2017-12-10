@@ -345,11 +345,4 @@ public class User
     {
         return office;
     }
-
-    public static void main(String[] args){
-        User user = new User("ab1234","password");
-        user.login();
-        ArrayList<Project> projects = user.getProjects();
-        System.out.println(projects.get(0).getProjectType());
-    }
 }

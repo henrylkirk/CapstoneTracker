@@ -41,6 +41,7 @@ public class MyProjectsController implements Initializable {
 	@FXML
 	public Button btnLogout;
 	private ArrayList<Project> projects;
+	private BLUser user;
 	private ObservableList<ProjectRow> rows;
 
 	/**
@@ -72,7 +73,7 @@ public class MyProjectsController implements Initializable {
 								stage.setScene(scene);
 								// get controller
 								ProjectDetailController pdc = (ProjectDetailController) fxmlLoader.getController();
-								pdc.loadProjectDetails(project);
+								pdc.loadProjectDetails(project, project.getRole(user.getUserId()));
 							} catch(Exception e) {
 								System.out.println(e.getMessage());
 								e.printStackTrace();
@@ -87,11 +88,12 @@ public class MyProjectsController implements Initializable {
 	/**
 	* Load projects associated with a user into the table.
 	*/
-	public void loadTable(ArrayList<Project> projects){
-		this.projects = projects;
+	public void loadTable(BLUser user){
+		this.projects = user.getProjects();
+		this.user = user;
 		ArrayList<ProjectRow> rowList = new ArrayList<ProjectRow>();
 		for (int i = 0; i < projects.size(); i++) {
-			ProjectRow row = new ProjectRow(projects.get(i).getProjectName(), projects.get(i).getProjectType(), projects.get(i).getProjectID());
+			ProjectRow row = new ProjectRow(projects.get(i).getProjectName(), projects.get(i).getRole(user.getUserId()), projects.get(i).getProjectID());
 			rowList.add(row);
 		}
 		rows = FXCollections.observableArrayList(rowList);

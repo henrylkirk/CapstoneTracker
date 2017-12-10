@@ -81,22 +81,6 @@ public class Project {
     }
 
     /**
-    * After login, check what project did the user have
-    */
-    public ArrayList<ArrayList<String>> getUserProject(int userID) {
-        ArrayList<ArrayList<String>> userProjectList = new ArrayList<>();
-        String statement = "SELECT * FROM people_project WHERE uid = ?;";
-        try {
-            userProjectList = dbConn.getData(statement, Integer.toString(userID));
-        }
-        catch(DLException dle) {
-            System.out.println("*** Error: " + dle.getMessage() + " ***\n");
-            dle.printStackTrace();
-        }
-        return userProjectList;
-    }
-
-    /**
     * Fetch project data from database.
     */
     public boolean checkProject() {
@@ -123,7 +107,27 @@ public class Project {
         return check;
     }
 
-
+    /**
+    * For a given project id, get the usre's role on that project.
+    */
+    public String getRole(int userID) {
+        String role = "Grad"; // default to student in case of error
+        String statement = "SELECT role FROM people_project WHERE uid = ? AND pid = ?";
+        System.out.println("User id: "+Integer.toString(userID));
+        System.out.println("Project id: "+Integer.toString(getProjectID()));
+        try {
+            dbConn.connect();
+            ArrayList<ArrayList<String>> rs = dbConn.getData(statement, Integer.toString(userID), Integer.toString(getProjectID()));
+            dbConn.close();
+            if(rs != null){
+                role = rs.get(0).get(0);
+            }
+        } catch(DLException dle) {
+            System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+            dle.printStackTrace();
+        }
+        return role;
+    }
 
     public void setProjectType(String _projectType){
         projectType = _projectType;
