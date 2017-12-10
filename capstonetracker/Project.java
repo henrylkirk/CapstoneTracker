@@ -249,12 +249,11 @@ public class Project {
     * updateProjectInfo allow user to change project detail
     * BUT student are not allow to change plagirism score and grade
     */
-    public void updateProjectInfo(BLUser user) {
-        String userType = user.getUserType();
-        if(userType.equalsIgnoreCase("Grad")) {
-            String statement = "UPDATE projects SET name = ?,  description = ?, start_term = ?, expected_end_date = ? WHERE pid = ?;" ;
+    public void updateProjectInfo(String role) {
+        if(role.equalsIgnoreCase("Grad")) {
+            String statement = "UPDATE projects SET name = ?, type = ?, description = ?, start_term = ?, expected_end_date = ? WHERE pid = ?";
             try {
-                boolean update = dbConn.setData(statement, projectName, projectDescription, startDate, endDate, Integer.toString(projectID) );
+                boolean update = dbConn.setData(statement, projectName, projectType, projectDescription, startDate, endDate, Integer.toString(projectID) );
                 if (update) {
                     System.out.println("Data Updated");
                 }
@@ -269,9 +268,9 @@ public class Project {
             }
 
         } else {
-            String statement = "UPDATE projects SET name = ?,  description = ?, start_term = ?, expected_end_date = ?, plagiarism_score = ?, grade = ? WHERE pid = ?;" ;
+            String statement = "UPDATE projects SET name = ?,  type = ?, description = ?, start_term = ?, expected_end_date = ?, plagiarism_score = ?, grade = ? WHERE pid = ?;" ;
             try {
-                boolean update = dbConn.setData(statement, projectName, projectDescription, startDate, endDate,String.valueOf(plagiarismScore),String.valueOf(grade), String.valueOf(projectID) );
+                boolean update = dbConn.setData(statement, projectName, projectType, projectDescription, startDate, endDate,String.valueOf(plagiarismScore),String.valueOf(grade), String.valueOf(projectID) );
                 if (update) {
                     System.out.println("Data Updated");
                 } else {

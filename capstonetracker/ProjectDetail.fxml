@@ -27,7 +27,7 @@
             <TextField id="tfPlagiarismScore" fx:id="tfPlagiarismScore" promptText="5.0" />
          </children>
       </VBox>
-      <Button id="btnSave" fx:id="btnSave" defaultButton="true" layoutX="1155.0" layoutY="546.0" mnemonicParsing="false" text="Save Changes" />
+      <Button id="btnSave" fx:id="btnSave" onAction="#handleSaveButtonAction" defaultButton="true" layoutX="1155.0" layoutY="546.0" mnemonicParsing="false" text="Save Changes" />
       <Button id="btnLogout" fx:id="btnLogout" layoutX="1194.0" layoutY="14.0" mnemonicParsing="false" text="Log Out" />
       <Button id="btnBack" fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="&lt; Back" />
       <TableView layoutX="302.0" layoutY="97.0" prefHeight="422.0" prefWidth="580.0">

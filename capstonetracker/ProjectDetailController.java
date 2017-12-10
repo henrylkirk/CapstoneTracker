@@ -9,9 +9,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 /**
- * FXML Controller for project detail view
- * @author Henry Kirk
- */
+* FXML Controller for project detail view
+* @author Henry Kirk
+*/
 public class ProjectDetailController implements Initializable {
 
     @FXML
@@ -30,55 +30,58 @@ public class ProjectDetailController implements Initializable {
     private Label lblPlagiarismScore;
     @FXML
     private TextField tfPlagiarismScore;
-    private Project userProject;
+    private Project project;
+    private String role;
 
     /**
-     * Initializes the controller class.
-     */
+    * Initializes the controller class.
+    */
     @Override
     public void initialize(URL url, ResourceBundle rb) {}
 
-    public void loadProjectDetails(Project p, String role){
-        userProject = p;
+        public void loadProjectDetails(Project project, String role){
+            this.project = project;
+            this.role = role;
 
-        // hide/disable fields if the user is a student
-        if(role.equalsIgnoreCase("Grad")) {
-            tfPlagiarismScore.setVisible(false);
-            lblPlagiarismScore.setVisible(false);
-            tfGrade.setEditable(false);
+            // hide/disable fields if the user is a student
+            if(role.equalsIgnoreCase("Grad")) {
+                tfPlagiarismScore.setVisible(false);
+                lblPlagiarismScore.setVisible(false);
+                tfGrade.setEditable(false);
+            }
+
+            // set textfield text
+            tfName.setText(project.getProjectName());
+            taDescription.setText(project.getProjectDescription());
+            tfType.setText(project.getProjectType());
+            tfStartTerm.setText(String.valueOf(project.getStartDate()));
+            tfEndDate.setText(project.getEndDate());
+            tfGrade.setText(String.valueOf(project.getGrade()));
+            tfPlagiarismScore.setText(String.valueOf(project.getPlagiarismScore()));
         }
 
-        // set textfield text
-        tfName.setText(p.getProjectName());
-        taDescription.setText(p.getProjectDescription());
-        tfType.setText(p.getProjectType());
-        tfStartTerm.setText(String.valueOf(p.getStartDate()));
-        tfEndDate.setText(p.getEndDate());
-        tfGrade.setText(String.valueOf(p.getGrade()));
-        tfPlagiarismScore.setText(String.valueOf(p.getPlagiarismScore()));
-    }
+        /**
+         * Get all values from inputs, set them in the project, and update that project in the database.
+         */
+        @FXML
+        protected void handleSaveButtonAction(ActionEvent event) {
+            System.out.println("save button clicked");
+            String pName = tfName.getText().trim();
+            String pDesc = taDescription.getText().trim();
+            String pType = tfType.getText().trim();
+            String pStartTerm = tfStartTerm.getText().trim();
+            String pEndDate = tfEndDate.getText().trim();
+            String pGrade = tfGrade.getText().trim();
+            String pPlag = tfPlagiarismScore.getText().trim();
 
-    @FXML
-    protected void handleSaveButtonAction(ActionEvent event) {
-      // String pName = tfName.getText();
-      // String pDesc = tfDescription.getText();
-      // String pCode = tfCode.getText();
-      // String pStartDate = tfStartDate.getText();
-      // String pEndDate = tfEndDate.getText();
-      // String pDefense = tfDefenseDate.getText();
-      // String pGrade = tfGrade.getText();
-      // String pPlag = tfPlagiarismScore.getTest();
-      //
-      // userProject.setProjectName(pName);
-      // userProject.setProjectDescription(pDesc);
-      // userProject.setProjectCode(Integer.parseInt(pCode));
-      // userProject.setProjectStartDate(pStartDate);
-      // userProject.setProjectEndDate(pEndDate);
-      // userProject.setProjectDefenseDate(pDefense);
-      // userProject.setProjectGrade(Integer.parseInt(pGrade));
-      // userProject.setProjectPlagiarismScore(Integer.parseInt(pPlag));
-      //
-      // userProject.updateProjectInfo();
-    }
+            project.setProjectName(pName);
+            project.setProjectType(pType);
+            project.setProjectDescription(pDesc);
+            project.setStartDate(pStartTerm);
+            project.setEndDate(pEndDate);
+            project.setGrade(Integer.parseInt(pGrade));
+            project.setPlagiarismScore(Integer.parseInt(pPlag));
 
+            project.updateProjectInfo(role);
+        }
 }
