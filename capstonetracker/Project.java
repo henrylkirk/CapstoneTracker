@@ -325,7 +325,7 @@ public class Project
     }
 
     private void addUser(String username, int projectID, String role){
-        // find the uif of the user with that username
+        // find the uid of the user with that username
         // add that user as "role" to that project id - insert into people_project that role, the uid, and the pid
     }
 
