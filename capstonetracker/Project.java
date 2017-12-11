@@ -333,6 +333,7 @@ public class Project {
             rs = dbConn.getData(query, String.valueOf(getProjectID()));
             if(rs != null){
                for(int i = 0; i < rs.size(); i++){
+                   System.out.println("id: "+rs.get(i).get(0));
                   int newUID = Integer.parseInt(rs.get(i).get(0));
                   User newUser = new User(newUID);
                   if(newUser.login()){
@@ -340,7 +341,7 @@ public class Project {
                   }
                }
             }
-            
+
         } catch(DLException dle) {
             System.out.println("*** Error: " + dle.getMessage() + " ***\n");
             dle.printStackTrace();
