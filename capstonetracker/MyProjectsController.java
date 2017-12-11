@@ -37,7 +37,7 @@ public class MyProjectsController implements Initializable {
 	@FXML
 	private TableColumn colRole;
 	@FXML
-	private TableColumn colView;
+	private TableColumn colId;
 	@FXML
 	public Button btnLogout;
 	private ArrayList<Project> projects;
@@ -54,7 +54,7 @@ public class MyProjectsController implements Initializable {
 		tblProjects.setEditable(true);
 		colProjectName.setCellValueFactory(new PropertyValueFactory<ProjectRow,String>("projectName"));
 		colRole.setCellValueFactory(new PropertyValueFactory<ProjectRow,String>("projectType"));
-		colView.setCellValueFactory(new PropertyValueFactory<ProjectRow,Integer>("projectID"));
+		colId.setCellValueFactory(new PropertyValueFactory<ProjectRow,Integer>("projectID"));
 
 		// When a table row is double clicked on, view that project's details.
 		tblProjects.setOnMouseClicked((MouseEvent event) -> {

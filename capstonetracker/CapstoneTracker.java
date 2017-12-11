@@ -18,15 +18,11 @@ public class CapstoneTracker extends Application {
 
     private static Stage stage;
     public static BLUser user;
-    private MyProjectsController mpc = null;
-    private ProjectDetailController pdc = null;
 
     @Override
     public void start(Stage stage) throws Exception {
         setStage(stage);
-
-        // Show login scene at start
-        setScene("Login");
+        setScene("Login"); // Show login scene at start
     }
 
     // Accessors & Mutators
