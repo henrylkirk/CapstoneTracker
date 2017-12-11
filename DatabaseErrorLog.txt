@@ -4289,3 +4289,111 @@ capstonetracker.DLException: Misc Exception caught at connectDB.getData()
 	at com.sun.glass.ui.View.handleMouseEvent(View.java:555)
 	at com.sun.glass.ui.View.notifyMouse(View.java:937)
 
+
+2017-12-10 23:36:42.165  :::  Misc Exception caught at connectDB.prepare()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.prepare()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.executeStmt(ConnectDB.java:136)
+	at capstonetracker.ConnectDB.setData(ConnectDB.java:247)
+	at capstonetracker.Project.updateProjectInfo(Project.java:247)
+	at capstonetracker.Project.main(Project.java:348)
+
+
+2017-12-10 23:36:42.18  :::  Misc Excpetion caught at connectDB.executeStmt()
+Stack Trace____________
+capstonetracker.DLException: Misc Excpetion caught at connectDB.executeStmt()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.executeStmt(ConnectDB.java:136)
+	at capstonetracker.ConnectDB.setData(ConnectDB.java:247)
+	at capstonetracker.Project.updateProjectInfo(Project.java:247)
+	at capstonetracker.Project.main(Project.java:348)
+
+
+2017-12-10 23:36:42.18  :::  Misc Exception caught at connectDB.setData(statement,_params)
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.setData(statement,_params)
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.executeStmt(ConnectDB.java:136)
+	at capstonetracker.ConnectDB.setData(ConnectDB.java:247)
+	at capstonetracker.Project.updateProjectInfo(Project.java:247)
+	at capstonetracker.Project.main(Project.java:348)
+
+
+2017-12-10 23:43:46.448  :::  Misc Exception caught at connectDB.prepare()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.prepare()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.executeStmt(ConnectDB.java:136)
+	at capstonetracker.ConnectDB.setData(ConnectDB.java:247)
+	at capstonetracker.Project.updateProjectInfo(Project.java:265)
+	at capstonetracker.Project.main(Project.java:356)
+
+
+2017-12-10 23:43:46.463  :::  Misc Excpetion caught at connectDB.executeStmt()
+Stack Trace____________
+capstonetracker.DLException: Misc Excpetion caught at connectDB.executeStmt()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.executeStmt(ConnectDB.java:136)
+	at capstonetracker.ConnectDB.setData(ConnectDB.java:247)
+	at capstonetracker.Project.updateProjectInfo(Project.java:265)
+	at capstonetracker.Project.main(Project.java:356)
+
+
+2017-12-10 23:43:46.479  :::  Misc Exception caught at connectDB.setData(statement,_params)
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.setData(statement,_params)
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.executeStmt(ConnectDB.java:136)
+	at capstonetracker.ConnectDB.setData(ConnectDB.java:247)
+	at capstonetracker.Project.updateProjectInfo(Project.java:265)
+	at capstonetracker.Project.main(Project.java:356)
+
+
+2017-12-10 23:43:56.336  :::  Misc Exception caught at connectDB.prepare()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.prepare()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.executeStmt(ConnectDB.java:136)
+	at capstonetracker.ConnectDB.setData(ConnectDB.java:247)
+	at capstonetracker.Project.updateProjectInfo(Project.java:265)
+	at capstonetracker.Project.main(Project.java:356)
+
+
+2017-12-10 23:43:56.336  :::  Misc Excpetion caught at connectDB.executeStmt()
+Stack Trace____________
+capstonetracker.DLException: Misc Excpetion caught at connectDB.executeStmt()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.executeStmt(ConnectDB.java:136)
+	at capstonetracker.ConnectDB.setData(ConnectDB.java:247)
+	at capstonetracker.Project.updateProjectInfo(Project.java:265)
+	at capstonetracker.Project.main(Project.java:356)
+
+
+2017-12-10 23:43:56.351  :::  Misc Exception caught at connectDB.setData(statement,_params)
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.setData(statement,_params)
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.executeStmt(ConnectDB.java:136)
+	at capstonetracker.ConnectDB.setData(ConnectDB.java:247)
+	at capstonetracker.Project.updateProjectInfo(Project.java:265)
+	at capstonetracker.Project.main(Project.java:356)
+
+
+2017-12-10 23:49:20.891  :::  Misc Exception caught at connectDB.prepare()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.prepare()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addNewProject(Project.java:199)
+	at capstonetracker.Project.main(Project.java:358)
+
+
+2017-12-10 23:49:20.907  :::  Misc Exception caught at connectDB.getData()
+Stack Trace____________
+capstonetracker.DLException: Misc Exception caught at connectDB.getData()
+	at capstonetracker.ConnectDB.prepare(ConnectDB.java:103)
+	at capstonetracker.ConnectDB.getData(ConnectDB.java:216)
+	at capstonetracker.Project.addNewProject(Project.java:199)
+	at capstonetracker.Project.main(Project.java:358)
+
