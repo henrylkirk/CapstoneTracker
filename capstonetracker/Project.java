@@ -157,7 +157,7 @@ public class Project {
             }
          }
       }
-      catch(DLException dle) 
+      catch(DLException dle)  
       {
          System.out.println("*** Error: " + dle.getMessage() + " ***\n");
          dle.printStackTrace();
