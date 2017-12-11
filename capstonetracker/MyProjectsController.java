@@ -18,12 +18,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import javafx.scene.input.MouseEvent;
 
-// TODO: remove below imports
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
+
 /**
 * FXML Controller for my projects view
 * @author Henry Kirk

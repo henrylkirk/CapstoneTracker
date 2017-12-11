@@ -38,6 +38,7 @@ public class ProjectDetailController implements Initializable {
     private Project project;
     private String role;
     private ArrayList<ArrayList<String>> users;
+    private ArrayList<Status> statuses;
     // private ObservableList<UserRow> userRows;
     // private ObservableList<StatusRow> statusRows;
 
@@ -67,13 +68,38 @@ public class ProjectDetailController implements Initializable {
         tfGrade.setText(String.valueOf(project.getGrade()));
         tfPlagiarismScore.setText(String.valueOf(project.getPlagiarismScore()));
 
-        // Populate users table with users associated with this project
         loadUsersTable();
+        loadStatusesTable();
     }
 
+    /**
+     * Populate the "users" table with all users with a role on this project.
+     */
     private void loadUsersTable(){
-        this.users = project.getUsers();
-        System.out.println("user table loaded");
+        // this.users = project.getUsers();
+        // ArrayList<UserRow> rowList = new ArrayList<UserRow>();
+		// for (int i = 0; i < users.size(); i++) {
+		// 	UserRow row = new UserRow(users.get(i).getFirstName(), users.get(i).getLastName(), project.getRole(users.get(i).getUserId()));
+		// 	rowList.add(row);
+		// }
+		// userRows = FXCollections.observableArrayList(rowList);
+		// tblUsers.setItems(userRows);
+        System.out.println("User table loaded");
+    }
+
+    /**
+     * Populate the "users" table with all users with a role on this project.
+     */
+    private void loadStatusesTable(){
+        // this.statuses = project.getStatuses();
+        // ArrayList<StatusRow> rowList = new ArrayList<StatusRow>();
+		// for (int i = 0; i < statuses.size(); i++) {
+		// 	StatusRow row = new StatusRow(statuses.get(i).getStatusName(),statuses.get(i).getStatusDescription(),statuses.get(i).getLastDateModified(),statuses.get(i).getComment());
+		// 	rowList.add(row);
+		// }
+		// statusRows = FXCollections.observableArrayList(rowList);
+		// tblStatuses.setItems(statusRows);
+        System.out.println("status table loaded");
     }
 
     /**
