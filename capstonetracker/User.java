@@ -148,11 +148,44 @@ public class User {
             userType = rs.get(0).get(1);
             userName = rs.get(0).get(2);
             password = rs.get(0).get(3);
-            fName = rs.get(0).get(5);
-            lName = rs.get(0).get(6);
-            email = rs.get(0).get(4);
+            fName = rs.get(0).get(4);
+            lName = rs.get(0).get(5);
+            email = rs.get(0).get(6);
             phone = rs.get(0).get(7);
             office = rs.get(0).get(8);
+            loginSuccess = true;
+         }
+         else{
+            dbConn.close();
+            loginSuccess = false;
+         }
+      }
+      catch(DLException dle){
+         loginSuccess = false;
+         System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+         dle.printStackTrace();
+      }
+      return loginSuccess;
+   }
+   
+   public boolean checkUser()
+   {
+      boolean loginSuccess = false;
+      String statement = "SELECT type, userName, password, fName, lName, email, phone, officelocation FROM people WHERE uid= ? ;";
+   
+      try{
+         dbConn.connect();
+         ArrayList<ArrayList<String>> rs = dbConn.getData(statement,String.valueOf(userID));
+         if(rs != null){
+            dbConn.close();
+            userType = rs.get(0).get(0);
+            userName = rs.get(0).get(1);
+            password = rs.get(0).get(2);
+            fName = rs.get(0).get(3);
+            lName = rs.get(0).get(4);
+            email = rs.get(0).get(5);
+            phone = rs.get(0).get(6);
+            office = rs.get(0).get(7);
             loginSuccess = true;
          }
          else{
