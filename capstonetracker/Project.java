@@ -97,7 +97,7 @@ public class Project {
                 endDate = data.get(0).get(4);
                 plagiarismScore = Integer.parseInt(data.get(0).get(5));
                 grade = Integer.parseInt(data.get(0).get(6));
-
+                
             }
         } catch(DLException dle) {
             System.out.println("*** Error: " + dle.getMessage() + " ***\n");
@@ -128,28 +128,47 @@ public class Project {
         System.out.println(role);
         return role;
     }
-
+    
    /**
     * get the status for the project
     * return 2d arraylist includes all statused for that project
     */
-    public ArrayList<ArrayList<String>> getStatus()
+    public ArrayList<Status> getStatus()
     {
-      String statement = "select * from project_status where pid = ?";
+      String statement = "select sid, last_modified, comment from project_status where pid = ?";
+      ArrayList<Status> status = new ArrayList<Status>();
       ArrayList<ArrayList<String>> statusArray = new ArrayList<ArrayList<String>>();
       try
       {
          dbConn.connect();
          statusArray = dbConn.getData(statement, Integer.toString(getProjectID()));
+         if(statusArray != null)
+         {
+            for(int i = 0; i < statusArray.size();i++)
+            {
+               int statusID = Integer.parseInt(statusArray.get(i).get(0));
+               String lastModified = statusArray.get(i).get(1);
+               String comment = statusArray.get(i).get(2);
+               Status newStatus = new Status(statusID,lastModified,comment);
+               if(newStatus.checkStatusInfo())
+               {
+                  status.add(newStatus);
+               }
+            }
+         }
       }
-      catch(DLException dle)
+      catch(DLException dle)  
       {
          System.out.println("*** Error: " + dle.getMessage() + " ***\n");
          dle.printStackTrace();
       }
-      return statusArray;
+      return status;
     }
+    
 
+    
+   
+    
 
     public void setProjectType(String _projectType){
         projectType = _projectType;
@@ -303,11 +322,11 @@ public class Project {
 
     /**
      * Get all users associated with this project.
-     * @return 2D ArrayList of strings in format: firstname, lastname, role, uid
+     * @return 2D ArrayList of strings in format: username, role, uid
      */
     public ArrayList<ArrayList<String>> getUsers(){
         ArrayList<ArrayList<String>> users = new ArrayList<ArrayList<String>>();
-        String query = "SELECT people.fName, people.lName, people_project.role, people.uid FROM people, people_project, project WHERE people_project.pid = project.pid AND people.uid = people_project.uid AND project.pid = ?";
+        String query = "SELECT people.username, people_project.role, people.uid FROM people, people_project, project WHERE people_project.pid = project.pid AND people.uid = people_project.uid AND project.pid = ?";
         try {
             dbConn.connect();
             users = dbConn.getData(query, Integer.toString(getProjectID()));
@@ -370,6 +389,6 @@ public class Project {
          dle.printStackTrace();
       }
     }
-
-
+   
+    
 }
