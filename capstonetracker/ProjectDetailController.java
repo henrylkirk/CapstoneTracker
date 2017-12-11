@@ -42,7 +42,7 @@ public class ProjectDetailController implements Initializable {
     @FXML
     private TableView tblStatuses;
     @FXML
-    private TableColumn colStep;
+    private TableColumn colStatusName;
     @FXML
     private TableColumn colDescription;
     @FXML
@@ -61,6 +61,10 @@ public class ProjectDetailController implements Initializable {
     private TextField tfAddRole;
     @FXML
     private Button btnAddUser;
+    @FXML
+    private TextField tfAddComment;
+    @FXML
+    private Button tfAddStatus;
     private Project project;
     private String role;
     private ArrayList<User> users;
@@ -80,7 +84,7 @@ public class ProjectDetailController implements Initializable {
 
         // set each table column type
 		tblStatuses.setEditable(true);
-		colStep.setCellValueFactory(new PropertyValueFactory<StatusRow,String>("statusName"));
+		colStatusName.setCellValueFactory(new PropertyValueFactory<StatusRow,String>("statusName"));
 		colDescription.setCellValueFactory(new PropertyValueFactory<StatusRow,String>("description"));
         colModified.setCellValueFactory(new PropertyValueFactory<StatusRow,String>("lastDateModified"));
         colComments.setCellValueFactory(new PropertyValueFactory<StatusRow,String>("comment"));
@@ -150,8 +154,11 @@ public class ProjectDetailController implements Initializable {
         String addUsername = tfAddUsername.getText().trim();
 
         // add user with that role to this project
-        // project.addUser(addUsername, addRole, project.getProjectID());
+        project.addUser(addUsername, project.getProjectID(), addRole);
     }
+
+    @FXML
+    protected void handleAddStatusButton(ActionEvent event) {}
 
     /**
     * Get all values from inputs, set them in the project, and update that project in the database.

@@ -338,7 +338,7 @@ public class Project {
                    System.out.println("id: "+rs.get(i).get(0));
                   int newUID = Integer.parseInt(rs.get(i).get(0));
                   User newUser = new User(newUID);
-                  if(newUser.login()){
+                  if(newUser.checkUser()){
                      users.add(newUser);
                   }
                }
@@ -359,44 +359,44 @@ public class Project {
     * 5. if the role is not student, check the uid of the new user by using the username
     * 5. Insert to table.
     */
-    public void addUser(String username, int pid, String role) 
+    public void addUser(String username, int pid, String role)
     {
          String statement = "select uid, type from people where username = ?;";
          ArrayList<ArrayList<String>> data = new ArrayList<>();
-         try 
+         try
          {
             dbConn.connect();
             data = dbConn.getData(statement,username);
             int newUserID = Integer.parseInt(data.get(0).get(0));
             String newUserType = data.get(0).get(1);
-            if(newUserType.equalsIgnoreCase("Grad")) 
+            if(newUserType.equalsIgnoreCase("Grad"))
             {
                System.out.println("Can't add student");
-            } 
-            else 
+            }
+            else
             {
                System.out.println("ok,add prof");
                String statement2 = "insert into people_project values(?,?,?);";
-               try 
+               try
                {
                   dbConn.connect();
                   dbConn.setData(statement,Integer.toString(newUserID), Integer.toString(pid), role);
-               } 
-               catch(DLException dle) 
+               }
+               catch(DLException dle)
                {
                   System.out.println("*** Error: " + dle.getMessage() + " ***\n");
                   dle.printStackTrace();
                }
 
             }
-         } 
-         catch(DLException dle) 
+         }
+         catch(DLException dle)
          {
             System.out.println("*** Error: " + dle.getMessage() + " ***\n");
             dle.printStackTrace();
          }
     }
-   
-    
- 
+
+
+
 }

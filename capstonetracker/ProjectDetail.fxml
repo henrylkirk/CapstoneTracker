@@ -7,9 +7,9 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="projectDetail" prefHeight="600.0" prefWidth="1295.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="capstonetracker.ProjectDetailController">
+<AnchorPane id="projectDetail" prefHeight="597.0" prefWidth="1294.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="capstonetracker.ProjectDetailController">
    <children>
-      <VBox layoutX="14.0" layoutY="81.0" prefHeight="505.0" prefWidth="272.0">
+      <VBox layoutX="14.0" layoutY="66.0" prefHeight="520.0" prefWidth="272.0">
          <children>
             <Label id="lblName" text="Project Name" />
             <TextField id="tfName" fx:id="tfName" promptText="project name" />
@@ -25,27 +25,29 @@
             <TextField id="tfGrade" fx:id="tfGrade" promptText="95.0" />
             <Label fx:id="lblPlagiarismScore" text="Plagiarism Score" />
             <TextField id="tfPlagiarismScore" fx:id="tfPlagiarismScore" promptText="5.0" />
+            <Button id="btnSave" fx:id="btnSave" defaultButton="true" lineSpacing="1.0" mnemonicParsing="false" onAction="#handleSaveButtonAction" prefHeight="27.0" prefWidth="274.0" text="Save Changes" />
          </children>
       </VBox>
-      <Button id="btnSave" fx:id="btnSave" defaultButton="true" layoutX="75.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSaveButtonAction" text="Save Changes" />
       <Button id="btnLogout" fx:id="btnLogout" layoutX="1194.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleLogoutButtonAction" text="Log Out" />
       <Button id="btnBack" fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBackButtonAction" text="&lt; Back" />
-      <TableView fx:id="tblStatuses" layoutX="302.0" layoutY="97.0" prefHeight="422.0" prefWidth="580.0">
+      <TableView fx:id="tblStatuses" layoutX="302.0" layoutY="76.0" prefHeight="469.0" prefWidth="580.0">
         <columns>
-          <TableColumn id="colStep" fx:id="colStep" prefWidth="75.0" text="Step" />
+          <TableColumn id="colStatusName" fx:id="colStatusName" prefWidth="75.0" text="Status" />
           <TableColumn id="colDescription" fx:id="colDescription" prefWidth="180.0" text="Description" />
             <TableColumn id="colModified" fx:id="colModified" prefWidth="120.0" text="Last Modified" />
             <TableColumn id="colComments" fx:id="colComments" prefWidth="204.0" text="Comments" />
         </columns>
       </TableView>
-      <TableView fx:id="tblUsers" layoutX="908.0" layoutY="97.0" prefHeight="422.0" prefWidth="353.0">
+      <TableView fx:id="tblUsers" layoutX="908.0" layoutY="76.0" prefHeight="469.0" prefWidth="353.0">
         <columns>
           <TableColumn id="colName" fx:id="colName" prefWidth="180.0" text="Name" />
           <TableColumn id="colRole" fx:id="colRole" prefWidth="172.0" text="Role" />
         </columns>
       </TableView>
-      <Button id="btnAddUser" fx:id="btnAddUser" onAction="#handleAddButtonAction" layoutX="1185.0" layoutY="519.0" mnemonicParsing="false" text="Add User" />
-      <TextField id="tfAddUsername" fx:id="tfAddUsername" layoutX="908.0" layoutY="519.0" prefHeight="27.0" prefWidth="143.0" promptText="username" />
-      <TextField id="tfAddRole" fx:id="tfAddRole" layoutX="1053.0" layoutY="519.0" prefHeight="27.0" prefWidth="132.0" promptText="role" />
+      <Button id="btnAddUser" fx:id="btnAddUser" layoutX="1183.0" layoutY="545.0" mnemonicParsing="false" onAction="#handleAddButtonAction" text="Add User" />
+      <TextField id="tfAddUsername" fx:id="tfAddUsername" layoutX="908.0" layoutY="545.0" prefHeight="27.0" prefWidth="143.0" promptText="username" />
+      <TextField id="tfAddRole" fx:id="tfAddRole" layoutX="1051.0" layoutY="545.0" prefHeight="27.0" prefWidth="132.0" promptText="role" />
+      <Button id="btnAddStatus" fx:id="btnAddStatus" onAction="#handleAddStatusButton" layoutX="715.0" layoutY="545.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="167.0" text="Add Status" />
+      <TextField id="tfAddComment" fx:id="tfAddComment" layoutX="302.0" layoutY="545.0" prefHeight="27.0" prefWidth="414.0" promptText="comment" />
    </children>
 </AnchorPane>
