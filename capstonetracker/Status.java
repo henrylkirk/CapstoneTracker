@@ -8,7 +8,7 @@ import java.util.*;
  * Status class for project status and related Info
  * @author Ryan Sweeney
  */
-public class Status{
+public class Status {
 
    private int statusId;
    private String statusName;

@@ -8,6 +8,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.beans.value.ObservableValue;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
 * FXML Controller for project detail view
@@ -39,7 +46,7 @@ public class ProjectDetailController implements Initializable {
     private String role;
     private ArrayList<ArrayList<String>> users;
     private ArrayList<Status> statuses;
-    // private ObservableList<UserRow> userRows;
+    private ObservableList<UserRow> userRows;
     // private ObservableList<StatusRow> statusRows;
 
     /**
@@ -76,14 +83,18 @@ public class ProjectDetailController implements Initializable {
      * Populate the "users" table with all users with a role on this project.
      */
     private void loadUsersTable(){
-        // this.users = project.getUsers();
-        // ArrayList<UserRow> rowList = new ArrayList<UserRow>();
-		// for (int i = 0; i < users.size(); i++) {
-		// 	UserRow row = new UserRow(users.get(i).getFirstName(), users.get(i).getLastName(), project.getRole(users.get(i).getUserId()));
-		// 	rowList.add(row);
-		// }
-		// userRows = FXCollections.observableArrayList(rowList);
-		// tblUsers.setItems(userRows);
+        this.users = project.getUsers();
+        ArrayList<UserRow> rowList = new ArrayList<UserRow>();
+		for (int i = 0; i < users.size(); i++) {
+            // in format firstname, lastname, role, uid
+            System.out.println("uid: "+users.get(i).get(3));
+            int uid = Integer.valueOf(users.get(i).get(3));
+			UserRow row = new UserRow(users.get(i).get(0), users.get(i).get(1), project.getRole(uid), uid);
+            // System.out.println(users.get(i).get(3));
+			rowList.add(row);
+		}
+		userRows = FXCollections.observableArrayList(rowList);
+		tblUsers.setItems(userRows);
         System.out.println("User table loaded");
     }
 
