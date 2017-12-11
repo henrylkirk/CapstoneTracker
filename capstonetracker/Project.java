@@ -324,12 +324,23 @@ public class Project {
      * Get all users associated with this project.
      * @return 2D ArrayList of strings in format: username, role, uid
      */
-    public ArrayList<ArrayList<String>> getUsers(){
-        ArrayList<ArrayList<String>> users = new ArrayList<ArrayList<String>>();
-        String query = "SELECT people.username, people_project.role, people.uid FROM people, people_project, project WHERE people_project.pid = project.pid AND people.uid = people_project.uid AND project.pid = ?";
+    public ArrayList<User> getUsers(){
+        ArrayList<ArrayList<String>> rs = new ArrayList<ArrayList<String>>();
+        ArrayList<User> users = new ArrayList<User>();
+        String query = "SELECT uid FROM people_project WHERE pid = ? ;";
         try {
             dbConn.connect();
-            users = dbConn.getData(query, Integer.toString(getProjectID()));
+            rs = dbConn.getData(query, String.valueOf(getProjectID()));
+            if(rs != null){
+               for(int i = 0; i < rs.size(); i++){
+                  int newUID = Integer.parseInt(rs.get(i).get(0));
+                  User newUser = new User(newUID);
+                  if(newUser.login()){
+                     users.add(newUser);
+                  }
+               }
+            }
+            
         } catch(DLException dle) {
             System.out.println("*** Error: " + dle.getMessage() + " ***\n");
             dle.printStackTrace();
