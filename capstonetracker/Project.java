@@ -7,6 +7,8 @@ package capstonetracker;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.*;
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
 * New class named Project
@@ -401,5 +403,13 @@ public class Project {
       }
     }
 
+
+   public void updateStatus(int _sid, String _comment){
+      Date date = new Date();
+      Timestamp timeCaught = new Timestamp(date.getTime());
+      String dateMod = timeCaught.toString();
+      Status newStatus = new Status(_sid,dateMod,_comment);
+      newStatus.updateProjectStatus(String.valueOf(projectID));
+   }
 
 }
