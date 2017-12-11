@@ -8,6 +8,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.beans.value.ObservableValue;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 /**
 * FXML Controller for project detail view
@@ -34,19 +42,43 @@ public class ProjectDetailController implements Initializable {
     @FXML
     private TableView tblStatuses;
     @FXML
+    private TableColumn colStep;
+    @FXML
+    private TableColumn colDescription;
+    @FXML
+    private TableColumn colModified;
+    @FXML
+    private TableColumn colComments;
+    @FXML
     private TableView tblUsers;
+    @FXML
+    private TableColumn colRole;
+    @FXML
+    private TableColumn colName;
     private Project project;
     private String role;
     private ArrayList<ArrayList<String>> users;
     private ArrayList<Status> statuses;
-    // private ObservableList<UserRow> userRows;
-    // private ObservableList<StatusRow> statusRows;
+    private ObservableList<UserRow> userRows;
+    private ObservableList<StatusRow> statusRows;
 
     /**
     * Initializes the controller class.
     */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {}
+    public void initialize(URL url, ResourceBundle rb) {
+        // set each table column type
+		tblUsers.setEditable(true);
+		colName.setCellValueFactory(new PropertyValueFactory<UserRow,String>("name"));
+		colRole.setCellValueFactory(new PropertyValueFactory<UserRow,String>("role"));
+
+        // set each table column type
+		tblStatuses.setEditable(true);
+		colStep.setCellValueFactory(new PropertyValueFactory<UserRow,String>("statusName"));
+		colDescription.setCellValueFactory(new PropertyValueFactory<UserRow,String>("description"));
+        colModified.setCellValueFactory(new PropertyValueFactory<UserRow,String>("lastDateModified"));
+        colComments.setCellValueFactory(new PropertyValueFactory<UserRow,String>("comment"));
+    }
 
     public void loadProjectDetails(Project project, String role){
         this.project = project;
@@ -79,26 +111,30 @@ public class ProjectDetailController implements Initializable {
         // this.users = project.getUsers();
         // ArrayList<UserRow> rowList = new ArrayList<UserRow>();
 		// for (int i = 0; i < users.size(); i++) {
-		// 	UserRow row = new UserRow(users.get(i).getFirstName(), users.get(i).getLastName(), project.getRole(users.get(i).getUserId()));
+        //     // in format firstname, lastname, role, uid
+        //     System.out.println("uid: "+users.get(i).get(3));
+        //     int uid = Integer.valueOf(users.get(i).get(3));
+		// 	UserRow row = new UserRow(users.get(i).get(0), users.get(i).get(1), project.getRole(uid), uid);
+        //     System.out.println("Firstname: "+users.get(i).get(0));
 		// 	rowList.add(row);
 		// }
 		// userRows = FXCollections.observableArrayList(rowList);
 		// tblUsers.setItems(userRows);
-        System.out.println("User table loaded");
+        // System.out.println("User table loaded");
     }
 
     /**
      * Populate the "users" table with all users with a role on this project.
      */
     private void loadStatusesTable(){
-        // this.statuses = project.getStatuses();
-        // ArrayList<StatusRow> rowList = new ArrayList<StatusRow>();
-		// for (int i = 0; i < statuses.size(); i++) {
-		// 	StatusRow row = new StatusRow(statuses.get(i).getStatusName(),statuses.get(i).getStatusDescription(),statuses.get(i).getLastDateModified(),statuses.get(i).getComment());
-		// 	rowList.add(row);
-		// }
-		// statusRows = FXCollections.observableArrayList(rowList);
-		// tblStatuses.setItems(statusRows);
+        this.statuses = project.getStatus();
+        ArrayList<StatusRow> rowList = new ArrayList<StatusRow>();
+		for (int i = 0; i < statuses.size(); i++) {
+			StatusRow row = new StatusRow(statuses.get(i).getStatusName(),statuses.get(i).getStatusDescription(),statuses.get(i).getLastDateModified(),statuses.get(i).getComment());
+			rowList.add(row);
+		}
+		statusRows = FXCollections.observableArrayList(rowList);
+		tblStatuses.setItems(statusRows);
         System.out.println("status table loaded");
     }
 
@@ -182,7 +218,7 @@ public class ProjectDetailController implements Initializable {
 			this.comment = comment;
 		}
 
-		public String getName() {
+		public String getStatusName() {
 			return statusName;
 		}
 		public String getDescription() {
