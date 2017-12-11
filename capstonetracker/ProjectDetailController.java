@@ -144,4 +144,55 @@ public class ProjectDetailController implements Initializable {
     protected void handleLogoutButtonAction(ActionEvent event) {
         CapstoneTracker.setScene("Login");
     }
+
+    // Class to hold user info as a table row
+	public static class UserRow {
+		private String name;
+		private String role;
+        private int uid;
+
+		private UserRow(String fName, String lName, String role, int uid) {
+			name = fName + " " + lName;
+			this.role = role;
+			this.uid = uid;
+		}
+
+		public String getName() {
+			return name;
+		}
+		public String getRole() {
+			return role;
+		}
+		public int getUserID() {
+			return uid;
+		}
+	}
+
+    // Class to hold user info as a table row
+	public static class StatusRow {
+		private String statusName;
+		private String description;
+        private String lastDateModified;
+        private String comment;
+
+		private StatusRow(String statusName, String description, String lastDateModified, String comment) {
+			this.statusName = statusName;
+            this.description = description;
+			this.lastDateModified = lastDateModified;
+			this.comment = comment;
+		}
+
+		public String getName() {
+			return statusName;
+		}
+		public String getDescription() {
+			return description;
+		}
+        public String getLastDateModified() {
+			return lastDateModified;
+		}
+		public String getComment() {
+			return comment;
+		}
+	}
 }
