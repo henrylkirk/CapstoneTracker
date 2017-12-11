@@ -133,22 +133,41 @@ public class Project {
     * get the status for the project
     * return 2d arraylist includes all statused for that project
     */
-    public ArrayList<ArrayList<String>> getStatus()
+    public ArrayList<Status> getStatus()
     {
-      String statement = "select * from project_status where pid = ?";
+      String statement = "select sid, last_modified, comment from project_status where pid = ?";
+      ArrayList<Status> status = new ArrayList<Status>();
       ArrayList<ArrayList<String>> statusArray = new ArrayList<ArrayList<String>>();
       try
       {
          dbConn.connect();
          statusArray = dbConn.getData(statement, Integer.toString(getProjectID()));
+         if(statusArray != null)
+         {
+            for(int i = 0; i < statusArray.size();i++)
+            {
+               int statusID = Integer.parseInt(statusArray.get(i).get(0));
+               String lastModified = statusArray.get(i).get(1);
+               String comment = statusArray.get(i).get(2);
+               Status newStatus = new Status(statusID,lastModified,comment);
+               if(newStatus.checkStatusInfo())
+               {
+                  status.add(newStatus);
+               }
+            }
+         }
       }
       catch(DLException dle) 
       {
          System.out.println("*** Error: " + dle.getMessage() + " ***\n");
          dle.printStackTrace();
       }
-      return statusArray;
+      return status;
     }
+    
+
+    
+   
     
 
     public void setProjectType(String _projectType){
