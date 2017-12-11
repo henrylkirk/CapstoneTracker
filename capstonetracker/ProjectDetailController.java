@@ -42,6 +42,10 @@ public class ProjectDetailController implements Initializable {
     private TableView tblStatuses;
     @FXML
     private TableView tblUsers;
+    @FXML
+    private TableColumn colRole;
+    @FXML
+    private TableColumn colName;
     private Project project;
     private String role;
     private ArrayList<ArrayList<String>> users;
@@ -53,7 +57,12 @@ public class ProjectDetailController implements Initializable {
     * Initializes the controller class.
     */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {}
+    public void initialize(URL url, ResourceBundle rb) {
+        // set each table column type
+		tblUsers.setEditable(true);
+		colName.setCellValueFactory(new PropertyValueFactory<UserRow,String>("name"));
+		colRole.setCellValueFactory(new PropertyValueFactory<UserRow,String>("role"));
+    }
 
     public void loadProjectDetails(Project project, String role){
         this.project = project;
@@ -90,7 +99,7 @@ public class ProjectDetailController implements Initializable {
             System.out.println("uid: "+users.get(i).get(3));
             int uid = Integer.valueOf(users.get(i).get(3));
 			UserRow row = new UserRow(users.get(i).get(0), users.get(i).get(1), project.getRole(uid), uid);
-            // System.out.println(users.get(i).get(3));
+            System.out.println("Firstname: "+users.get(i).get(0));
 			rowList.add(row);
 		}
 		userRows = FXCollections.observableArrayList(rowList);
