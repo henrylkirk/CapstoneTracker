@@ -64,7 +64,6 @@ public class MyProjectsController implements Initializable {
 					// find project with that id
 					for(Project project : projects) {
 						if(project.getProjectID() == selectedRow.getProjectID()) {
-							System.out.println("you found it");
 							try {
 								FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProjectDetail.fxml"));
 								Parent root = (Parent) fxmlLoader.load();
@@ -83,14 +82,16 @@ public class MyProjectsController implements Initializable {
 				}
 			}
 		});
+
+		loadTable();
 	}
 
 	/**
 	* Load projects associated with a user into the table.
 	*/
-	public void loadTable(BLUser user){
+	public void loadTable(){
+		this.user = CapstoneTracker.getUser();
 		this.projects = user.getProjects();
-		this.user = user;
 		ArrayList<ProjectRow> rowList = new ArrayList<ProjectRow>();
 		for (int i = 0; i < projects.size(); i++) {
 			ProjectRow row = new ProjectRow(projects.get(i).getProjectName(), projects.get(i).getRole(user.getUserId()), projects.get(i).getProjectID());
@@ -100,10 +101,21 @@ public class MyProjectsController implements Initializable {
 		tblProjects.setItems(rows);
 	}
 
+	/**
+	 * Create a new empty project row.
+	 */
 	@FXML
 	protected void handleCreateButtonAction(ActionEvent event) {
 		ProjectRow row = new ProjectRow("","",-1);
 		rows.add(row);
+	}
+
+	/**
+	 * Called when logout button is clicked.
+	 */
+	@FXML
+	protected void handleLogoutButtonAction(ActionEvent event) {
+		CapstoneTracker.setScene("Login");
 	}
 
 	// Class to hold project info as a table row

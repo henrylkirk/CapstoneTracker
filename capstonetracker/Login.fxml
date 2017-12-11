@@ -16,7 +16,7 @@
               <Label id="lblLogin" text="Login" />
               <TextField id="tfLoginUsername" fx:id="tfLoginUsername" promptText="username" />
               <TextField id="tfLoginPassword" fx:id="tfLoginPassword" promptText="password" />
-              <Button id="btnLogin" fx:id="btnLogin" mnemonicParsing="false" prefHeight="57.0" prefWidth="178.0" text="Log in" />
+              <Button id="btnLogin" fx:id="btnLogin" onAction="#handleLoginButtonAction" mnemonicParsing="false" prefHeight="57.0" prefWidth="178.0" text="Log in" />
            </children>
         </VBox>
         <VBox id="vboxCreate" layoutX="317.0" layoutY="20.0" prefHeight="267.0" prefWidth="178.0">

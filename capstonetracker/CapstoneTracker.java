@@ -18,66 +18,59 @@ public class CapstoneTracker extends Application {
 
     private static Stage stage;
     private FXMLLoader fxmlLoader;
-    private BLUser user;
+    public static BLUser user;
     private MyProjectsController mpc = null;
     private ProjectDetailController pdc = null;
-
-    private void setStage(Stage stage) {
-        CapstoneTracker.stage = stage;
-    }
-    static public Stage getStage() {
-        return CapstoneTracker.stage;
-    }
 
     @Override
     public void start(Stage stage) throws Exception {
         setStage(stage);
 
         // Show login scene at start
-        changeScene("Login");
-
-        // get login controller
-        LoginController lc = (LoginController) fxmlLoader.getController();
-        // add event listener to login button
-        lc.btnLogin.setOnAction((event) -> {
-            if(lc.login()){
-                this.user = lc.getUser();
-                changeScene("MyProjects");
-                loadMyProjects();
-            }
-        });
-        this.loadProjectDetails();
+        setScene("Login");
     }
 
-    /**
-     * Call's controller's function to load the table with MyProjects
-     * Adds logout button event listener to controller
-     */
-    private void loadMyProjects(){
-        if(this.user != null){
-            mpc = (MyProjectsController) fxmlLoader.getController();
-            // Populate table with user's projects
-            mpc.loadTable(user);
-            // logout
-            mpc.btnLogout.setOnAction((event) -> {
-                changeScene("Login");
-                user = null;
-            });
-        }
+    // Accessors & Mutators
+    private void setStage(Stage stage) {
+        CapstoneTracker.stage = stage;
     }
-
-    private void loadProjectDetails(){
-        // get project detail controller
-        // pdc = (ProjectDetailController) fxmlLoader.getController();
+    static public Stage getStage() {
+        return CapstoneTracker.stage;
+    }
+    private void setUser(BLUser user) {
+        CapstoneTracker.user = user;
+    }
+    static public BLUser getUser() {
+        return CapstoneTracker.user;
     }
 
     /**
      * Create and show a scene from the fxml file name.
      */
-    public void changeScene(String sceneName) {
+    // public void changeScene(String sceneName) {
+    //     try {
+    //         fxmlLoader = new FXMLLoader(getClass().getResource(sceneName+".fxml"));
+    //         Parent root = fxmlLoader.load();
+    //         Scene scene = new Scene(root);
+    //         stage.setScene(scene);
+    //         stage.setTitle(sceneName);
+    //         stage.centerOnScreen();
+    //         stage.show();
+    //     } catch(Exception e){
+    //         System.out.println("Exception caught at changeScene"+e.getMessage());
+    //         e.printStackTrace();
+    //         System.exit(0);
+    //     }
+    //
+    // }
+
+    /**
+     * Create and show a scene from the fxml file name.
+     */
+    public static void setScene(String sceneName) {
         try {
-            fxmlLoader = new FXMLLoader(getClass().getResource(sceneName+".fxml"));
-            Parent root = fxmlLoader.load();
+            FXMLLoader f = new FXMLLoader(CapstoneTracker.class.getResource(sceneName+".fxml"));
+            Parent root = f.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle(sceneName);

@@ -47,13 +47,15 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
     }
 
     /**
      * Attempt to log in with the provided username and password.
      * This method is called when the "Login" button is pressed.
      */
-    public boolean login() {
+     @FXML
+     protected void handleLoginButtonAction(ActionEvent event) {
         String username = tfLoginUsername.getText();
         String password = tfLoginPassword.getText();
         boolean validLogin = false;
@@ -75,7 +77,10 @@ public class LoginController implements Initializable {
             lblLoginStatus.setVisible(false);
             System.out.println("successful login\nUsername: "+username+"\nPassword: "+password);
         }
-        return validLogin;
+        if(validLogin){
+            CapstoneTracker.user = getUser();
+            CapstoneTracker.setScene("MyProjects");
+        }
     }
 
     /**
