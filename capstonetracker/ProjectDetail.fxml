@@ -32,16 +32,16 @@
       <Button id="btnBack" fx:id="btnBack" onAction="#handleBackButtonAction" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="&lt; Back" />
       <TableView fx:id="tblStatuses" layoutX="302.0" layoutY="97.0" prefHeight="422.0" prefWidth="580.0">
         <columns>
-          <TableColumn id="colStep" prefWidth="75.0" text="Step" />
-          <TableColumn id="colDescription" prefWidth="180.0" text="Description" />
-            <TableColumn id="colModified" prefWidth="120.0" text="Last Modified" />
-            <TableColumn id="colComments" prefWidth="204.0" text="Comments" />
+          <TableColumn id="colStep" fx:id="colStep" prefWidth="75.0" text="Step" />
+          <TableColumn id="colDescription" fx:id="colDescription" prefWidth="180.0" text="Description" />
+            <TableColumn id="colModified" fx:id="colModified" prefWidth="120.0" text="Last Modified" />
+            <TableColumn id="colComments" fx:id="colComments" prefWidth="204.0" text="Comments" />
         </columns>
       </TableView>
       <TableView fx:id="tblUsers" layoutX="908.0" layoutY="97.0" prefHeight="422.0" prefWidth="353.0">
         <columns>
-          <TableColumn id="colName" prefWidth="180.0" text="Name" />
-          <TableColumn id="colRole" prefWidth="172.0" text="Role" />
+          <TableColumn id="colName" fx:id="colName" prefWidth="180.0" text="Name" />
+          <TableColumn id="colRole" fx:id="colRole" prefWidth="172.0" text="Role" />
         </columns>
       </TableView>
    </children>
