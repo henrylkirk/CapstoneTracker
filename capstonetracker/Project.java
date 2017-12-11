@@ -88,7 +88,6 @@ public class Project {
         try {
             dbConn.connect();
             ArrayList<ArrayList<String>> data = dbConn.getData(statement, Integer.toString(projectID));
-            dbConn.close();
             if (data != null) {
                 check = true;
                 projectType = data.get(0).get(0);
@@ -98,6 +97,7 @@ public class Project {
                 endDate = data.get(0).get(4);
                 plagiarismScore = Integer.parseInt(data.get(0).get(5));
                 grade = Integer.parseInt(data.get(0).get(6));
+                
             }
         } catch(DLException dle) {
             System.out.println("*** Error: " + dle.getMessage() + " ***\n");
@@ -125,8 +125,31 @@ public class Project {
             System.out.println("*** Error: " + dle.getMessage() + " ***\n");
             dle.printStackTrace();
         }
+        System.out.println(role);
         return role;
     }
+    
+   /**
+    * get the status for the project
+    * return 2d arraylist includes all statused for that project
+    */
+    public ArrayList<ArrayList<String>> getStatus()
+    {
+      String statement = "select * from project_status where pid = ?";
+      ArrayList<ArrayList<String>> statusArray = new ArrayList<ArrayList<String>>();
+      try
+      {
+         dbConn.connect();
+         statusArray = dbConn.getData(statement, Integer.toString(getProjectID()));
+      }
+      catch(DLException dle) 
+      {
+         System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+         dle.printStackTrace();
+      }
+      return statusArray;
+    }
+    
 
     public void setProjectType(String _projectType){
         projectType = _projectType;
@@ -192,9 +215,10 @@ public class Project {
     /**
     * addNewProject allow user to insert new project to database
     */
-    public void addNewProject(BLUser user) {
+    public void addNewProject() {
         String statement = "INSERT INTO project VALUES(?,?,?,?,?,?,?,?);";
         try {
+            dbConn.connect();
             String getMaxProjectId = "SELECT MAX(pid) FROM project;";
             ArrayList<ArrayList<String>> rs = dbConn.getData(getMaxProjectId);
             int newProjectID = Integer.parseInt(rs.get(0).get(0)) + 1;
@@ -217,10 +241,11 @@ public class Project {
     public boolean addProjectUser(String username, String role){
         // check if this username exists in the database
         boolean check = false;
-        String statement = "SELECT * FROM users WHERE username = ?";
+        String statement = "SELECT * FROM people WHERE username = ?";
         ArrayList<ArrayList<String>> data = new ArrayList<>();
 
         try {
+            dbConn.connect();
             data = dbConn.getData(statement, Integer.toString(projectID));
             if (data == null) {
                 check = false;
@@ -242,8 +267,9 @@ public class Project {
     */
     public void updateProjectInfo(String role) {
         if(role.equalsIgnoreCase("Grad")) {
-            String statement = "UPDATE projects SET name = ?, type = ?, description = ?, start_term = ?, expected_end_date = ? WHERE pid = ?";
+            String statement = "UPDATE project SET name = ?, type = ?, description = ?, start_term = ?, expected_end_date = ? WHERE pid = ?";
             try {
+                dbConn.connect();
                 boolean update = dbConn.setData(statement, projectName, projectType, projectDescription, startDate, endDate, Integer.toString(projectID) );
                 if (update) {
                     System.out.println("Data Updated");
@@ -259,8 +285,9 @@ public class Project {
             }
 
         } else {
-            String statement = "UPDATE projects SET name = ?,  type = ?, description = ?, start_term = ?, expected_end_date = ?, plagiarism_score = ?, grade = ? WHERE pid = ?;" ;
+            String statement = "UPDATE project SET name = ?,  type = ?, description = ?, start_term = ?, expected_end_date = ?, plagiarism_score = ?, grade = ? WHERE pid = ?;" ;
             try {
+                dbConn.connect();
                 boolean update = dbConn.setData(statement, projectName, projectType, projectDescription, startDate, endDate,String.valueOf(plagiarismScore),String.valueOf(grade), String.valueOf(projectID) );
                 if (update) {
                     System.out.println("Data Updated");
@@ -282,6 +309,7 @@ public class Project {
         ArrayList<ArrayList<String>> users = new ArrayList<ArrayList<String>>();
         String query = "SELECT people.username, people_project.role, people.uid FROM people, people_project, project WHERE people_project.pid = project.pid AND people.uid = people_project.uid AND project.pid = ?";
         try {
+            dbConn.connect();
             users = dbConn.getData(query, Integer.toString(getProjectID()));
         } catch(DLException dle) {
             System.out.println("*** Error: " + dle.getMessage() + " ***\n");
@@ -314,6 +342,7 @@ public class Project {
             String statement2 = "select uid, type from people where username = ?;";
             ArrayList<ArrayList<String>> data2 = new ArrayList<>();
             try {
+               dbConn.connect();
                data2 = dbConn.getData(statement2,username);
                int newUserID = Integer.parseInt(data2.get(0).get(0));
                String newUserType = data2.get(0).get(1);
@@ -323,6 +352,7 @@ public class Project {
                   System.out.println("ok,add prof");
                   String statement3 = "insert into people_project values(?,?,?);";
                   try {
+                     dbConn.connect();
                      dbConn.setData(statement3,Integer.toString(newUserID), Integer.toString(pid), newUserType);
                   } catch(DLException dle) {
                      System.out.println("*** Error: " + dle.getMessage() + " ***\n");
@@ -340,4 +370,6 @@ public class Project {
          dle.printStackTrace();
       }
     }
+   
+    
 }
