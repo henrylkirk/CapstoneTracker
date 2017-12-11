@@ -335,6 +335,7 @@ public class Project {
             rs = dbConn.getData(query, String.valueOf(getProjectID()));
             if(rs != null){
                for(int i = 0; i < rs.size(); i++){
+                   System.out.println("id: "+rs.get(i).get(0));
                   int newUID = Integer.parseInt(rs.get(i).get(0));
                   User newUser = new User(newUID);
                   if(newUser.login()){
@@ -342,7 +343,7 @@ public class Project {
                   }
                }
             }
-            
+
         } catch(DLException dle) {
             System.out.println("*** Error: " + dle.getMessage() + " ***\n");
             dle.printStackTrace();
@@ -358,58 +359,44 @@ public class Project {
     * 5. if the role is not student, check the uid of the new user by using the username
     * 5. Insert to table.
     */
-    public void addUser(String username, int pid) {
-      // int userID = user.getUserId();
-      boolean checkUserProject = false;
-      String statement = "SELECT * FROM people_project WHERE uid = ? AND pid = ?;";
-      ArrayList<ArrayList<String>> data = new ArrayList<>();
-      try {
-         dbConn.connect();
-         data = dbConn.getData(statement,Integer.toString(userID),Integer.toString(pid));
-         if (data == null) {
-            checkUserProject = false;
-            System.out.println("you're not able to add user, unless you working for the project");
-         } else {
-            checkUserProject = true;
-            String statement2 = "select uid, type from people where username = ?;";
-            ArrayList<ArrayList<String>> data2 = new ArrayList<>();
-            try {
-               dbConn.connect();
-               data2 = dbConn.getData(statement2,username);
-               int newUserID = Integer.parseInt(data2.get(0).get(0));
-               String newUserType = data2.get(0).get(1);
-               if(newUserType.equalsIgnoreCase("Grad")) {
-                  System.out.println("Can't add student");
-               } else {
-                  System.out.println("ok,add prof");
-                  String statement3 = "insert into people_project values(?,?,?);";
-                  try {
-                     dbConn.connect();
-                     dbConn.setData(statement3,Integer.toString(newUserID), Integer.toString(pid), newUserType);
-                  } catch(DLException dle) {
-                     System.out.println("*** Error: " + dle.getMessage() + " ***\n");
-                     dle.printStackTrace();
-                  }
-
+    public void addUser(String username, int pid, String role) 
+    {
+         String statement = "select uid, type from people where username = ?;";
+         ArrayList<ArrayList<String>> data = new ArrayList<>();
+         try 
+         {
+            dbConn.connect();
+            data = dbConn.getData(statement,username);
+            int newUserID = Integer.parseInt(data.get(0).get(0));
+            String newUserType = data.get(0).get(1);
+            if(newUserType.equalsIgnoreCase("Grad")) 
+            {
+               System.out.println("Can't add student");
+            } 
+            else 
+            {
+               System.out.println("ok,add prof");
+               String statement2 = "insert into people_project values(?,?,?);";
+               try 
+               {
+                  dbConn.connect();
+                  dbConn.setData(statement,Integer.toString(newUserID), Integer.toString(pid), role);
+               } 
+               catch(DLException dle) 
+               {
+                  System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+                  dle.printStackTrace();
                }
-            } catch(DLException dle) {
-               System.out.println("*** Error: " + dle.getMessage() + " ***\n");
-               dle.printStackTrace();
+
             }
+         } 
+         catch(DLException dle) 
+         {
+            System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+            dle.printStackTrace();
          }
-      } catch(DLException dle) {
-         System.out.println("*** Error: " + dle.getMessage() + " ***\n");
-         dle.printStackTrace();
-      }
     }
-
-
-   public void updateStatus(int _sid, String _comment){
-      Date date = new Date();
-      Timestamp timeCaught = new Timestamp(date.getTime());
-      String dateMod = timeCaught.toString();
-      Status newStatus = new Status(_sid,dateMod,_comment);
-      newStatus.updateProjectStatus(String.valueOf(projectID));
-   }
-
+   
+    
+ 
 }
