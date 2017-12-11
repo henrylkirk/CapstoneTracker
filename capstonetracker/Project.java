@@ -128,6 +128,28 @@ public class Project {
         System.out.println(role);
         return role;
     }
+    
+   /**
+    * get the status for the project
+    * return 2d arraylist includes all statused for that project
+    */
+    public ArrayList<ArrayList<String>> getStatus()
+    {
+      String statement = "select * from project_status where pid = ?";
+      ArrayList<ArrayList<String>> statusArray = new ArrayList<ArrayList<String>>();
+      try
+      {
+         dbConn.connect();
+         statusArray = dbConn.getData(statement, Integer.toString(getProjectID()));
+      }
+      catch(DLException dle) 
+      {
+         System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+         dle.printStackTrace();
+      }
+      return statusArray;
+    }
+    
 
     public void setProjectType(String _projectType){
         projectType = _projectType;
