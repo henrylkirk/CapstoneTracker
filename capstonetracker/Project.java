@@ -375,11 +375,11 @@ public class Project {
             else 
             {
                System.out.println("ok,add prof");
-               String statement2 = "insert into people_project values(?,?,?);";
+               String statement2 = "insert into people_project values(?,?,?);"; 
                try 
                {
                   dbConn.connect();
-                  dbConn.setData(statement,Integer.toString(newUserID), Integer.toString(pid), role);
+                  dbConn.setData(statement2,Integer.toString(newUserID), Integer.toString(pid),role);
                } 
                catch(DLException dle) 
                {
@@ -395,7 +395,6 @@ public class Project {
             dle.printStackTrace();
          }
     }
-   
-    
+  
  
 }
