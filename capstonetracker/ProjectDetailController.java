@@ -63,7 +63,7 @@ public class ProjectDetailController implements Initializable {
     private Button btnAddUser;
     private Project project;
     private String role;
-    private ArrayList<ArrayList<String>> users;
+    private ArrayList<User> users;
     private ArrayList<Status> statuses;
     private ObservableList<UserRow> userRows;
     private ObservableList<StatusRow> statusRows;
@@ -80,10 +80,10 @@ public class ProjectDetailController implements Initializable {
 
         // set each table column type
 		tblStatuses.setEditable(true);
-		colStep.setCellValueFactory(new PropertyValueFactory<UserRow,String>("statusName"));
-		colDescription.setCellValueFactory(new PropertyValueFactory<UserRow,String>("description"));
-        colModified.setCellValueFactory(new PropertyValueFactory<UserRow,String>("lastDateModified"));
-        colComments.setCellValueFactory(new PropertyValueFactory<UserRow,String>("comment"));
+		colStep.setCellValueFactory(new PropertyValueFactory<StatusRow,String>("statusName"));
+		colDescription.setCellValueFactory(new PropertyValueFactory<StatusRow,String>("description"));
+        colModified.setCellValueFactory(new PropertyValueFactory<StatusRow,String>("lastDateModified"));
+        colComments.setCellValueFactory(new PropertyValueFactory<StatusRow,String>("comment"));
     }
 
     public void loadProjectDetails(Project project, String role){
@@ -114,19 +114,18 @@ public class ProjectDetailController implements Initializable {
      * Populate the "users" table with all users with a role on this project.
      */
     private void loadUsersTable(){
-        // this.users = project.getUsers();
-        // ArrayList<UserRow> rowList = new ArrayList<UserRow>();
-		// for (int i = 0; i < users.size(); i++) {
-        //     // in format firstname, lastname, role, uid
-        //     System.out.println("uid: "+users.get(i).get(3));
-        //     int uid = Integer.valueOf(users.get(i).get(3));
-		// 	UserRow row = new UserRow(users.get(i).get(0), users.get(i).get(1), project.getRole(uid), uid);
-        //     System.out.println("Firstname: "+users.get(i).get(0));
-		// 	rowList.add(row);
-		// }
-		// userRows = FXCollections.observableArrayList(rowList);
-		// tblUsers.setItems(userRows);
-        // System.out.println("User table loaded");
+        this.users = project.getUsers();
+        ArrayList<UserRow> rowList = new ArrayList<UserRow>();
+		for (int i = 0; i < users.size(); i++) {
+            int uid = users.get(i).getUserId();
+			UserRow row = new UserRow(users.get(i).getFirstName(), users.get(i).getLastName(), project.getRole(uid), uid);
+            System.out.println("first name: "+users.get(i).getFirstName());
+            System.out.println("user added to table");
+            rowList.add(row);
+		}
+		userRows = FXCollections.observableArrayList(rowList);
+		tblUsers.setItems(userRows);
+        System.out.println("User table loaded");
     }
 
     /**
@@ -151,7 +150,7 @@ public class ProjectDetailController implements Initializable {
         String addUsername = tfAddUsername.getText().trim();
 
         // add user with that role to this project
-        project.addUser(addUsername, addRole);
+        // project.addUser(addUsername, addRole, project.getProjectID());
     }
 
     /**
