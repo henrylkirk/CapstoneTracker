@@ -17,7 +17,6 @@ import javafx.scene.control.*;
 public class CapstoneTracker extends Application {
 
     private static Stage stage;
-    private FXMLLoader fxmlLoader;
     public static BLUser user;
     private MyProjectsController mpc = null;
     private ProjectDetailController pdc = null;
@@ -47,37 +46,17 @@ public class CapstoneTracker extends Application {
     /**
      * Create and show a scene from the fxml file name.
      */
-    // public void changeScene(String sceneName) {
-    //     try {
-    //         fxmlLoader = new FXMLLoader(getClass().getResource(sceneName+".fxml"));
-    //         Parent root = fxmlLoader.load();
-    //         Scene scene = new Scene(root);
-    //         stage.setScene(scene);
-    //         stage.setTitle(sceneName);
-    //         stage.centerOnScreen();
-    //         stage.show();
-    //     } catch(Exception e){
-    //         System.out.println("Exception caught at changeScene"+e.getMessage());
-    //         e.printStackTrace();
-    //         System.exit(0);
-    //     }
-    //
-    // }
-
-    /**
-     * Create and show a scene from the fxml file name.
-     */
     public static void setScene(String sceneName) {
         try {
-            FXMLLoader f = new FXMLLoader(CapstoneTracker.class.getResource(sceneName+".fxml"));
-            Parent root = f.load();
+            FXMLLoader fxmlLoader = new FXMLLoader(CapstoneTracker.class.getResource(sceneName+".fxml"));
+            Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle(sceneName);
             stage.centerOnScreen();
             stage.show();
         } catch(Exception e){
-            System.out.println("Exception caught at changeScene"+e.getMessage());
+            System.out.println("Exception caught at setScene"+e.getMessage());
             e.printStackTrace();
             System.exit(0);
         }

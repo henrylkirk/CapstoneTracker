@@ -28,7 +28,6 @@ public class Project {
     private ConnectDB dbConn;
     private int userID;
 
-
     /**
     * Default constructor
     */
@@ -108,7 +107,7 @@ public class Project {
     }
 
     /**
-    * For a given project id, get the usre's role on that project.
+    * For a given project id, get the user's role on that project.
     */
     public String getRole(int userID) {
         String role = "Grad"; // default to student in case of error
@@ -213,14 +212,6 @@ public class Project {
     }
 
     /**
-    * Returns an ArrayList of users associated with this project.
-    * @return ArrayList
-    */
-    // public ArrayList<User> getProjectUsers(){
-    //    return users;
-    // }
-
-    /**
     *
     */
     public boolean addProjectUser(String username, String role){
@@ -281,6 +272,22 @@ public class Project {
                 dle.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Get all users associated with this project.
+     * @return 2D ArrayList of strings in format: username, role, uid
+     */
+    public ArrayList<ArrayList<String>> getUsers(){
+        ArrayList<ArrayList<String>> users = new ArrayList<ArrayList<String>>();
+        String query = "SELECT people.username, people_project.role, people.uid FROM people, people_project, project WHERE people_project.pid = project.pid AND people.uid = people_project.uid AND project.pid = ?";
+        try {
+            users = dbConn.getData(query, Integer.toString(getProjectID()));
+        } catch(DLException dle) {
+            System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+            dle.printStackTrace();
+        }
+        return users;
     }
 
    /*

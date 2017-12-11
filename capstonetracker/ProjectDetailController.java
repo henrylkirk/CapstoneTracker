@@ -1,5 +1,6 @@
 package capstonetracker;
 
+import java.util.ArrayList;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -7,12 +8,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-
-// import javafx.fxml.FXMLLoader;
-// import javafx.scene.Parent;
-// import javafx.scene.Scene;
-// import javafx.stage.Stage;
-// import javafx.scene.Node;
 
 /**
 * FXML Controller for project detail view
@@ -36,8 +31,15 @@ public class ProjectDetailController implements Initializable {
     private Label lblPlagiarismScore;
     @FXML
     private TextField tfPlagiarismScore;
+    @FXML
+    private TableView tblStatuses;
+    @FXML
+    private TableView tblUsers;
     private Project project;
     private String role;
+    private ArrayList<ArrayList<String>> users;
+    // private ObservableList<UserRow> userRows;
+    // private ObservableList<StatusRow> statusRows;
 
     /**
     * Initializes the controller class.
@@ -64,6 +66,14 @@ public class ProjectDetailController implements Initializable {
         tfEndDate.setText(project.getEndDate());
         tfGrade.setText(String.valueOf(project.getGrade()));
         tfPlagiarismScore.setText(String.valueOf(project.getPlagiarismScore()));
+
+        // Populate users table with users associated with this project
+        loadUsersTable();
+    }
+
+    private void loadUsersTable(){
+        this.users = project.getUsers();
+        System.out.println("user table loaded");
     }
 
     /**

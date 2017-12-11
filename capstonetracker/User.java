@@ -9,8 +9,8 @@ import java.util.Arrays;
 * Ryan Sweeney, Henry Kirk, Zhimin Lin
 */
 
-public class User
-{
+public class User {
+    
     private int userID;
     private String userType;
     private String userName;

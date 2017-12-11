@@ -17,11 +17,11 @@ public class LoginController implements Initializable {
     @FXML
     private TextField tfLoginUsername;
     @FXML
-    private TextField tfLoginPassword;
+    private PasswordField pfPassword;
     @FXML
     private TextField tfCreateUsername;
     @FXML
-    private TextField tfCreatePassword;
+    private PasswordField pfCreatePassword;
     @FXML
     private TextField tfFirstname;
     @FXML
@@ -57,7 +57,7 @@ public class LoginController implements Initializable {
      @FXML
      protected void handleLoginButtonAction(ActionEvent event) {
         String username = tfLoginUsername.getText();
-        String password = tfLoginPassword.getText();
+        String password = pfPassword.getText();
         boolean validLogin = false;
 
         if( !isEmpty(username) && !isEmpty(password) ) {
@@ -90,7 +90,7 @@ public class LoginController implements Initializable {
     @FXML
     protected void handleCreateButtonAction(ActionEvent event) {
         String username = tfCreateUsername.getText();
-        String password = tfCreateUsername.getText();
+        String password = pfCreatePassword.getText();
         String email = tfEmail.getText();
         String firstName = tfFirstname.getText();
         String lastName = tfLastname.getText();

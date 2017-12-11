@@ -7,13 +7,16 @@
 
 <AnchorPane id="MyProjects" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="355.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="capstonetracker.MyProjectsController">
    <children>
-      <Button id="btnLogout" fx:id="btnLogout" onAction="#handleLogoutButtonAction" layoutX="624.0" layoutY="31.0" mnemonicParsing="false" text="Log Out" />
-      <TableView id="tblProjects" fx:id="tblProjects" layoutX="12.0" layoutY="86.0" prefHeight="200.0" prefWidth="682.0">
+      <Button id="btnLogout" fx:id="btnLogout" layoutX="624.0" layoutY="31.0" mnemonicParsing="false" onAction="#handleLogoutButtonAction" text="Log Out" />
+      <TableView id="tblProjects" fx:id="tblProjects" layoutX="12.0" layoutY="86.0" prefHeight="200.0" prefWidth="675.0">
         <columns>
-          <TableColumn id="colProjectName" fx:id="colProjectName" prefWidth="274.0" text="Project Name" />
-          <TableColumn id="colRole" fx:id="colRole" minWidth="0.0" prefWidth="292.0" text="Your Role" />
-            <TableColumn id="colView" fx:id="colView" prefWidth="115.0" />
+          <TableColumn id="colProjectName" fx:id="colProjectName" prefWidth="386.0" text="Project Name" />
+          <TableColumn id="colRole" fx:id="colRole" minWidth="0.0" prefWidth="180.0" text="Your Role" />
+            <TableColumn id="colView" fx:id="colView" prefWidth="115.0" visible="false" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
       <Button id="btnCreateProject" defaultButton="true" layoutX="14.0" layoutY="309.0" mnemonicParsing="false" onAction="#handleCreateButtonAction" text="Create a new project" />
    </children>
