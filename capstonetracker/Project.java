@@ -97,7 +97,7 @@ public class Project {
                 endDate = data.get(0).get(4);
                 plagiarismScore = Integer.parseInt(data.get(0).get(5));
                 grade = Integer.parseInt(data.get(0).get(6));
-                
+
             }
         } catch(DLException dle) {
             System.out.println("*** Error: " + dle.getMessage() + " ***\n");
@@ -128,7 +128,7 @@ public class Project {
         System.out.println(role);
         return role;
     }
-    
+
    /**
     * get the status for the project
     * return 2d arraylist includes all statused for that project
@@ -157,18 +157,18 @@ public class Project {
             }
          }
       }
-      catch(DLException dle)  
+      catch(DLException dle)
       {
          System.out.println("*** Error: " + dle.getMessage() + " ***\n");
          dle.printStackTrace();
       }
       return status;
     }
-    
 
-    
-   
-    
+
+
+
+
 
     public void setProjectType(String _projectType){
         projectType = _projectType;
@@ -345,8 +345,8 @@ public class Project {
     * 5. if the role is not student, check the uid of the new user by using the username
     * 5. Insert to table.
     */
-    public void addUser(BLUser user, String username, int pid) {
-      int userID = user.getUserId();
+    public void addUser(String username, int pid) {
+      // int userID = user.getUserId();
       boolean checkUserProject = false;
       String statement = "SELECT * FROM people_project WHERE uid = ? AND pid = ?;";
       ArrayList<ArrayList<String>> data = new ArrayList<>();
@@ -389,6 +389,6 @@ public class Project {
          dle.printStackTrace();
       }
     }
-   
-    
+
+
 }

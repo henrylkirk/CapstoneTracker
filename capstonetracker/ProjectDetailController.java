@@ -55,6 +55,12 @@ public class ProjectDetailController implements Initializable {
     private TableColumn colRole;
     @FXML
     private TableColumn colName;
+    @FXML
+    private TextField tfAddUsername;
+    @FXML
+    private TextField tfAddRole;
+    @FXML
+    private Button btnAddUser;
     private Project project;
     private String role;
     private ArrayList<ArrayList<String>> users;
@@ -136,6 +142,16 @@ public class ProjectDetailController implements Initializable {
 		statusRows = FXCollections.observableArrayList(rowList);
 		tblStatuses.setItems(statusRows);
         System.out.println("status table loaded");
+    }
+
+    @FXML
+    protected void handleAddButtonAction(ActionEvent event) {
+        // get values from textfields
+        String addRole = tfAddRole.getText().trim();
+        String addUsername = tfAddUsername.getText().trim();
+
+        // add user with that role to this project
+        project.addUser(addUsername, addRole);
     }
 
     /**

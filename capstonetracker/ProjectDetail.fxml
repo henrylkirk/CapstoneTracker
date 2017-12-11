@@ -23,13 +23,13 @@
             <TextField id="tfEndDate" fx:id="tfEndDate" promptText="YYYY-MM-DD" />
             <Label id="lblGrade" text="Grade" />
             <TextField id="tfGrade" fx:id="tfGrade" promptText="95.0" />
-            <Label text="Plagiarism Score" fx:id="lblPlagiarismScore" />
+            <Label fx:id="lblPlagiarismScore" text="Plagiarism Score" />
             <TextField id="tfPlagiarismScore" fx:id="tfPlagiarismScore" promptText="5.0" />
          </children>
       </VBox>
-      <Button id="btnSave" fx:id="btnSave" onAction="#handleSaveButtonAction" defaultButton="true" layoutX="1155.0" layoutY="546.0" mnemonicParsing="false" text="Save Changes" />
-      <Button id="btnLogout" fx:id="btnLogout" onAction="#handleLogoutButtonAction" layoutX="1194.0" layoutY="14.0" mnemonicParsing="false" text="Log Out" />
-      <Button id="btnBack" fx:id="btnBack" onAction="#handleBackButtonAction" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="&lt; Back" />
+      <Button id="btnSave" fx:id="btnSave" defaultButton="true" layoutX="75.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSaveButtonAction" text="Save Changes" />
+      <Button id="btnLogout" fx:id="btnLogout" layoutX="1194.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleLogoutButtonAction" text="Log Out" />
+      <Button id="btnBack" fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBackButtonAction" text="&lt; Back" />
       <TableView fx:id="tblStatuses" layoutX="302.0" layoutY="97.0" prefHeight="422.0" prefWidth="580.0">
         <columns>
           <TableColumn id="colStep" fx:id="colStep" prefWidth="75.0" text="Step" />
@@ -44,5 +44,8 @@
           <TableColumn id="colRole" fx:id="colRole" prefWidth="172.0" text="Role" />
         </columns>
       </TableView>
+      <Button id="btnAddUser" fx:id="btnAddUser" onAction="#handleAddButtonAction" layoutX="1185.0" layoutY="519.0" mnemonicParsing="false" text="Add User" />
+      <TextField id="tfAddUsername" fx:id="tfAddUsername" layoutX="908.0" layoutY="519.0" prefHeight="27.0" prefWidth="143.0" promptText="username" />
+      <TextField id="tfAddRole" fx:id="tfAddRole" layoutX="1053.0" layoutY="519.0" prefHeight="27.0" prefWidth="132.0" promptText="role" />
    </children>
 </AnchorPane>
