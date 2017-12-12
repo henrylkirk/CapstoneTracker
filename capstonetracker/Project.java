@@ -37,7 +37,7 @@ public class Project {
         projectID = 0;
         projectName = "";
         String projectType = "";
-        projectDescription = "NULL";
+        projectDescription = "";
         startDate = "2161";
         endDate =  "2017-18-10";
         plagiarismScore = 0;
