@@ -14,7 +14,7 @@
             <Label id="lblName" text="Project Name" />
             <TextField id="tfName" fx:id="tfName" promptText="project name" />
             <Label id="lblDescription" text="Project Description" />
-            <TextArea id="taDescription" fx:id="taDescription" prefHeight="200.0" prefWidth="200.0" promptText="description" />
+            <TextArea id="taDescription" fx:id="taDescription" prefHeight="200.0" prefWidth="200.0" promptText="description" wrapText="true" />
             <Label id="lblType" text="Project Type" />
             <TextField id="tfType" fx:id="tfType" promptText="Thesis" />
             <Label id="lblStartTerm" text="Start Term Code" />
@@ -47,7 +47,7 @@
       <Button id="btnAddUser" fx:id="btnAddUser" layoutX="1183.0" layoutY="545.0" mnemonicParsing="false" onAction="#handleAddButtonAction" text="Add User" />
       <TextField id="tfAddUsername" fx:id="tfAddUsername" layoutX="908.0" layoutY="545.0" prefHeight="27.0" prefWidth="143.0" promptText="username" />
       <TextField id="tfAddRole" fx:id="tfAddRole" layoutX="1051.0" layoutY="545.0" prefHeight="27.0" prefWidth="132.0" promptText="role" />
-      <Button id="btnAddStatus" fx:id="btnAddStatus" onAction="#handleAddStatusButton" layoutX="715.0" layoutY="545.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="167.0" text="Add Status" />
+      <Button id="btnAddStatus" fx:id="btnAddStatus" layoutX="715.0" layoutY="545.0" mnemonicParsing="false" onAction="#handleAddStatusButton" prefHeight="27.0" prefWidth="167.0" text="Add Status" />
       <TextField id="tfAddComment" fx:id="tfAddComment" layoutX="302.0" layoutY="545.0" prefHeight="27.0" prefWidth="414.0" promptText="comment" />
    </children>
 </AnchorPane>
