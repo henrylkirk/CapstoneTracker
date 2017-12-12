@@ -34,7 +34,7 @@ public class Project {
     * Default constructor.
     */
     public Project() {
-        projectID = 0;
+        projectID = -1;
         projectName = "";
         String projectType = "";
         projectDescription = "";

@@ -201,6 +201,7 @@ public class ProjectDetailController implements Initializable {
         project.setPlagiarismScore(Integer.parseInt(pPlag));
 
         if(project.checkProject()){
+            System.out.println("check project was true");
             // Update database with project fields
             project.updateProjectInfo(role);
         } else {
