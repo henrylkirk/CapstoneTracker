@@ -397,20 +397,20 @@ public class Project {
          }
     }
 
-      public void updateStatus(int _sid, String _comment){
+      public void updateStatus(String _comment){
       Date date = new Date();
       Timestamp timeCaught = new Timestamp(date.getTime());
       String dateMod = timeCaught.toString();
-      
+
       String query = "SELECT MAX(sid) FROM project_status WHERE pid = ? ;";
       try{
          dbConn.connect();
          ArrayList<ArrayList<String>> rs = dbConn.getData(query,String.valueOf(projectID));
          if(rs != null){
             int newStatusId = Integer.parseInt(rs.get(0).get(0)) + 100;
-            Status newStatus = new Status(_sid,dateMod,_comment);
+            Status newStatus = new Status(newStatusId,dateMod,_comment);
             newStatus.updateProjectStatus(String.valueOf(projectID));
-            
+
          }
       }
       catch(DLException dle){

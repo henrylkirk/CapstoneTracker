@@ -158,10 +158,18 @@ public class ProjectDetailController implements Initializable {
 
         // add user with that role to this project
         project.addUser(addUsername, project.getProjectID(), addRole);
+        loadUsersTable();
     }
 
+    /**
+     * Increment the status and add a comment for that status.
+     */
     @FXML
-    protected void handleAddStatusButton(ActionEvent event) {}
+    protected void handleAddStatusButton(ActionEvent event) {
+        String comment = tfAddComment.getText().trim();
+        project.updateStatus(comment);
+        loadStatusesTable();
+    }
 
     /**
     * Get all values from inputs, set them in the project, and update that project in the database.
