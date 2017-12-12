@@ -237,7 +237,7 @@ public class Project {
     * addNewProject allow user to insert new project to database
     */
     public void addNewProject(int userID) {
-        String statement = "INSERT INTO project VALUES(?,?,?,?,?,?,?,?);";
+        String statement = "INSERT INTO project(pid,type,name,description,start_term,expected_end_date,plagiarism_score,grade) VALUES(?,?,?,?,?,?,?,?);";
         String statement2 = "Insert into people_project values(?,?,?);";
         try {
             dbConn.connect();
@@ -245,15 +245,15 @@ public class Project {
             ArrayList<ArrayList<String>> rs = dbConn.getData(getMaxProjectId);
             int newProjectID = Integer.parseInt(rs.get(0).get(0)) + 1;
 
-            boolean add = dbConn.setData(statement, String.valueOf(newProjectID), projectName, projectType,projectDescription, startDate, endDate, String.valueOf(plagiarismScore), String.valueOf(grade));
+            boolean add = dbConn.setData(statement, String.valueOf(newProjectID), projectType, projectName ,projectDescription, startDate, endDate, String.valueOf(plagiarismScore), String.valueOf(grade));
             if (add) {
                 System.out.println("New Project Added");
             } else {
                 System.out.println("New Project Added Failed");
-            } 
-            String role = "GRAD"; 
-            dbConn.setData(statement2,String.valueOf(userID), String.valueOf(newProjectID),role); 
-             
+            }
+            // String role = "GRAD";
+            // dbConn.setData(statement2,String.valueOf(userID), String.valueOf(newProjectID),role); 
+
         } catch(DLException dle) {
             System.out.println("*** Error: " + dle.getMessage() + " ***\n");
             dle.printStackTrace();

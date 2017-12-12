@@ -108,6 +108,8 @@ public class MyProjectsController implements Initializable {
 	protected void handleCreateButtonAction(ActionEvent event) {
 		ProjectRow row = new ProjectRow("","",-1);
 		rows.add(row);
+		Project project = new Project();
+		project.addNewProject(user.getUserId());
 	}
 
 	/**
