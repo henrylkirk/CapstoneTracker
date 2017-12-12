@@ -22,6 +22,10 @@ public class User {
    private String office;
    private ConnectDB dbConn;
 
+   /**
+    * Constructor that sets the User ID for this instance of a User object
+    * @param _userID the User id for this user object
+    */
    public User(int _userID){
       userID = _userID;
       userType = "NULL";
@@ -168,6 +172,10 @@ public class User {
       return loginSuccess;
    }
    
+   /**
+    * Method that checks that a user exists only using userID
+    * @return boolean that determines if the check was successful
+    */
    public boolean checkUser()
    {
       boolean loginSuccess = false;
