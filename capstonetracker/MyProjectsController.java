@@ -64,19 +64,7 @@ public class MyProjectsController implements Initializable {
 					// find project with that id
 					for(Project project : projects) {
 						if(project.getProjectID() == selectedRow.getProjectID()) {
-							try {
-								FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProjectDetail.fxml"));
-								Parent root = (Parent) fxmlLoader.load();
-								Stage stage = CapstoneTracker.getStage();
-								Scene scene = new Scene(root);
-								stage.setScene(scene);
-								// get controller
-								ProjectDetailController pdc = (ProjectDetailController) fxmlLoader.getController();
-								pdc.loadProjectDetails(project, project.getRole(user.getUserId()));
-							} catch(Exception e) {
-								System.out.println(e.getMessage());
-								e.printStackTrace();
-							}
+							showProjectDetails(project);
 						}
 					}
 				}
@@ -84,6 +72,22 @@ public class MyProjectsController implements Initializable {
 		});
 
 		loadTable();
+	}
+
+	private void showProjectDetails(Project project){
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProjectDetail.fxml"));
+			Parent root = (Parent) fxmlLoader.load();
+			Stage stage = CapstoneTracker.getStage();
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			// get controller
+			ProjectDetailController pdc = (ProjectDetailController) fxmlLoader.getController();
+			pdc.loadProjectDetails(project, user);
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -109,7 +113,9 @@ public class MyProjectsController implements Initializable {
 		ProjectRow row = new ProjectRow("","",-1);
 		rows.add(row);
 		Project project = new Project();
-		project.addNewProject(user.getUserId());
+		// project.setRole();
+		showProjectDetails(project);
+		// project.addNewProject(user.getUserId());
 	}
 
 	/**

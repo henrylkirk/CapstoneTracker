@@ -67,6 +67,7 @@ public class ProjectDetailController implements Initializable {
     private Button tfAddStatus;
     private Project project;
     private String role;
+    private BLUser user;
     private ArrayList<User> users;
     private ArrayList<Status> statuses;
     private ObservableList<UserRow> userRows;
@@ -90,9 +91,10 @@ public class ProjectDetailController implements Initializable {
         colComments.setCellValueFactory(new PropertyValueFactory<StatusRow,String>("comment"));
     }
 
-    public void loadProjectDetails(Project project, String role){
+    public void loadProjectDetails(Project project, BLUser user){
         this.project = project;
-        this.role = role;
+        this.user = user;
+        role = project.getRole(user.getUserId());
 
         // hide/disable fields if the user is a student
         if(role.equalsIgnoreCase("Grad")) {
@@ -176,6 +178,7 @@ public class ProjectDetailController implements Initializable {
     */
     @FXML
     protected void handleSaveButtonAction(ActionEvent event) {
+
         // Get field values
         String pName = tfName.getText().trim();
         String pDesc = taDescription.getText().trim();
@@ -194,8 +197,13 @@ public class ProjectDetailController implements Initializable {
         project.setGrade(Integer.parseInt(pGrade));
         project.setPlagiarismScore(Integer.parseInt(pPlag));
 
-        // Update database with project fields
-        project.updateProjectInfo(role);
+        if(project.checkProject()){
+            // Update database with project fields
+            project.updateProjectInfo(role);
+        } else {
+            project.addNewProject(user.getUserId());
+        }
+
     }
 
     /**
