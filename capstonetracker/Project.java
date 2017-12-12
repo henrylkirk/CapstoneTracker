@@ -31,7 +31,7 @@ public class Project {
     private int userID;
 
     /**
-    * Default constructor
+    * Default constructor.
     */
     public Project() {
         projectID = 0;
@@ -48,6 +48,9 @@ public class Project {
         dbConn = new ConnectDB();
     }
 
+    /**
+    * Paramaterized constructor.
+    */
     public Project(int _projectID) {
         projectID = _projectID;
         projectName = "NULL";
@@ -131,47 +134,41 @@ public class Project {
         return role;
     }
 
-   /**
+    /**
     * get the status for the project
     * return 2d arraylist includes all statused for that project
     */
     public ArrayList<Status> getStatus()
     {
-      String statement = "select sid, last_modified, comment from project_status where pid = ?";
-      ArrayList<Status> status = new ArrayList<Status>();
-      ArrayList<ArrayList<String>> statusArray = new ArrayList<ArrayList<String>>();
-      try
-      {
-         dbConn.connect();
-         statusArray = dbConn.getData(statement, Integer.toString(getProjectID()));
-         if(statusArray != null)
-         {
-            for(int i = 0; i < statusArray.size();i++)
+        String statement = "select sid, last_modified, comment from project_status where pid = ?";
+        ArrayList<Status> status = new ArrayList<Status>();
+        ArrayList<ArrayList<String>> statusArray = new ArrayList<ArrayList<String>>();
+        try
+        {
+            dbConn.connect();
+            statusArray = dbConn.getData(statement, Integer.toString(getProjectID()));
+            if(statusArray != null)
             {
-               int statusID = Integer.parseInt(statusArray.get(i).get(0));
-               String lastModified = statusArray.get(i).get(1);
-               String comment = statusArray.get(i).get(2);
-               Status newStatus = new Status(statusID,lastModified,comment);
-               if(newStatus.checkStatusInfo())
-               {
-                  status.add(newStatus);
-               }
+                for(int i = 0; i < statusArray.size();i++)
+                {
+                    int statusID = Integer.parseInt(statusArray.get(i).get(0));
+                    String lastModified = statusArray.get(i).get(1);
+                    String comment = statusArray.get(i).get(2);
+                    Status newStatus = new Status(statusID,lastModified,comment);
+                    if(newStatus.checkStatusInfo())
+                    {
+                        status.add(newStatus);
+                    }
+                }
             }
-         }
-      }
-      catch(DLException dle)
-      {
-         System.out.println("*** Error: " + dle.getMessage() + " ***\n");
-         dle.printStackTrace();
-      }
-      return status;
+        } catch(DLException dle) {
+            System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+            dle.printStackTrace();
+        }
+        return status;
     }
 
-
-
-
-
-
+    // Accessor & Mutators
     public void setProjectType(String _projectType){
         projectType = _projectType;
     }
@@ -251,7 +248,7 @@ public class Project {
             } else {
                 System.out.println("New Project Added Failed");
             }
-             String role = "GRAD";
+            String role = "GRAD";
             dbConn.setData(statement2,String.valueOf(userID), String.valueOf(newProjectID),role);
 
         } catch(DLException dle) {
@@ -301,9 +298,9 @@ public class Project {
     }
 
     /**
-     * Get all users associated with this project.
-     * @return 2D ArrayList of strings in format: username, role, uid
-     */
+    * Get all users associated with this project.
+    * @return 2D ArrayList of strings in format: username, role, uid
+    */
     public ArrayList<User> getUsers(){
         ArrayList<ArrayList<String>> rs = new ArrayList<ArrayList<String>>();
         ArrayList<User> users = new ArrayList<User>();
@@ -312,14 +309,14 @@ public class Project {
             dbConn.connect();
             rs = dbConn.getData(query, String.valueOf(getProjectID()));
             if(rs != null){
-               for(int i = 0; i < rs.size(); i++){
-                   System.out.println("id: "+rs.get(i).get(0));
-                  int newUID = Integer.parseInt(rs.get(i).get(0));
-                  User newUser = new User(newUID);
-                  if(newUser.checkUser()){
-                     users.add(newUser);
-                  }
-               }
+                for(int i = 0; i < rs.size(); i++){
+                    System.out.println("id: "+rs.get(i).get(0));
+                    int newUID = Integer.parseInt(rs.get(i).get(0));
+                    User newUser = new User(newUID);
+                    if(newUser.checkUser()){
+                        users.add(newUser);
+                    }
+                }
             }
 
         } catch(DLException dle) {
@@ -329,7 +326,7 @@ public class Project {
         return users;
     }
 
-   /*
+    /*
     * This method allow user to add a new user to the project
     * 1. Check is the current user working on the project by using projectID
     * 2. If No, the current user not able to add new user to the project
@@ -337,64 +334,50 @@ public class Project {
     * 5. if the role is not student, check the uid of the new user by using the username
     * 5. Insert to table.
     */
-    public void addUser(String username, int pid, String role)
-    {
-         String statement = "select uid, type from people where username = ?;";
-         ArrayList<ArrayList<String>> data = new ArrayList<>();
-         try
-         {
+    public void addUser(String username, int pid, String role) {
+        String statement = "select uid, type from people where username = ?;";
+        ArrayList<ArrayList<String>> data = new ArrayList<>();
+        try {
             dbConn.connect();
             data = dbConn.getData(statement,username);
             int newUserID = Integer.parseInt(data.get(0).get(0));
             String newUserType = data.get(0).get(1);
-            if(newUserType.equalsIgnoreCase("Grad"))
-            {
-               System.out.println("Can't add student");
+            if(newUserType.equalsIgnoreCase("Grad")){
+                System.out.println("You cannot add another student to this project.");
+            } else {
+                String statement2 = "insert into people_project values(?,?,?);";
+                try {
+                    dbConn.connect();
+                    dbConn.setData(statement2,Integer.toString(newUserID), Integer.toString(pid), role);
+                } catch(DLException dle) {
+                    System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+                    dle.printStackTrace();
+                }
             }
-            else
-            {
-               System.out.println("ok,add prof");
-               String statement2 = "insert into people_project values(?,?,?);";
-               try
-               {
-                  dbConn.connect();
-                  dbConn.setData(statement2,Integer.toString(newUserID), Integer.toString(pid), role);
-               }
-               catch(DLException dle)
-               {
-                  System.out.println("*** Error: " + dle.getMessage() + " ***\n");
-                  dle.printStackTrace();
-               }
-
-            }
-         }
-         catch(DLException dle)
-         {
+        } catch(DLException dle) {
             System.out.println("*** Error: " + dle.getMessage() + " ***\n");
             dle.printStackTrace();
-         }
+        }
     }
 
-      public void updateStatus(String _comment){
-      Date date = new Date();
-      Timestamp timeCaught = new Timestamp(date.getTime());
-      String dateMod = timeCaught.toString();
+    public void updateStatus(String _comment) {
+        Date date = new Date();
+        Timestamp timeCaught = new Timestamp(date.getTime());
+        String dateMod = timeCaught.toString();
 
-      String query = "SELECT MAX(sid) FROM project_status WHERE pid = ? ;";
-      try{
-         dbConn.connect();
-         ArrayList<ArrayList<String>> rs = dbConn.getData(query,String.valueOf(projectID));
-         if(rs != null){
-            int newStatusId = Integer.parseInt(rs.get(0).get(0)) + 100;
-            Status newStatus = new Status(newStatusId,dateMod,_comment);
-            newStatus.updateProjectStatus(String.valueOf(projectID));
-
-         }
-      }
-      catch(DLException dle){
-         System.out.println("*** Error: " + dle.getMessage() + " ***\n");
-         dle.printStackTrace();
-      }
-   }
+        String query = "SELECT MAX(sid) FROM project_status WHERE pid = ? ;";
+        try {
+            dbConn.connect();
+            ArrayList<ArrayList<String>> rs = dbConn.getData(query,String.valueOf(projectID));
+            if (rs != null) {
+                int newStatusId = Integer.parseInt(rs.get(0).get(0)) + 100;
+                Status newStatus = new Status(newStatusId,dateMod,_comment);
+                newStatus.updateProjectStatus(String.valueOf(projectID));
+            }
+        } catch(DLException dle){
+            System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+            dle.printStackTrace();
+        }
+    }
 
 }

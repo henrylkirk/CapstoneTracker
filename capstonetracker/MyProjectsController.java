@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 
 /**
-* FXML Controller for my projects view
+* FXML Controller for my projects view.
 * @author Henry Kirk
 */
 public class MyProjectsController implements Initializable {
@@ -74,6 +74,9 @@ public class MyProjectsController implements Initializable {
 		loadTable();
 	}
 
+	/**
+	 * Change the scene to the project detail scene.
+	 */
 	private void showProjectDetails(Project project){
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProjectDetail.fxml"));

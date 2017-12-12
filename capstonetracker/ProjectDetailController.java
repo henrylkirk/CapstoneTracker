@@ -18,7 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 /**
-* FXML Controller for project detail view
+* FXML Controller for project detail view.
 * @author Henry Kirk
 */
 public class ProjectDetailController implements Initializable {
@@ -91,6 +91,9 @@ public class ProjectDetailController implements Initializable {
         colComments.setCellValueFactory(new PropertyValueFactory<StatusRow,String>("comment"));
     }
 
+    /**
+     * Load the fields of the project and the two tables.
+     */
     public void loadProjectDetails(Project project, BLUser user){
         this.project = project;
         this.user = user;
