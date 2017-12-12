@@ -380,7 +380,7 @@ public class Project {
                try
                {
                   dbConn.connect();
-                  dbConn.setData(statement,Integer.toString(newUserID), Integer.toString(pid), role);
+                  dbConn.setData(statement2,Integer.toString(newUserID), Integer.toString(pid), role);
                }
                catch(DLException dle)
                {
