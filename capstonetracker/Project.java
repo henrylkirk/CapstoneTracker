@@ -236,8 +236,9 @@ public class Project {
     /**
     * addNewProject allow user to insert new project to database
     */
-    public void addNewProject() {
+    public void addNewProject(int userID) {
         String statement = "INSERT INTO project VALUES(?,?,?,?,?,?,?,?);";
+        String statement2 = "Insert into people_project values(?,?,?);";
         try {
             dbConn.connect();
             String getMaxProjectId = "SELECT MAX(pid) FROM project;";
@@ -249,7 +250,10 @@ public class Project {
                 System.out.println("New Project Added");
             } else {
                 System.out.println("New Project Added Failed");
-            }
+            } 
+            String role = "GRAD"; 
+            dbConn.setData(statement2,String.valueOf(userID), String.valueOf(newProjectID),role); 
+             
         } catch(DLException dle) {
             System.out.println("*** Error: " + dle.getMessage() + " ***\n");
             dle.printStackTrace();
