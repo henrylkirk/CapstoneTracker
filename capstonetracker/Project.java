@@ -376,7 +376,6 @@ public class Project {
             else
             {
                System.out.println("ok,add prof");
-<<<<<<< HEAD
                String statement2 = "insert into people_project values(?,?,?);";
                try
                {
@@ -384,15 +383,6 @@ public class Project {
                   dbConn.setData(statement,Integer.toString(newUserID), Integer.toString(pid), role);
                }
                catch(DLException dle)
-=======
-               String statement2 = "insert into people_project values(?,?,?);"; 
-               try 
-               {
-                  dbConn.connect();
-                  dbConn.setData(statement2,Integer.toString(newUserID), Integer.toString(pid),role);
-               } 
-               catch(DLException dle) 
->>>>>>> 6b371e17e2787684d8bd8998667f0ce0600a46b2
                {
                   System.out.println("*** Error: " + dle.getMessage() + " ***\n");
                   dle.printStackTrace();
@@ -406,12 +396,7 @@ public class Project {
             dle.printStackTrace();
          }
     }
-<<<<<<< HEAD
 
 
 
-=======
-  
- 
->>>>>>> 6b371e17e2787684d8bd8998667f0ce0600a46b2
 }
