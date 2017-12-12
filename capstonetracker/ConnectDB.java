@@ -149,59 +149,6 @@ public class ConnectDB {
    }
 
    /**
-    * Method that starts a transaction
-    * @exception DLException throw when any type of exception is caught and write info to a log file
-    */
-   public void startTrans() throws DLException{
-      try{
-         conn.setAutoCommit(false);
-         noRollback = true;
-      }
-      catch(SQLException sqle){
-         throw new DLException(sqle,"SQL Exception caught at connectDB.startTrans()");
-      }
-      catch(Exception e){
-         throw new DLException(e,"Misc Exception caught at connectDB.startTrans()");
-      }
-   }
-
-   /**
-    * Method the ends a transaction
-    * @exception DLException throw when any type of exception is caught and write info to a log file
-    */
-   public void endTrans() throws DLException{
-      try{
-         if(noRollback){
-            conn.commit();
-         }
-         conn.setAutoCommit(true);
-      }
-      catch(SQLException sqle){
-         throw new DLException(sqle,"SQL Exception caught at connectDB.endTrans()");
-      }
-      catch(Exception e){
-         throw new DLException(e,"Misc Exception caught at connectDB.endTrans()");
-      }
-   }
-
-   /**
-    * Method used to rollback the results of a transaction should an error occur
-    * @exception DLException throw when any type of exception is caught and write info to a log file
-    */
-   public void rollbackTrans() throws DLException{
-      try{
-         conn.rollback();
-         noRollback = false;
-      }
-      catch(SQLException sqle){
-         throw new DLException(sqle,"SQL Exception caught at connectDB.rollbackTrans()");
-      }
-      catch(Exception e){
-         throw new DLException(e,"Misc Exception caught at connectDB.rollbackTrans()");
-      }
-   }
-
-   /**
     * Method to retrieve data from the MySQL Database using a prepared statement
     * @param statement sets string to be used for the SELECT statement
     * @param _params series of string value that represent the parameters to be binded to the prepared statement
