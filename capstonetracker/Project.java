@@ -237,7 +237,7 @@ public class Project {
     * addNewProject allow user to insert new project to database
     */
     public void addNewProject(int userID) {
-        String statement = "INSERT INTO project VALUES(?,?,?,?,?,?,?,?);";
+        String statement = "INSERT INTO project(pid,type,name,description,start_term,expected_end_date,plagiarism_score,grade) VALUES(?,?,?,?,?,?,?,?);";
         String statement2 = "Insert into people_project values(?,?,?);";
         try {
             dbConn.connect();
@@ -245,15 +245,15 @@ public class Project {
             ArrayList<ArrayList<String>> rs = dbConn.getData(getMaxProjectId);
             int newProjectID = Integer.parseInt(rs.get(0).get(0)) + 1;
 
-            boolean add = dbConn.setData(statement, String.valueOf(newProjectID), projectName, projectType,projectDescription, startDate, endDate, String.valueOf(plagiarismScore), String.valueOf(grade));
+            boolean add = dbConn.setData(statement, String.valueOf(newProjectID), projectType, projectName ,projectDescription, startDate, endDate, String.valueOf(plagiarismScore), String.valueOf(grade));
             if (add) {
                 System.out.println("New Project Added");
             } else {
                 System.out.println("New Project Added Failed");
-            } 
-            String role = "GRAD"; 
-            dbConn.setData(statement2,String.valueOf(userID), String.valueOf(newProjectID),role); 
-             
+            }
+            // String role = "GRAD";
+            // dbConn.setData(statement2,String.valueOf(userID), String.valueOf(newProjectID),role); 
+
         } catch(DLException dle) {
             System.out.println("*** Error: " + dle.getMessage() + " ***\n");
             dle.printStackTrace();
@@ -401,20 +401,20 @@ public class Project {
          }
     }
 
-      public void updateStatus(int _sid, String _comment){
+      public void updateStatus(String _comment){
       Date date = new Date();
       Timestamp timeCaught = new Timestamp(date.getTime());
       String dateMod = timeCaught.toString();
-      
+
       String query = "SELECT MAX(sid) FROM project_status WHERE pid = ? ;";
       try{
          dbConn.connect();
          ArrayList<ArrayList<String>> rs = dbConn.getData(query,String.valueOf(projectID));
          if(rs != null){
             int newStatusId = Integer.parseInt(rs.get(0).get(0)) + 100;
-            Status newStatus = new Status(_sid,dateMod,_comment);
+            Status newStatus = new Status(newStatusId,dateMod,_comment);
             newStatus.updateProjectStatus(String.valueOf(projectID));
-            
+
          }
       }
       catch(DLException dle){
