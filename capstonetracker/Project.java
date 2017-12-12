@@ -35,11 +35,11 @@ public class Project {
     */
     public Project() {
         projectID = 0;
-        projectName = "NULL";
-        String projectType = "NULL";
+        projectName = "";
+        String projectType = "";
         projectDescription = "NULL";
-        startDate = "NULL";
-        endDate =  "NULL";
+        startDate = "2161";
+        endDate =  "2017-18-10";
         plagiarismScore = 0;
         grade = 0;
         changeTo = "NULL";
@@ -251,8 +251,8 @@ public class Project {
             } else {
                 System.out.println("New Project Added Failed");
             }
-            // String role = "GRAD";
-            // dbConn.setData(statement2,String.valueOf(userID), String.valueOf(newProjectID),role); 
+             String role = "GRAD";
+            dbConn.setData(statement2,String.valueOf(userID), String.valueOf(newProjectID),role);
 
         } catch(DLException dle) {
             System.out.println("*** Error: " + dle.getMessage() + " ***\n");

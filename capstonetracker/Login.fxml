@@ -23,7 +23,7 @@
            <children>
               <Label text="Create Account" />
               <TextField id="tfCreateUsername" fx:id="tfCreateUsername" promptText="username" />
-            <PasswordField id="pfCreatePassword" promptText="password" />
+            <PasswordField id="pfCreatePassword" fx:id="pfCreatePassword" promptText="password" />
               <TextField id="tfFirstname" fx:id="tfFirstname" promptText="first name" />
               <TextField id="tfLastname" fx:id="tfLastname" promptText="last name" />
               <TextField id="tfEmail" fx:id="tfEmail" promptText="email" />
@@ -38,7 +38,7 @@
               </ComboBox>
             <TextField id="tfOfficeNumber" fx:id="tfOfficeNumber" promptText="office number" />
             <TextField id="tfPhone" fx:id="tfPhone" promptText="phone number" />
-              <Button id="btnCreate" mnemonicParsing="false" onAction="#handleCreateButtonAction" prefHeight="32.0" prefWidth="178.0" text="Create Account" />
+              <Button id="btnCreate" fx:id="btnCreate" mnemonicParsing="false" onAction="#handleCreateButtonAction" prefHeight="32.0" prefWidth="178.0" text="Create Account" />
            </children>
         </VBox>
       <Label id="lblLoginStatus" fx:id="lblLoginStatus" layoutX="41.0" layoutY="233.0" prefHeight="17.0" prefWidth="178.0" text="Invalid username or password." textFill="RED" visible="false">

@@ -39,6 +39,8 @@ public class LoginController implements Initializable {
     @FXML
     public Button btnLogin;
     @FXML
+    public Button btnCreate;
+    @FXML
     private Label lblLoginStatus;
     private BLUser user = null;
 
@@ -89,19 +91,19 @@ public class LoginController implements Initializable {
      */
     @FXML
     protected void handleCreateButtonAction(ActionEvent event) {
-        String username = tfCreateUsername.getText();
-        String password = pfCreatePassword.getText();
-        String email = tfEmail.getText();
-        String firstName = tfFirstname.getText();
-        String lastName = tfLastname.getText();
-        String office = tfOfficeNumber.getText();
-        String phone = tfPhone.getText();
-        String usertype = cbRole.getValue().toString();
+        String username = tfCreateUsername.getText().trim();
+        String password = pfCreatePassword.getText().trim();
+        String email = tfEmail.getText().trim();
+        String firstName = tfFirstname.getText().trim();
+        String lastName = tfLastname.getText().trim();
+        String office = tfOfficeNumber.getText().trim();
+        String phone = tfPhone.getText().trim();
+        String usertype = cbRole.getValue().toString().trim();
 
         if(!isEmpty(username) && !isEmpty(password) && !isEmpty(email) && !isEmpty(firstName) && !isEmpty(lastName) && !isEmpty(phone) && !isEmpty(office) && !isEmpty(usertype)){
-            System.out.println("successfully created account");
             user = new BLUser(username, password, firstName, lastName, email, office, phone, usertype);
             user.registerAccount();
+            System.out.println("successfully created account");
             // System.out.println(username+password+firstName+lastName+email+phone+office+usertype);
         } else {
             System.out.println("Could not create account");
