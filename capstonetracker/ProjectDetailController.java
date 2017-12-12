@@ -147,6 +147,9 @@ public class ProjectDetailController implements Initializable {
         System.out.println("status table loaded");
     }
 
+    /**
+     * Add a user to this project with the input role.
+     */
     @FXML
     protected void handleAddButtonAction(ActionEvent event) {
         // get values from textfields
