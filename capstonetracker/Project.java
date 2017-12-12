@@ -261,32 +261,6 @@ public class Project {
     }
 
     /**
-    *
-    */
-    public boolean addProjectUser(String username, String role){
-        // check if this username exists in the database
-        boolean check = false;
-        String statement = "SELECT * FROM people WHERE username = ?";
-        ArrayList<ArrayList<String>> data = new ArrayList<>();
-
-        try {
-            dbConn.connect();
-            data = dbConn.getData(statement, Integer.toString(projectID));
-            if (data == null) {
-                check = false;
-            } else {
-
-            }
-            // if so, add user to ArrayList
-        } catch(DLException dle){
-            System.out.println("*** Error: " + dle.getMessage() + " ***\n");
-            dle.printStackTrace();
-        }
-
-        return check;
-    }
-
-    /**
     * updateProjectInfo allow user to change project detail
     * BUT student are not allow to change plagirism score and grade
     */
