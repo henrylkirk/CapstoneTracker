@@ -116,9 +116,9 @@ public class MyProjectsController implements Initializable {
 		ProjectRow row = new ProjectRow("","",-1);
 		rows.add(row);
 		Project project = new Project();
-		// project.setRole();
+		// project.setRole("GRAD");
 		showProjectDetails(project);
-		// project.addNewProject(user.getUserId());
+		project.addNewProject(user.getUserId());
 	}
 
 	/**
