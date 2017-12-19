@@ -112,6 +112,25 @@ public class Project {
     }
 
     /**
+    * See if project with this id exists.
+    */
+    public boolean exists() {
+        String statement = "SELECT type, name, description, start_term, expected_end_date, plagiarism_score, grade FROM project WHERE pid = ?";
+        boolean check = false;
+        try {
+            dbConn.connect();
+            ArrayList<ArrayList<String>> data = dbConn.getData(statement, Integer.toString(projectID));
+            if (data != null) {
+                check = true;
+            }
+        } catch(DLException dle) {
+            System.out.println("*** Error: " + dle.getMessage() + " ***\n");
+            dle.printStackTrace();
+        }
+        return check;
+    }
+
+    /**
     * For a given project id, get the user's role on that project.
     */
     public String getRole(int userID) {
